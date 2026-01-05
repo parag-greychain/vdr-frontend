@@ -1,0 +1,110 @@
+.air-quality-page {
+    height: 100%;
+}
+
+.sidebar {
+    background: #f9faf9;
+    padding: 16px;
+    border-right: 1px solid #eee;
+}
+
+.quick-search {
+    margin-bottom: 12px;
+}
+
+.add-scope {
+    padding-left: 0;
+    color: #00e6a1;
+    font-weight: 600;
+}
+
+.scope-list {
+    margin-top: 12px;
+}
+
+.scope-item {
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #555;
+
+    &.active {
+        background: #e9fff7;
+        color: #00b386;
+        font-weight: 600;
+    }
+}
+
+.content {
+    padding: 24px;
+}
+
+.page-header {
+    h2 {
+        margin-bottom: 4px;
+    }
+
+    p {
+        color: #777;
+        max-width: 800px;
+    }
+}
+
+.meta-row {
+    display: flex;
+    gap: 20px;
+    margin-top: 12px;
+    align-items: center;
+
+    .progress {
+        width: 200px;
+    }
+}
+
+.filter-bar {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0;
+    align-items: center;
+}
+
+.create-btn {
+    margin-left: auto;
+    background: #00e6a1;
+    border: none;
+}
+
+.request-card {
+    margin-bottom: 12px;
+    border-radius: 10px;
+}
+
+.status-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fff3d6;
+    border: 2px solid #ffcc66;
+}
+
+.request-id {
+    font-weight: 600;
+}
+
+.request-desc {
+    color: #666;
+    margin: 4px 0;
+}
+
+.request-meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: #777;
+    font-size: 13px;
+}
+
+.more-icon {
+    font-size: 18px;
+    cursor: pointer;
+}

@@ -9,6 +9,7 @@ import {
 import "./App.css";
 import { Login, Home } from "./pages";
 import { PATHS } from "./shared";
+import Scope from "./pages/scope/Scope";
 
 const App = () => {
   const router = createBrowserRouter(
@@ -16,6 +17,7 @@ const App = () => {
       <Route>
         <Route path={PATHS.login} element={<Login />} />
         <Route index path={PATHS.home} element={<Home />} />
+        <Route path={PATHS.scope} element={<Scope />} />
       </Route>
     )
   );

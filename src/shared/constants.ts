@@ -1,6 +1,7 @@
 export enum PATHS {
   home = "/",
   login = "/login",
+  scope = "/scope",
 }
 
 export enum LocalStorageName {
