@@ -6,18 +6,25 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import "./App.css";
 import { Login, Home } from "./pages";
 import { PATHS } from "./shared";
 import Scope from "./pages/scope/Scope";
+import { AppLayout } from "./layout";
+import AuthLayout from "./layout/auth/AuthLayout";
+import "./App.scss";
 
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
-        <Route path={PATHS.login} element={<Login />} />
-        <Route index path={PATHS.home} element={<Home />} />
-        <Route path={PATHS.scope} element={<Scope />} />
+        <Route element={<AuthLayout />}>
+          <Route index path={PATHS.login} element={<Login />} />
+        </Route>
+        <Route element={<AppLayout />}>
+          <Route index path={PATHS.home} element={<Home />} />
+          <Route path={PATHS.projects} element={<Scope />} />
+          <Route path={PATHS.scope} element={<Scope />} />
+        </Route>
       </Route>
     )
   );
