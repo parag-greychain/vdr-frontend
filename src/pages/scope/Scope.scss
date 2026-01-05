@@ -37,6 +37,8 @@
 
 .content {
     padding: 24px;
+    height: calc(100vh - 55px);
+    overflow: auto;
 }
 
 .page-header {
