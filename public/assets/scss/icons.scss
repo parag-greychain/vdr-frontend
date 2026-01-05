@@ -12,4 +12,44 @@
     mask-image: url(/assets/icons/toggle.svg);
   }
 
+  &[class*="filter-icon"] {
+    mask-image: url(/assets/icons/filter-icon.svg);
+    width: 14px;
+    height: 14px;
+    color: #53705E;
+  }
+
+  &[class*="search-icon"] {
+    mask-image: url(/assets/icons/search-icon.svg);
+    width: 16px;
+    height: 16px;
+    color: var(--primary);
+  }
+
+  &[class*="plus-icon"] {
+    mask-image: url(/assets/icons/plus-icon.svg);
+    width: 18px;
+    height: 18px;
+  }
+
+  &[class*="calendar-icon"] {
+    mask-image: url(/assets/icons/calendar-icon.svg);
+    width: 15px;
+    height: 15px;
+    color: #5A7665;
+  }
+
+  &[class*="dropdown-arrow-icon"] {
+    mask-image: url(/assets/icons/dropdown-arrow-icon.svg);
+    width: 10px;
+    height: 10px;
+    color: var(--primary);
+  }
+
+  &[class*="dropdown-top-arrow-icon"] {
+    mask-image: url(/assets/icons/dropdown-top-arrow-icon.svg);
+    width: 10px;
+    height: 10px;
+    color: var(--primary);
+  }
 }

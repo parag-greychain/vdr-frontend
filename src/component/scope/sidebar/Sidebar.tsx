@@ -1,19 +1,27 @@
 import { Button, Input } from "antd";
 import "./Sidebar.scss";
-import { SearchOutlined } from "@ant-design/icons";
 
 const Sidebar = () => {
   return (
     <>
       <h4 className="sidebar-heading">Scope</h4>
-      <Input
-        placeholder="Quick find"
-        prefix={<SearchOutlined />}
-        className="quick-search"
-      />
+      <div className="sidebar-search-wrapper">
+        <Input
+          placeholder="Quick find"
+          prefix={<i className="erm-icon search-icon" />}
+          className="quick-search"
+        />
+        <button
+          type="button"
+          className="status-trigger"
+          aria-label="Filter by status"
+        >
+          <i className="erm-icon filter-icon"></i>
+        </button>
+      </div>
 
       <Button type="link" className="add-scope">
-        + ADD SCOPE
+        <i className="erm-icon plus-icon"></i> ADD SCOPE
       </Button>
 
       <div className="scope-list">

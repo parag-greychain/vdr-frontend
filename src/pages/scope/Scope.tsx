@@ -9,6 +9,8 @@ import {
   Avatar,
   Dropdown,
   Card,
+  Flex,
+  Breadcrumb,
 } from "antd";
 import { PlusOutlined, MoreOutlined, SearchOutlined } from "@ant-design/icons";
 import "./Scope.scss";
@@ -18,8 +20,8 @@ const Scope = () => {
   const { TabPane } = Tabs;
 
   return (
-    <div className="air-quality-page">
-      <Row gutter={24}>
+    <Flex className="inner-app-wrap">
+      <Row className="inner-app-row" gutter={24}>
         {/* LEFT SIDEBAR */}
         <Col flex="253px" className="scope-sidebar">
           <Sidebar />
@@ -27,9 +29,27 @@ const Scope = () => {
 
         {/* MAIN CONTENT */}
         <Col flex="auto" className="content">
-          {/* HEADER */}
-          <div className="page-header">
-            <h2>Air Quality</h2>
+          <div className="scope-header">
+            <div className="breadcrumb-wrapper">
+              <Breadcrumb className="page-breadcrumb">
+                <Breadcrumb.Item>Home</Breadcrumb.Item>
+                <Breadcrumb.Item>Shell - Air Quality</Breadcrumb.Item>
+              </Breadcrumb>
+            </div>
+            <div className="scope-actions">
+              <Button className="primary-btn" type="primary" shape="round">
+                CHAT
+              </Button>
+              <Button type="text" aria-label="Comments">
+                {/* <img src={IMAGES.commentIcon} alt="Comments" /> */}
+              </Button>
+              <Button type="text" aria-label="Export">
+                {/* <img src={IMAGES.exportIcon} alt="Export" /> */}
+              </Button>
+            </div>
+          </div>
+          <div className="scope-page-header">
+            <h2 className="page-heading">Air Quality</h2>
             <p>
               The category addresses management of air quality impacts resulting
               from stationary (e.g., factories, power plants) and mobile
@@ -37,12 +57,34 @@ const Scope = () => {
             </p>
 
             <div className="meta-row">
-              <span>📅 Due: 20/01/2024</span>
-              <span>🔄 Last Synced: 20/01/2024</span>
-
-              <div className="progress">
-                <span>67% Completed</span>
-                <Progress percent={67} showInfo={false} />
+              <div className="meta-row-left">
+                <div className="collaborators-wrapper">
+                  <Avatar size={24} src="https://i.pravatar.cc/100" />
+                  <div className="collaborators-plus-more">
+                    <i className="erm-icon plus-icon" />
+                  </div>
+                </div>
+                <span className="date-wrap">
+                  <i className="erm-icon calendar-icon" />
+                  <span>
+                    Due :<span className="orange-text"> 20/01/2024</span>
+                  </span>
+                </span>
+                <span className="date-wrap">
+                  <i className="erm-icon calendar-icon" />
+                  <span>Last Synced : 20/01/2024</span>
+                </span>
+              </div>
+              <div className="meta-row-right">
+                <div className="custom-progress">
+                  <span className="progress-text">67% Completed</span>
+                  <Progress
+                    percent={67}
+                    showInfo={false}
+                    strokeLinecap="round"
+                    className="progress-bar"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -56,23 +98,36 @@ const Scope = () => {
 
           {/* FILTER BAR */}
           <div className="filter-bar">
-            <Input
-              placeholder="Search..."
-              prefix={<SearchOutlined />}
-              className="search-input"
-            />
+            <div className="filter-left">
+              <Input
+                placeholder="Search..."
+                prefix={<i className="erm-icon search-icon" />}
+                className="quick-search"
+              />
 
-            <Select defaultValue="all" className="status-select">
-              <Select.Option value="all">All</Select.Option>
-            </Select>
-
-            <Button
-              type="primary"
-              icon={<PlusOutlined />}
-              className="create-btn"
-            >
-              CREATE REQUEST
-            </Button>
+              <Select
+                defaultValue="all"
+                className="dropdown-ui"
+                suffixIcon={
+                  <>
+                    <i className="erm-icon dropdown-arrow-icon" />
+                    <i className="erm-icon dropdown-top-arrow-icon" />
+                  </>
+                }
+              >
+                <Select.Option value="all">All</Select.Option>
+              </Select>
+            </div>
+            <div className="filter-right">
+              <Button
+                icon={<i className="erm-icon plus-icon" />}
+                className="primary-btn"
+                type="primary"
+                shape="round"
+              >
+                CREATE REQUEST
+              </Button>
+            </div>
           </div>
 
           {/* REQUEST LIST */}
@@ -109,7 +164,7 @@ const Scope = () => {
           </div>
         </Col>
       </Row>
-    </div>
+    </Flex>
   );
 };
 
