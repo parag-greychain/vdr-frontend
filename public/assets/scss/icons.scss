@@ -1,5 +1,4 @@
 .erm-icon {
-  // Instead of using the font-based icons // We're applying SVG masks
   mask-size: contain;
   mask-position: 50% 50%;
   mask-repeat: no-repeat;
@@ -13,217 +12,44 @@
     mask-image: url(/assets/icons/toggle.svg);
   }
 
-  &[class*="chat"] {
-    background: url(/assets/icons/plus.svg);
-    background-position: 50% 50%;
+  &[class*="filter-icon"] {
+    mask-image: url(/assets/icons/filter-icon.svg);
+    width: 14px;
+    height: 14px;
+    color: #53705E;
   }
 
-  &[class*="agent"] {
-    mask-image: url(/assets/icons/chat.svg);
+  &[class*="search-icon"] {
+    mask-image: url(/assets/icons/search-icon.svg);
+    width: 16px;
+    height: 16px;
+    color: var(--primary);
   }
 
-  &[class*="home"] {
-    mask-image: url(/assets/icons/home.svg);
-  }
-
-  &[class*="my-project"] {
-    mask-image: url(/assets/icons/my-project.svg);
-  }
-
-  &[class*="source"] {
-    mask-image: url(/assets/icons/source.svg);
-  }
-
-  &[class*="setting"] {
-    mask-image: url(/assets/icons/setting.svg);
-    height: 21px;
-    width: 21px;
-  }
-
-  &[class*="guides"] {
-    mask-image: url(/assets/icons/guides.svg);
-    height: 21px;
-    width: 21px;
-  }
-
-  &[class*="deep-research"] {
-    mask-image: url(/assets/icons/deep-research.svg);
-  }
-
-  &[class*="logout"] {
-    mask-image: url(/assets/icons/logout.svg);
-    height: 21px;
-    width: 21px;
-  }
-
-  &[class*="arrow-right"] {
-    mask-image: url(/assets/icons/arrow-right.svg);
-    height: 12px;
-  }
-
-  &[class*="arrow-down"] {
-    mask-image: url(/assets/icons/arrow-down.svg);
-    width: 12px;
-  }
-
-  &[class*="arrow-up"] {
-    mask-image: url(/assets/icons/arrow-up.svg);
-    width: 12px;
-  }
-
-  &[class*="doc-icon"] {
-    mask-image: url(/assets/icons/doc-icon.svg);
+  &[class*="plus-icon"] {
+    mask-image: url(/assets/icons/plus-icon.svg);
     width: 18px;
+    height: 18px;
   }
 
-  &[class*="three-dot-icon"] {
-    mask-image: url(/assets/icons/three-dot-icon.svg);
-    width: 18px;
+  &[class*="calendar-icon"] {
+    mask-image: url(/assets/icons/calendar-icon.svg);
+    width: 15px;
+    height: 15px;
+    color: #5A7665;
   }
 
   &[class*="dropdown-arrow-icon"] {
     mask-image: url(/assets/icons/dropdown-arrow-icon.svg);
     width: 10px;
+    height: 10px;
     color: var(--primary);
   }
 
   &[class*="dropdown-top-arrow-icon"] {
     mask-image: url(/assets/icons/dropdown-top-arrow-icon.svg);
     width: 10px;
-    color: var(--primary);
-  }
-
-  &[class*="toggle-up-icon"] {
-    mask-image: url(/assets/icons/toggle-up.svg);
-    width: 12px;
-    color: #084f30;
-  }
-
-  &[class*="search-icon"] {
-    mask-image: url(/assets/icons/search-icon.svg);
-  }
-
-  &[class*="edit-icon"] {
-    mask-image: url(/assets/icons/edit.svg);
-  }
-
-  &[class*="duration-icon"] {
-    mask-image: url(/assets/icons/duration.svg);
-  }
-
-  &[class*="export-icon"] {
-    mask-image: url(/assets/icons/export.svg);
-  }
-
-  &[class*="copy-icon"] {
-    mask-image: url(/assets/icons/copy.svg);
-  }
-
-  &[class*="drawer-close-icon"] {
-    mask-image: url(/assets/icons/drawer-close-icon.svg);
-    width: 12px;
-    color: black;
-  }
-
-  &[class*="search-icon"] {
-    mask-image: url(/assets/icons/search-icon.svg);
-    width: 20px;
-    color: var(--primary);
-  }
-
-  &[class*="filter-icon"] {
-    mask-image: url(/assets/icons/filter-icon.svg);
-    width: 16px;
-    color: var(--primary);
-  }
-
-  &[class*="arrow-right-big-icon"] {
-    mask-image: url(/assets/icons/arrow-right-big-icon.svg);
-    width: 16px;
-    color: var(--arrow-color);
-  }
-
-  &[class*="notification-icon"] {
-    mask-image: url(/assets/icons/notification-icon.svg);
-    width: 14px;
-    color: var(--primary);
-  }
-
-  &[class*="comment-icon"] {
-    mask-image: url(/assets/icons/comment.svg);
-  }
-
-  &[class*="sent-back-icon"] {
-    mask-image: url(/assets/icons/reply-back.svg);
-  }
-
-  &[class*="approval-icon"] {
-    mask-image: url(/assets/icons/approval.svg);
-  }
-
-  &[class*="prompts-icon"] {
-    mask-image: url(/assets/icons/prompts-icon.svg);
-    width: 12px;
-    color: var(--primary-green);
-  }
-
-  &[class*="edit-drawer-icon"] {
-    mask-image: url(/assets/icons/edit-drawer-icon.svg);
-    width: 17px;
-    height: 17px;
-    color: var(--primary);
-    opacity: 0.5;
-  }
-
-  &[class*="delete-drawer-icon"] {
-    mask-image: url(/assets/icons/delete-drawer-icon.svg);
-    width: 17px;
-    height: 17px;
-    color: #ff6969;
-  }
-
-  &[class*="active-icon"] {
-    mask-image: url(/assets/icons/active.svg);
-    width: 10px;
     height: 10px;
-    color: #76f28f;
-  }
-
-  &[class*="inactive-icon"] {
-    mask-image: url(/assets/icons/active.svg);
-    width: 10px;
-    height: 10px;
-    color: #c4c4c4;
-  }
-
-  &[class*="doc-cross-icon"] {
-    mask-image: url(/assets/icons/doc-cross-icon.svg);
-    width: 18px;
-  }
-
-  &[class*="collaborators-icon"] {
-    mask-image: url(/assets/icons/collaborators-icons.svg);
-    width: 18px;
-  }
-
-  &[class*="agent-icon"] {
-    mask-image: url(/assets/icons/agent-icon.svg);
-  }
-
-  &[class*="breadcrumb-arrow"] {
-    mask-image: url(/assets/icons/breadcrumb-arrow.svg);
-    width: 18px;
-    height: 18px;
-    color: #084f30;
-  }
-  &[class*="history"] {
-    mask-image: url(/assets/icons/chat-history.svg);
     color: var(--primary);
-  }
-  &[class*="stop-generation"] {
-    mask-image: url(/assets/icons/stop-generation.svg);
-    width: 10px;
-    height: 10px;
-    color: #246027;
   }
 }

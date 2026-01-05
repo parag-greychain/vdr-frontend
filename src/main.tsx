@@ -7,7 +7,7 @@ import { store, persistor } from './store/store'
 import { ConfigProvider } from 'antd'
 import './index.scss'
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -15,13 +15,12 @@ createRoot(document.getElementById('root')!).render(
           theme={{
             token: {
               colorPrimary: "var(--primary)",
-              borderRadius: 8,
-              fontFamily: "Figtree, sans-serif",
+              fontFamily: "var(--primary-font)",
             },
           }}>
           <App />
         </ConfigProvider>
       </PersistGate>
     </Provider>
-  </StrictMode>,
-)
+  </StrictMode>
+);

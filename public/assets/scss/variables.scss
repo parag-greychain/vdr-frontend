@@ -1,20 +1,20 @@
 :root {
-  --primary: #012c12;
+  --primary: #012C12;
+  --secondary: #00FFBE;
   --arrow-color: #084f30;
   --text-light: #ffffff;
   --text-dark: #000000;
   --primary-btn-bg: #00ffbe;
   --primary-btn-hover-bg: #00e5aa;
-  --menu-text-color: #d3dfd4;
-  --menu-hover-bg: #246027;
+  --border-color: #D3DFD4;
   --white-smoke: #f5f5f5;
   --grey: #c4c4c4;
-  --primary-green: #019a20;
+  --primary-green: #019A20;
   --border-radius: 3px;
   --bg-grey: rgba(211, 223, 212, 0.2);
   --modal-bg: #f4f8f4;
   --modal-border: #d3dfd48c;
-  --input-border: #d3dfd4d9;
+  --input-border: #D3DFD4;
   --text-dark-green: #0a2b14;
   --text-muted-green: #657a6b;
   --home-bg: #f8faf9;
@@ -29,6 +29,9 @@
   --danger-color: #c10007;
   --warning-color: #f8a815;
   --success-color: #019a20;
+  --orange: #FD582D;
+
+  --refresh-btn-bg: #c4d0d370;
 
   // solid colors
   --white: #ffffff;
@@ -36,4 +39,9 @@
 
   // border radius
   --border-radius-5: 5px;
+
+  // fonts
+  --primary-font: "Figtree", sans-serif;
+  --overall-paragraph-size: 14px;
+  --overall-heading-size: 18px;
 }

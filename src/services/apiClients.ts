@@ -172,10 +172,8 @@ const setupResponseInterceptor = (client: AxiosInstance) => {
 };
 
 applyRequestInterceptor(axiosClient);
-applyRequestInterceptor(axiosUserClient);
 
 setupResponseInterceptor(axiosClient);
-setupResponseInterceptor(axiosUserClient);
 
 // Methods GET, POST,PUT, DELETE for Axios-Client
 export const get = async (path: string, config?: AxiosRequestConfig) => {
