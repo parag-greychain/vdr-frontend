@@ -52,4 +52,46 @@
     height: 10px;
     color: var(--primary);
   }
+
+  &[class*="ai-icon"] {
+    mask-image: url(/assets/icons/ai-icon.svg);
+    width: 12px;
+    height: 14px;
+    color: var(--primary);
+  }
+
+  &[class*="time-icon"] {
+    mask-image: url(/assets/icons/time-icon.svg);
+    width: 28px;
+    height: 28px;
+    color: #F49A00;
+  }
+
+  &[class*="doc-icon"] {
+    mask-image: url(/assets/icons/doc-icon.svg);
+    width: 28px;
+    height: 28px;
+    color: #246027;
+  }
+
+  &[class*="check-icon"] {
+    mask-image: url(/assets/icons/check-icon.svg);
+    width: 28px;
+    height: 28px;
+    color: var(--primary-green);
+  }
+
+  &[class*="file-icon"] {
+    mask-image: url(/assets/icons/file-icon.svg);
+    width: 15px;
+    height: 15px;
+    color: #5A7665;
+  }
+
+  &[class*="more-icon"] {
+    mask-image: url(/assets/icons/more-icon.svg);
+    width: 22px;
+    height: 22px;
+    color: #809689;
+  }
 }
