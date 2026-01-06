@@ -81,8 +81,6 @@
         font-style: italic;
     }
 
-
-
     .ant-avatar {
         width: 24px;
         height: 24px;
@@ -101,14 +99,13 @@
         }
     }
 
-
     .collaborators-plus-more {
         min-width: 24px;
         height: 24px;
         margin-left: -8px;
         border-radius: 50%;
         border: solid 2px var(--white);
-        background: #D3DFD4;
+        background: #d3dfd4;
         color: var(--primary);
         display: flex;
         align-items: center;
@@ -130,7 +127,6 @@
         }
     }
 }
-
 
 .filter-bar {
     display: flex;
@@ -158,13 +154,11 @@
         font-size: 14px;
         width: 240px;
 
-        .erm-icon[class*=search-icon] {
+        .erm-icon[class*="search-icon"] {
             width: 20px;
             height: 20px;
         }
-
     }
-
 }
 
 .create-btn {
@@ -208,7 +202,6 @@
     cursor: pointer;
 }
 
-
 .scope-actions {
     display: flex;
     align-items: center;
@@ -242,7 +235,7 @@
     font-family: var(--primary-font);
 
     .ant-breadcrumb-item {
-        opacity: 0.40;
+        opacity: 0.4;
     }
 
     .ant-breadcrumb-link {
@@ -254,8 +247,7 @@
     .ant-breadcrumb-separator {
         margin: 0 10px;
         color: var(--primary);
-        opacity: 0.40;
-
+        opacity: 0.4;
     }
 
     li:last-child {
@@ -287,7 +279,7 @@
     }
 
     .ant-progress-rail {
-        background: #E1E9E3;
+        background: #e1e9e3;
         height: 8px;
     }
 
