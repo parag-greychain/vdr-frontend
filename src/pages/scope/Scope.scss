@@ -300,3 +300,29 @@
                 #f5a623 100%);
     }
 }
+
+//tabs override
+.ant-tabs {
+    margin-top: 25px;
+
+    .ant-tabs-tab {
+        padding: 0 0 7px 0 !important;
+        font-size: var(--overall-paragraph-size);
+        font-weight: 500;
+        line-height: 20px;
+        color: rgba(1, 44, 18, 0.65);
+
+        &:hover,
+        &.ant-tabs-tab-active {
+            color: var(--primary);
+        }
+    }
+
+    .ant-tabs-nav::before {
+        border-color: var(--border-color);
+    }
+
+    .ant-tabs-ink-bar {
+        background-color: var(--primary-green);
+    }
+}

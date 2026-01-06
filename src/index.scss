@@ -370,7 +370,9 @@ button:focus-visible {
   }
 }
 
-
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: #f4f7f4 !important;
+}
 
 //Tooltip styles
 
