@@ -1,0 +1,90 @@
+.add-scope-drawer {
+    .ant-drawer-header-title {
+        align-items: self-start;
+        flex-direction: row-reverse;
+    }
+
+    .ant-drawer-close {
+        background: transparent !important;
+        padding: 0;
+        margin: 0 !important;
+    }
+
+    .ant-drawer-body {
+        padding: 25px 30px;
+    }
+
+    .ant-drawer-header {
+        border-color: var(--border-color);
+        padding: 25px 30px;
+
+        .drawer-title {
+            color: var(--primary);
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0 0 8px;
+        }
+
+        .drawer-subtitle {
+            margin: 0;
+            color: #587564;
+            font-size: 14px;
+            font-weight: 400;
+        }
+    }
+
+    .drawer-subtitle {
+        color: #7a7a7a;
+        margin-bottom: 16px;
+    }
+
+    .form-group {
+        margin-bottom: 24px;
+        gap: 0;
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: var(--overall-paragraph-size);
+            color: var(--primary);
+        }
+
+        .required {
+            color: red;
+        }
+
+        small {
+            color: #8a8a8a;
+        }
+    }
+
+    .risk-level-group {
+        display: flex;
+        gap: 8px;
+
+        .risk-btn {
+            flex: 1;
+            border-radius: 20px;
+
+            &.low {
+                color: green;
+            }
+
+            &.medium.active {
+                border-color: var(--primary-green);
+                color: var(--primary-green);
+            }
+
+            &.high {
+                color: red;
+            }
+        }
+    }
+
+    .drawer-footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 24px;
+    }
+}

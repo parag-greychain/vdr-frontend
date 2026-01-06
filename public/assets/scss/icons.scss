@@ -94,4 +94,11 @@
     height: 22px;
     color: #809689;
   }
+
+  &[class*="close-icon"] {
+    mask-image: url(/assets/icons/close-icon.svg);
+    width: 20px;
+    height: 20px;
+    color: #587564;
+  }
 }

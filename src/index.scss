@@ -470,3 +470,8 @@ button:focus-visible {
 .Toastify__toast-icon {
   width: 16px;
 }
+
+.ant-drawer .ant-drawer-mask.ant-drawer-mask-blur {
+  backdrop-filter: inherit;
+  background: rgba(0, 0, 0, 0.50);
+}
