@@ -6,9 +6,8 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import { Login, Home } from "./pages";
+import { Login, Home, Scope } from "./pages";
 import { PATHS } from "./shared";
-import Scope from "./pages/scope/Scope";
 import { AppLayout } from "./layout";
 import AuthLayout from "./layout/auth/AuthLayout";
 import "./App.scss";

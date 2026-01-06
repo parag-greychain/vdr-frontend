@@ -12,7 +12,7 @@ import {
   Flex,
   Breadcrumb,
 } from "antd";
-import {MoreOutlined } from "@ant-design/icons";
+import { MoreOutlined } from "@ant-design/icons";
 import "./Scope.scss";
 import Sidebar from "../../component/scope/sidebar/Sidebar";
 
