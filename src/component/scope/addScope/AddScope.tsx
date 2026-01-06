@@ -1,4 +1,4 @@
-import { Drawer, Input, Select, Button, DatePicker } from "antd";
+import { Drawer, Input, Select, Button, DatePicker, Progress } from "antd";
 
 import "./AddScope.scss";
 
@@ -26,8 +26,8 @@ const AddScope = ({ open, onClose }: AddScopeProps) => {
       }
       footer={
         <div className="drawer-footer">
-          <Button onClick={onClose}>Cancel</Button>
-          <Button type="primary" className="primary-btn">
+          <Button onClick={onClose} shape="round" type="text">Cancel</Button>
+          <Button type="primary" className="primary-btn" shape="round">
             ADD SCOPE
           </Button>
         </div>
@@ -38,17 +38,17 @@ const AddScope = ({ open, onClose }: AddScopeProps) => {
           <label>
             Scope Name <span className="required">*</span>
           </label>
-          <Input placeholder="e.g. Water Management, Human Rights" />
+          <Input className="input-field" placeholder="e.g. Water Management, Human Rights" />
         </div>
 
         <div className="form-group">
           <label>Description</label>
-          <Input.TextArea rows={3} />
+          <Input.TextArea className="input-field" rows={3} />
         </div>
 
         <div className="form-group">
           <label>Category</label>
-          <Select defaultValue="environmental">
+          <Select className="input-field select-field" defaultValue="environmental">
             <Select.Option value="environmental">Environmental</Select.Option>
           </Select>
         </div>
@@ -56,30 +56,36 @@ const AddScope = ({ open, onClose }: AddScopeProps) => {
         <div className="form-group">
           <label>Default Risk Level</label>
           <div className="risk-level-group">
-            <Button className="risk-btn low">Low</Button>
-            <Button className="risk-btn medium active">Medium</Button>
-            <Button className="risk-btn high">High</Button>
+            <Button className="risk-btn low"><span className="risk-icon"></span>Low</Button>
+            <Button className="risk-btn medium active"><span className="risk-icon"></span>Medium</Button>
+            <Button className="risk-btn high"><span className="risk-icon"></span>High</Button>
           </div>
         </div>
 
         <div className="form-group">
           <label>Scope Owner</label>
-          <Select placeholder="Select owner" />
+          <Select className="input-field select-field" placeholder="Select owner" />
+          <span className="info-text">Owner will be responsible for managing requests under this scope.</span>
         </div>
 
         <div className="form-group">
           <label>Default Due Date</label>
-          <DatePicker className="full-width" />
+          <DatePicker className="input-field date-picker select-field" />
         </div>
 
-        <div className="scope-preview">
-          <div className="preview-title">Scope Name</div>
-          <div className="preview-progress">
-            <span>Progress</span>
-            <span>0 Requests</span>
+        <div className="form-group mb-0">
+          <label>Preview</label>
+          <div className="scope-preview">
+            <div className="preview-title">Scope Name</div>
+            <div className="preview-progress">
+              <span className="progress-text">Progress</span>
+              <span className="progress-count">0 Requests</span>
+            </div>
+            <Progress percent={50} showInfo={false} strokeColor="#019A20" trailColor="#EEF3EF" strokeWidth={10} className="preview-progress-bar" />
           </div>
-          <div className="preview-bar" />
         </div>
+
+
       </div>
     </Drawer>
   );

@@ -1,7 +1,7 @@
 import { Popover } from "antd";
 import { useState } from "react";
 import "./Notifications.scss";
-import { IMAGES } from "../../shared/images";
+import { IMAGES } from "../../../shared/images";
 
 const notifications = [
   {

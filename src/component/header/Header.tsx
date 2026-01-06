@@ -1,12 +1,11 @@
 // import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { IMAGES } from "../../shared/images";
-import Notifications from "../notifications/Notifications";
-
-import "./Header.scss";
-import UserDropdown from "../userDropdown/UserDropdown";
+import Notifications from "./notifications/Notifications";
+import UserProfile from "./userProfile/UserProfile";
 import { Flex } from "antd";
 import { PATHS } from "../../shared";
+import "./Header.scss";
 
 const Header = () => {
   // const { pathname } = useLocation();
@@ -42,7 +41,7 @@ const Header = () => {
 
       <div className="header-right">
         <Notifications />
-        <UserDropdown />
+        <UserProfile />
       </div>
     </div>
   );
