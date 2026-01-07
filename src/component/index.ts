@@ -2,6 +2,7 @@ import Header from "./header/Header";
 import Notifications from "./header/notifications/Notifications";
 import UserProfile from "./header/userProfile/UserProfile";
 import PDFViewerDrawer from "./pdfViewerDrawer/PdfViewerDrawer";
+import RiskAssessment from "./riskAssessment";
 import {
   AddScope,
   ScopeSidebar,
@@ -20,4 +21,5 @@ export {
   ScopeFilterBar,
   PDFViewerDrawer,
   ScopeHeader,
+  RiskAssessment,
 };
