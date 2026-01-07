@@ -29,7 +29,6 @@ interface PdfViewerDrawerProps {
   onCancel?: () => void;
   showActions?: boolean;
   summaryContent?: React.ReactNode;
-  lastSync?: string;
 }
 
 const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
@@ -41,7 +40,6 @@ const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
   onCancel,
   showActions = false,
   summaryContent,
-  lastSync,
 }) => {
   const [numPages, setNumPages] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState<number>(1);
@@ -93,7 +91,11 @@ const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
       footer={null}
     >
       <div className="pdf-viewer-container">
-        <div className={`pdf-content-wrapper ${isFullscreen ? 'fullscreen-mode' : ''}`}>
+        <div
+          className={`pdf-content-wrapper ${
+            isFullscreen ? "fullscreen-mode" : ""
+          }`}
+        >
           <div className="pdf-document-section">
             <div className="pdf-toolbar">
               <div className="pdf-zoom-controls">
@@ -174,14 +176,14 @@ const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
             <div className="summary-header">
               <div className="summary-top">
                 <h2 className="summary-title">{title}</h2>
-                <Button type="text" onClick={onClose} icon={<CloseOutlined />}>
-                  Close
-                </Button>
+                <Button
+                  type="text"
+                  onClick={onClose}
+                  icon={<CloseOutlined />}
+                />
               </div>
               <div className="summary-sub">
-                <span className="last-sync">
-                  {lastSync ? `Last sync: ${lastSync}` : ""}
-                </span>
+                <span className="last-sync">Last sync : May 30.2025</span>
                 <div className="summary-actions">
                   <Button type="text" icon={<CopyOutlined />} />
                   <Button type="text" icon={<DownloadOutlined />} />
