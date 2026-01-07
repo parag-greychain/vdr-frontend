@@ -4,14 +4,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 import {
   LeftOutlined,
   RightOutlined,
-  ZoomInOutlined,
-  ZoomOutOutlined,
-  FullscreenOutlined,
   FullscreenExitOutlined,
-  CloseOutlined,
-  CopyOutlined,
-  DownloadOutlined,
-  ShareAltOutlined,
 } from "@ant-design/icons";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
