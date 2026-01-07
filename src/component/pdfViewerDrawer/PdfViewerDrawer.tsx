@@ -6,10 +6,10 @@ import {
   RightOutlined,
   FullscreenExitOutlined,
 } from "@ant-design/icons";
-import "react-pdf/dist/Page/AnnotationLayer.css";
-import "react-pdf/dist/Page/TextLayer.css";
-import "./PdfViewerDrawer.scss";
 import { IMAGES } from "../../shared";
+import "./PdfViewerDrawer.scss";
+import "react-pdf/dist/Page/TextLayer.css";
+import "react-pdf/dist/Page/AnnotationLayer.css";
 
 // Configure worker
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;

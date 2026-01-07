@@ -1,10 +1,9 @@
 import { Button } from "antd";
-import { type FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { IMAGES, PATHS } from "../../../shared";
 import "./Login.scss";
+import { IMAGES, PATHS } from "../../../shared";
 
-const Login: FC = () => {
+const Login = () => {
   const navigate = useNavigate();
 
   return (
@@ -14,7 +13,10 @@ const Login: FC = () => {
         <img src={IMAGES.logo} alt="ERM Logo" className="erm-logo" />
         <div className="content-wrapper">
           <h1 className="title">M&A Workflow & Intelligence Platform </h1>
-          <p>A unified, AI-powered platform for M&A teams to manage deal workflows, documents, and insights seamlessly integrated with existing VDRs and data sources.
+          <p>
+            A unified, AI-powered platform for M&A teams to manage deal
+            workflows, documents, and insights seamlessly integrated with
+            existing VDRs and data sources.
           </p>
         </div>
       </div>
@@ -23,8 +25,13 @@ const Login: FC = () => {
       <div className="login-right">
         <div className="login-box">
           <h3>Login</h3>
-          <Button type="default" className="login-btn" onClick={() => navigate(PATHS.home)}>
-            <img src={IMAGES.microsoft} alt="microsoft" /> Continue with Microsoft
+          <Button
+            type="default"
+            className="login-btn"
+            onClick={() => navigate(PATHS.home)}
+          >
+            <img src={IMAGES.microsoft} alt="microsoft" /> Continue with
+            Microsoft
           </Button>
           <div className="links">
             <a href="#">Contact Support</a>

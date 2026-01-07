@@ -1,15 +1,11 @@
 import { useState } from "react";
 import {
   Button,
-  Tabs,
-  Avatar,
-  Progress,
-  Breadcrumb,
+  Tabs
 } from "antd";
-import "./Scope.scss";
-import { ScopeSidebar, RequestCard, ScopeFilterBar, Comments } from "../../component";
-import { IMAGES } from "../../shared";
+import { ScopeSidebar, RequestCard, ScopeFilterBar, ScopeHeader, Comments } from "../../component";
 import type { Comment } from "../../component/scope/comments/Comments";
+import "./Scope.scss";
 
 const Scope = () => {
   const { TabPane } = Tabs;
@@ -37,70 +33,11 @@ const Scope = () => {
 
           {/* MAIN CONTENT */}
           <div className={`content ${isCommentsOpen ? "comments-open" : ""}`}>
-            <div className="scope-header">
-              <div className="breadcrumb-wrapper">
-                <Breadcrumb className="page-breadcrumb">
-                  <Breadcrumb.Item>Home</Breadcrumb.Item>
-                  <Breadcrumb.Item>Shell - Air Quality</Breadcrumb.Item>
-                </Breadcrumb>
-              </div>
-              <div className="scope-actions">
-                <Button className="primary-btn" type="primary" shape="round">
-                  <i className="erm-icon ai-icon" /> CHAT
-                </Button>
-                <Button
-                  type="text"
-                  aria-label="Comments"
-                  onClick={() => setIsCommentsOpen(!isCommentsOpen)}
-                  className={isCommentsOpen ? "active" : ""}
-                >
-                  <img src={IMAGES.commentIcon} alt="Comments" />
-                </Button>
-                <Button type="text" aria-label="Export">
-                  <img src={IMAGES.exportIcon} alt="Export" />
-                </Button>
-              </div>
-            </div>
-            <div className="scope-page-header">
-              <h2 className="page-heading">Air Quality</h2>
-              <p>
-                The category addresses management of air quality impacts
-                resulting from stationary (e.g., factories, power plants) and
-                mobile sources...
-              </p>
-
-              <div className="meta-row">
-                <div className="meta-row-left">
-                  <div className="collaborators-wrapper">
-                    <Avatar size={24} src={IMAGES.avatarImage} />
-                    <div className="collaborators-plus-more">
-                      <i className="erm-icon plus-icon" />
-                    </div>
-                  </div>
-                  <span className="date-wrap">
-                    <i className="erm-icon calendar-icon" />
-                    <span>
-                      Due :<span className="orange-text"> 20/01/2024</span>
-                    </span>
-                  </span>
-                  <span className="date-wrap">
-                    <i className="erm-icon calendar-icon" />
-                    <span>Last Synced : 20/01/2024</span>
-                  </span>
-                </div>
-                <div className="meta-row-right">
-                  <div className="custom-progress">
-                    <span className="progress-text">67% Completed</span>
-                    <Progress
-                      percent={67}
-                      showInfo={false}
-                      strokeLinecap="round"
-                      className="progress-bar"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ScopeHeader 
+              isScopePage={true} 
+              isCommentsOpen={isCommentsOpen}
+              onCommentsToggle={() => setIsCommentsOpen(!isCommentsOpen)}
+            />
 
             {/* TABS */}
             <Tabs defaultActiveKey="sent">
@@ -160,19 +97,19 @@ const Scope = () => {
           </div>
 
           {/* COMMENTS PANEL */}
-          <div className={`comments-panel ${isCommentsOpen ? "open" : ""}`}>
-            <div className="comments-panel-header">
-              <h3 className="comments-panel-title">Comments</h3>
+          <div className={`right-panel ${isCommentsOpen ? "open" : ""}`}>
+            <div className="right-panel-header">
+              <h3 className="right-panel-title">Comments</h3>
               <Button
                 type="text"
-                className="comments-close-btn"
+                className="close-btn"
                 onClick={() => setIsCommentsOpen(false)}
                 aria-label="Close Comments"
               >
                 <i className="erm-icon close-icon" />
               </Button>
             </div>
-            <div className="comments-panel-content">
+            <div className="right-panel-content">
               <Comments comments={comments} onCommentsChange={setComments} />
             </div>
           </div>
