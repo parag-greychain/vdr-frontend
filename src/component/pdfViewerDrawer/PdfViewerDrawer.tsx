@@ -16,6 +16,7 @@ import {
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 import "./PdfViewerDrawer.scss";
+import { IMAGES } from "../../shared";
 
 // Configure worker
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
@@ -100,14 +101,14 @@ const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
             <div className="pdf-toolbar">
               <div className="pdf-zoom-controls">
                 <Button
-                  icon={<ZoomOutOutlined />}
+                  icon={<i className="erm-icon zoom-minus-icon" />}
                   onClick={handleZoomOut}
                   disabled={scale <= 0.5}
                   type="text"
                 />
                 <span className="zoom-level">{Math.round(scale * 100)}%</span>
                 <Button
-                  icon={<ZoomInOutlined />}
+                  icon={<i className="erm-icon zoom-plus-icon" />}
                   onClick={handleZoomIn}
                   disabled={scale >= 3.0}
                   type="text"
@@ -136,7 +137,7 @@ const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
                     isFullscreen ? (
                       <FullscreenExitOutlined />
                     ) : (
-                      <FullscreenOutlined />
+                      <i className="erm-icon expend-icon" />
                     )
                   }
                   onClick={toggleFullscreen}
@@ -162,10 +163,21 @@ const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
             <div className="pdf-drawer-footer">
               {showActions && (
                 <>
-                  <Button size="large" onClick={handleCancel}>
+                  <Button
+                    className="secondary-btn"
+                    size="large"
+                    shape="round"
+                    onClick={handleCancel}
+                  >
                     CANCEL
                   </Button>
-                  <Button type="primary" size="large" onClick={handleApprove}>
+                  <Button
+                    className="primary-btn"
+                    type="primary"
+                    size="large"
+                    shape="round"
+                    onClick={handleApprove}
+                  >
                     APPROVE
                   </Button>
                 </>
@@ -177,17 +189,26 @@ const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
               <div className="summary-top">
                 <h2 className="summary-title">{title}</h2>
                 <Button
+                  className="ant-drawer-close"
                   type="text"
                   onClick={onClose}
-                  icon={<CloseOutlined />}
+                  icon={<i className="erm-icon close-icon" />}
                 />
               </div>
               <div className="summary-sub">
-                <span className="last-sync">Last sync : May 30.2025</span>
-                <div className="summary-actions">
-                  <Button type="text" icon={<CopyOutlined />} />
-                  <Button type="text" icon={<DownloadOutlined />} />
-                  <Button type="text" icon={<ShareAltOutlined />} />
+                <span className="last-sync">
+                  Last sync : <span>May 30.2025</span>
+                </span>
+                <div className="pdf-detail-actions">
+                  <Button type="text" aria-label="Copy">
+                    <img src={IMAGES.copyIcon} alt="Copy" />
+                  </Button>
+                  <Button type="text" aria-label="Comments">
+                    <img src={IMAGES.commentIcon} alt="Comments" />
+                  </Button>
+                  <Button type="text" aria-label="Export">
+                    <img src={IMAGES.exportIcon} alt="Export" />
+                  </Button>
                 </div>
               </div>
             </div>

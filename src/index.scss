@@ -130,6 +130,8 @@ button:focus-visible {
 
   &.ant-btn-variant-solid:not(:disabled):not(.ant-btn-disabled):hover {
     background: var(--primary-btn-hover-bg) !important;
+    color: var(--primary);
+
   }
 }
 

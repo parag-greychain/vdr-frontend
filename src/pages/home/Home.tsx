@@ -27,7 +27,7 @@ const Home = () => {
     <div>
       <h1>Home Page</h1>
       <p>Welcome to the application!</p>
-      <Button type="primary" onClick={handleOpenPdf}>
+      <Button type="primary" onClick={handleOpenPdf} hidden>
         Open PDF Viewer
       </Button>
 
