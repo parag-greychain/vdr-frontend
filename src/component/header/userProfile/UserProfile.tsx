@@ -1,10 +1,10 @@
 import { Avatar, Dropdown, type MenuProps } from "antd";
 import { persistStore } from "redux-persist";
-import { store } from "../../store";
+import { store } from "../../../store";
 import { useNavigate } from "react-router-dom";
-import { PATHS } from "../../shared";
+import { PATHS } from "../../../shared";
 
-const UserDropdown = () => {
+const UserProfile = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -43,4 +43,4 @@ const UserDropdown = () => {
   );
 };
 
-export default UserDropdown;
+export default UserProfile;

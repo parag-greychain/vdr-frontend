@@ -1,7 +1,11 @@
-import { Button, Input } from "antd";
+import { Input, Button } from "antd";
 import "./Sidebar.scss";
+import AddScope from "../addScope/AddScope";
+import { useState } from "react";
 
 const Sidebar = () => {
+  const [isAddScopeOpen, setIsAddScopeOpen] = useState(false);
+
   return (
     <>
       <h4 className="sidebar-heading">Scope</h4>
@@ -20,7 +24,11 @@ const Sidebar = () => {
         </button>
       </div>
 
-      <Button type="link" className="add-scope">
+      <Button
+        type="link"
+        className="add-scope"
+        onClick={() => setIsAddScopeOpen(true)}
+      >
         <i className="erm-icon plus-icon"></i> ADD SCOPE
       </Button>
 
@@ -44,6 +52,11 @@ const Sidebar = () => {
           </div>
         ))}
       </div>
+
+      <AddScope
+        open={isAddScopeOpen}
+        onClose={() => setIsAddScopeOpen(false)}
+      />
     </>
   );
 };

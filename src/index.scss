@@ -121,7 +121,7 @@ button:focus-visible {
 
 .primary-btn {
   background: var(--primary-btn-bg);
-  color: var(--primary) !important;
+  color: var(--primary);
   font-weight: 600;
   font-size: 13px;
   text-transform: uppercase;
@@ -318,12 +318,18 @@ button:focus-visible {
 
 .dropdown-ui {
   border: 1px solid var(--input-border) !important;
-  background: var(--body-bg) !important;
+  background: transparent !important;
   box-shadow: none !important;
   border-radius: 3px;
   height: 40px;
   padding: 5px 10px !important;
   position: relative;
+
+  .ant-select-content-value {
+    color: var(--primary);
+    font-size: var(--overall-paragraph-size);
+    font-weight: 500;
+  }
 
   .ant-select-item {
     padding: 10px 12px !important;
@@ -370,7 +376,9 @@ button:focus-visible {
   }
 }
 
-
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: #f4f7f4 !important;
+}
 
 //Tooltip styles
 
@@ -461,4 +469,14 @@ button:focus-visible {
 
 .Toastify__toast-icon {
   width: 16px;
+}
+
+.ant-drawer .ant-drawer-mask.ant-drawer-mask-blur {
+  backdrop-filter: inherit;
+  background: rgba(0, 0, 0, 0.50);
+}
+
+.ant-form-item-explain-error {
+  font-size: 12px;
+  margin-top: 2px;
 }
