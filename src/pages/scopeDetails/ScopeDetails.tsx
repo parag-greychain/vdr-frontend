@@ -14,7 +14,7 @@ const ScopeDetails = () => {
 
           {/* MAIN CONTENT */}
           <Col flex="auto" className="content">
-            <ScopeHeader />
+            <ScopeHeader isScopePage={false} />
             <div className="scope-details-content">
               <ScopeFilterBar />
               <h3>Scope Details Page Content</h3>

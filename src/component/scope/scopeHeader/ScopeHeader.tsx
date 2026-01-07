@@ -2,7 +2,12 @@ import { Avatar, Breadcrumb, Button, Progress } from "antd";
 import "./ScopeHeader.scss";
 import { IMAGES } from "../../../shared";
 
-const ScopeHeader = () => {
+interface IScopeHeader {
+  isScopePage: boolean;
+}
+const ScopeHeader = (props: IScopeHeader) => {
+  const { isScopePage } = props;
+
   return (
     <div className="scope-header-wrapper">
       <div className="scope-header">
@@ -31,7 +36,7 @@ const ScopeHeader = () => {
           from stationary (e.g., factories, power plants) and mobile sources...
         </p>
 
-        <div className="meta-row">
+        <div className="meta-row" hidden={!isScopePage}>
           <div className="meta-row-left">
             <div className="collaborators-wrapper">
               <Avatar size={24} src={IMAGES.avatarImage} />
