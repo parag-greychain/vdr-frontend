@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Button } from "antd";
-import { PDFViewerDrawer, RiskAssessment } from "../../component";
+import { PDFViewerDrawer, RiskAssessment, AddScopeDrawer } from "../../component";
 
 const Home = () => {
   const [isPdfOpen, setIsPdfOpen] = useState(false);
   const [isRiskAssessmentOpen, setIsRiskAssessmentOpen] = useState(false);
+  const [isAddScopeDrawerOpen, setIsAddScopeDrawerOpen] = useState(false);
 
   const handleOpenPdf = () => {
     setIsPdfOpen(true);
@@ -36,6 +37,18 @@ const Home = () => {
     console.log("Risk Assessment Added");
   };
 
+  const handleOpenAddScopeDrawer = () => {
+    setIsAddScopeDrawerOpen(true);
+  };
+
+  const handleCloseAddScopeDrawer = () => {
+    setIsAddScopeDrawerOpen(false);
+  };
+
+  const handleAddScope = (description: string) => {
+    console.log("Scope Added:", description);
+  };
+
   return (
     <div>
       <h1>Home Page</h1>
@@ -45,6 +58,9 @@ const Home = () => {
       </Button>
       <Button type="primary" onClick={handleOpenRiskAssessment}>
         Open Risk Assessment
+      </Button>
+      <Button type="primary" onClick={handleOpenAddScopeDrawer}>
+        Open Add Scope Drawer
       </Button>
 
       <PDFViewerDrawer
@@ -61,6 +77,12 @@ const Home = () => {
         open={isRiskAssessmentOpen}
         onClose={handleCloseRiskAssessment}
         onAdd={handleAddRisk}
+      />
+
+      <AddScopeDrawer
+        open={isAddScopeDrawerOpen}
+        onClose={handleCloseAddScopeDrawer}
+        onAdd={handleAddScope}
       />
     </div>
   );
