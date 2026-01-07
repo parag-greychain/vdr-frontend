@@ -96,6 +96,21 @@ const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
         <div className="pdf-content-wrapper">
           <div className="pdf-document-section">
             <div className="pdf-toolbar">
+              <div className="pdf-zoom-controls">
+                <Button
+                  icon={<ZoomOutOutlined />}
+                  onClick={handleZoomOut}
+                  disabled={scale <= 0.5}
+                  type="text"
+                />
+                <span className="zoom-level">{Math.round(scale * 100)}%</span>
+                <Button
+                  icon={<ZoomInOutlined />}
+                  onClick={handleZoomIn}
+                  disabled={scale >= 3.0}
+                  type="text"
+                />
+              </div>
               <div className="pdf-nav-controls">
                 <Button
                   icon={<LeftOutlined />}
@@ -113,20 +128,7 @@ const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
                   type="text"
                 />
               </div>
-              <div className="pdf-zoom-controls">
-                <Button
-                  icon={<ZoomOutOutlined />}
-                  onClick={handleZoomOut}
-                  disabled={scale <= 0.5}
-                  type="text"
-                />
-                <span className="zoom-level">{Math.round(scale * 100)}%</span>
-                <Button
-                  icon={<ZoomInOutlined />}
-                  onClick={handleZoomIn}
-                  disabled={scale >= 3.0}
-                  type="text"
-                />
+              <div className="pdf-fullscreen-control">
                 <Button
                   icon={
                     isFullWidth ? (
