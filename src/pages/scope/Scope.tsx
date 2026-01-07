@@ -16,12 +16,12 @@ const Scope = () => {
         <Row className="inner-app-row" gutter={24}>
           {/* LEFT SIDEBAR */}
           <Col flex="253px" className="scope-sidebar">
-            <ScopeSidebar />
+            <ScopeSidebar  />
           </Col>
 
           {/* MAIN CONTENT */}
           <Col flex="auto" className="content">
-            <ScopeHeader />
+            <ScopeHeader isScopePage={true}/>
             {/* TABS */}
             <Tabs defaultActiveKey="sent">
               <TabPane tab="Sent (20)" key="sent">

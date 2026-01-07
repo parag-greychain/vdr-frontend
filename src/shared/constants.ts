@@ -3,6 +3,7 @@ export enum PATHS {
   login = "/login",
   projects = "/projects",
   scope = "/scope",
+  scopeDetails = "/scope/scope-details",
 }
 
 export enum LocalStorageName {
