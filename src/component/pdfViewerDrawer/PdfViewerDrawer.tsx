@@ -46,7 +46,7 @@ const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
   const [numPages, setNumPages] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [scale, setScale] = useState<number>(1.0);
-  const [isFullWidth, setIsFullWidth] = useState<boolean>(false);
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
@@ -69,8 +69,8 @@ const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
     setScale((prev) => Math.max(prev - 0.2, 0.5));
   };
 
-  const toggleFullWidth = () => {
-    setIsFullWidth((prev) => !prev);
+  const toggleFullscreen = () => {
+    setIsFullscreen((prev) => !prev);
   };
 
   const handleApprove = () => {
@@ -93,7 +93,7 @@ const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
       footer={null}
     >
       <div className="pdf-viewer-container">
-        <div className="pdf-content-wrapper">
+        <div className={`pdf-content-wrapper ${isFullscreen ? 'fullscreen-mode' : ''}`}>
           <div className="pdf-document-section">
             <div className="pdf-toolbar">
               <div className="pdf-zoom-controls">
@@ -131,15 +131,15 @@ const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
               <div className="pdf-fullscreen-control">
                 <Button
                   icon={
-                    isFullWidth ? (
+                    isFullscreen ? (
                       <FullscreenExitOutlined />
                     ) : (
                       <FullscreenOutlined />
                     )
                   }
-                  onClick={toggleFullWidth}
+                  onClick={toggleFullscreen}
                   type="text"
-                  title={isFullWidth ? "Fit to width" : "Full width"}
+                  title={isFullscreen ? "Fit to width" : "Fullscreen"}
                 />
               </div>
             </div>
@@ -153,7 +153,7 @@ const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
                 <Page
                   pageNumber={pageNumber}
                   scale={scale}
-                  width={isFullWidth ? undefined : 550}
+                  width={isFullscreen ? undefined : 550}
                 />
               </Document>
             </div>

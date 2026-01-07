@@ -21,6 +21,14 @@
       height: 100%;
       overflow: hidden;
 
+      &.fullscreen-mode {
+        grid-template-columns: 1fr;
+
+        .pdf-summary-section {
+          display: none;
+        }
+      }
+
       .pdf-document-section {
         display: grid;
         grid-template-rows: 50px 1fr 80px;
