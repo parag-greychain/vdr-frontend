@@ -20,7 +20,7 @@ const RiskAssessment = ({ open, onClose, onAdd }: RiskAssessmentProps) => {
       footer={null}
       closable={true}
       className="risk-assessment-modal"
-      width={750}
+      width={650}
       centered
     >
       <div className="risk-assessment-content">
