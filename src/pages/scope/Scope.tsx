@@ -1,31 +1,42 @@
+import { useState } from "react";
 import {
   Button,
-  Col,
-  Row,
   Tabs,
   Avatar,
   Progress,
-  Flex,
   Breadcrumb,
 } from "antd";
 import "./Scope.scss";
-import { ScopeSidebar, RequestCard, ScopeFilterBar } from "../../component";
+import { ScopeSidebar, RequestCard, ScopeFilterBar, Comments } from "../../component";
 import { IMAGES } from "../../shared";
+import type { Comment } from "../../component/scope/comments/Comments";
 
 const Scope = () => {
   const { TabPane } = Tabs;
+  const [isCommentsOpen, setIsCommentsOpen] = useState(false);
+  const [comments, setComments] = useState<Comment[]>([
+    {
+      id: "1",
+      author: "Sarah Chen",
+      text: "There are no applicable regulatory criteria against which these direct GHG",
+      timestamp: "26/11/25, 2:47 PM",
+      avatar: "S",
+      replies: [],
+      isResolved: false,
+    },
+  ]);
 
   return (
     <div className="scope-page-container">
-      <Flex className="inner-app-wrap">
-        <Row className="inner-app-row" gutter={24}>
+      <div className="inner-app-wrap">
+        <div className="inner-app-row">
           {/* LEFT SIDEBAR */}
-          <Col flex="253px" className="scope-sidebar">
+          <div className="scope-sidebar">
             <ScopeSidebar />
-          </Col>
+          </div>
 
           {/* MAIN CONTENT */}
-          <Col flex="auto" className="content">
+          <div className={`content ${isCommentsOpen ? "comments-open" : ""}`}>
             <div className="scope-header">
               <div className="breadcrumb-wrapper">
                 <Breadcrumb className="page-breadcrumb">
@@ -37,7 +48,12 @@ const Scope = () => {
                 <Button className="primary-btn" type="primary" shape="round">
                   <i className="erm-icon ai-icon" /> CHAT
                 </Button>
-                <Button type="text" aria-label="Comments">
+                <Button
+                  type="text"
+                  aria-label="Comments"
+                  onClick={() => setIsCommentsOpen(!isCommentsOpen)}
+                  className={isCommentsOpen ? "active" : ""}
+                >
                   <img src={IMAGES.commentIcon} alt="Comments" />
                 </Button>
                 <Button type="text" aria-label="Export">
@@ -141,9 +157,27 @@ const Scope = () => {
                 </div>
               </TabPane>
             </Tabs>
-          </Col>
-        </Row>
-      </Flex>
+          </div>
+
+          {/* COMMENTS PANEL */}
+          <div className={`comments-panel ${isCommentsOpen ? "open" : ""}`}>
+            <div className="comments-panel-header">
+              <h3 className="comments-panel-title">Comments</h3>
+              <Button
+                type="text"
+                className="comments-close-btn"
+                onClick={() => setIsCommentsOpen(false)}
+                aria-label="Close Comments"
+              >
+                <i className="erm-icon close-icon" />
+              </Button>
+            </div>
+            <div className="comments-panel-content">
+              <Comments comments={comments} onCommentsChange={setComments} />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
