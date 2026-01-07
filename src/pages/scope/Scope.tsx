@@ -9,12 +9,7 @@ import {
   Breadcrumb,
 } from "antd";
 import "./Scope.scss";
-import {
-  ScopeSidebar,
-  SentScopeTab,
-  ReceivedScopeTab,
-  ReviewedScopeTab,
-} from "../../component";
+import { ScopeSidebar, RequestCard, ScopeFilterBar } from "../../component";
 import { IMAGES } from "../../shared";
 
 const Scope = () => {
@@ -94,7 +89,15 @@ const Scope = () => {
             {/* TABS */}
             <Tabs defaultActiveKey="sent">
               <TabPane tab="Sent (20)" key="sent">
-                <SentScopeTab />
+                <div className="sent-tab">
+                  <ScopeFilterBar />
+
+                  <div className="request-list">
+                    {[1, 2, 3, 4].map((id) => (
+                      <RequestCard key={id} id={id} statusIcon="time-icon" />
+                    ))}
+                  </div>
+                </div>
               </TabPane>
               <TabPane
                 tab={
@@ -104,10 +107,38 @@ const Scope = () => {
                 }
                 key="received"
               >
-                <ReceivedScopeTab />
+                <div className="received-tab">
+                  <ScopeFilterBar />
+
+                  <div className="request-list">
+                    {[1, 2, 3, 4].map((id) => (
+                      <RequestCard
+                        key={id}
+                        id={id}
+                        statusIcon="doc-icon"
+                        showProgress
+                        progress={78}
+                      />
+                    ))}
+                  </div>
+                </div>
               </TabPane>
               <TabPane tab="Reviewed (3)" key="reviewed">
-                <ReviewedScopeTab />
+                <div className="reviewed-tab">
+                  <ScopeFilterBar />
+
+                  <div className="request-list">
+                    {[1, 2, 3, 4].map((id) => (
+                      <RequestCard
+                        key={id}
+                        id={id}
+                        statusIcon="check-icon"
+                        showProgress
+                        progress={78}
+                      />
+                    ))}
+                  </div>
+                </div>
               </TabPane>
             </Tabs>
           </Col>
