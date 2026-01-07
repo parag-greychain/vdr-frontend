@@ -101,4 +101,25 @@
     height: 20px;
     color: #587564;
   }
+
+  &[class*="zoom-plus-icon"] {
+    mask-image: url(/assets/icons/zoom-plus-icon.svg);
+    width: 16px;
+    height: 16px;
+    color: var(--primary);
+  }
+
+  &[class*="zoom-minus-icon"] {
+    mask-image: url(/assets/icons/zoom-minus-icon.svg);
+    width: 16px;
+    height: 16px;
+    color: var(--primary);
+  }
+
+  &[class*="expend-icon"] {
+    mask-image: url(/assets/icons/expend-icon.svg);
+    width: 16px;
+    height: 16px;
+    color: var(--primary);
+  }
 }

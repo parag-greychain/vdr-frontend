@@ -1,9 +1,17 @@
 import Header from "./header/Header";
 import Notifications from "./header/notifications/Notifications";
 import UserProfile from "./header/userProfile/UserProfile";
-import AddScope from "./scope/addScope/AddScope";
-import Sidebar from "./scope/sidebar/Sidebar";
 import PDFViewerDrawer from "./pdfViewerDrawer/PdfViewerDrawer";
-import Comments from "./scope/comments/Comments";
+import { AddScope, ScopeSidebar, RequestCard, ScopeFilterBar, Comments } from "./scope";
 
-export { Header, Notifications, Sidebar, UserProfile, AddScope, PDFViewerDrawer, Comments };
+export {
+  Header,
+  AddScope,
+  UserProfile,
+  RequestCard,
+  ScopeSidebar,
+  Notifications,
+  ScopeFilterBar,
+  PDFViewerDrawer,
+  Comments,
+};

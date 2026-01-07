@@ -4,6 +4,7 @@ export const IMAGES = {
   notificationIcon: "/assets/icons/notification-icon.svg",
   commentIcon: "/assets/icons/comment.svg",
   exportIcon: "/assets/icons/export.svg",
+  copyIcon: "/assets/icons/copy-icon.svg",
   avatarImage: "/assets/images/avatar.jpg",
   sendIcon: "/assets/icons/send.svg",
   replyIcon: "/assets/icons/reply.svg",
