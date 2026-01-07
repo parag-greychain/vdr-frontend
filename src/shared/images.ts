@@ -5,4 +5,6 @@ export const IMAGES = {
   commentIcon: "/assets/icons/comment.svg",
   exportIcon: "/assets/icons/export.svg",
   avatarImage: "/assets/images/avatar.jpg",
+  sendIcon: "/assets/icons/send.svg",
+  replyIcon: "/assets/icons/reply.svg",
 };
