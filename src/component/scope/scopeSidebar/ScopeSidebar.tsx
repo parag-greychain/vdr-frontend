@@ -1,9 +1,9 @@
 import { Input, Button } from "antd";
-import "./Sidebar.scss";
-import AddScope from "../addScope/AddScope";
+import "./ScopeSidebar.scss";
 import { useState } from "react";
+import { AddScope } from "../../../component";
 
-const Sidebar = () => {
+const ScopeSidebar = () => {
   const [isAddScopeOpen, setIsAddScopeOpen] = useState(false);
 
   return (
@@ -61,4 +61,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default ScopeSidebar;
