@@ -3,5 +3,6 @@ import Notifications from "./header/notifications/Notifications";
 import UserProfile from "./header/userProfile/UserProfile";
 import AddScope from "./scope/addScope/AddScope";
 import Sidebar from "./scope/sidebar/Sidebar";
+import PDFViewerDrawer from "./pdfViewerDrawer/PdfViewerDrawer";
 
-export { Header, Notifications, Sidebar, UserProfile, AddScope };
+export { Header, Notifications, Sidebar, UserProfile, AddScope, PDFViewerDrawer };
