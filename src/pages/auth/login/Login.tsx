@@ -1,62 +1,36 @@
-import { useState } from "react";
+import { Button } from "antd";
+import { type FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { PATHS } from "../../../shared";
+import { IMAGES, PATHS } from "../../../shared";
 import "./Login.scss";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+const Login: FC = () => {
   const navigate = useNavigate();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      // Add your login logic here
-      console.log("Login attempt:", { email, password });
-      
-      // Navigate to home after successful login
-      navigate(PATHS.home);
-    } catch (error) {
-      console.error("Login failed:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="login-container">
-      <div className="login-card">
-        <h1 className="login-title">Login</h1>
-        <form onSubmit={handleSubmit} className="login-form">
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-            />
+      {/* LEFT SECTION */}
+      <div className="login-left">
+        <img src={IMAGES.logo} alt="ERM Logo" className="erm-logo" />
+        <div className="content-wrapper">
+          <h1 className="title">M&A Workflow & Intelligence Platform </h1>
+          <p>A unified, AI-powered platform for M&A teams to manage deal workflows, documents, and insights seamlessly integrated with existing VDRs and data sources.
+          </p>
+        </div>
+      </div>
+
+      {/* RIGHT SECTION */}
+      <div className="login-right">
+        <div className="login-box">
+          <h3>Login</h3>
+          <Button type="default" className="login-btn" onClick={() => navigate(PATHS.home)}>
+            <img src={IMAGES.microsoft} alt="microsoft" /> Continue with Microsoft
+          </Button>
+          <div className="links">
+            <a href="#">Contact Support</a>
+            <a href="#">Privacy Policy</a>
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              required
-            />
-          </div>
-          <button type="submit" className="login-button" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );

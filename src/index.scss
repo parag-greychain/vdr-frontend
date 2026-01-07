@@ -121,7 +121,7 @@ button:focus-visible {
 
 .primary-btn {
   background: var(--primary-btn-bg);
-  color: var(--primary) !important;
+  color: var(--primary);
   font-weight: 600;
   font-size: 13px;
   text-transform: uppercase;
@@ -474,4 +474,9 @@ button:focus-visible {
 .ant-drawer .ant-drawer-mask.ant-drawer-mask-blur {
   backdrop-filter: inherit;
   background: rgba(0, 0, 0, 0.50);
+}
+
+.ant-form-item-explain-error {
+  font-size: 12px;
+  margin-top: 2px;
 }
