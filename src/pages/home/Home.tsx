@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Button } from "antd";
-import { PDFViewerDrawer, RiskAssessment, AddScopeDrawer } from "../../component";
+import { PDFViewerDrawer, RiskAssessment, AddScopeDrawer, SelectedSourcesDrawer } from "../../component";
 
 const Home = () => {
   const [isPdfOpen, setIsPdfOpen] = useState(false);
   const [isRiskAssessmentOpen, setIsRiskAssessmentOpen] = useState(false);
   const [isAddScopeDrawerOpen, setIsAddScopeDrawerOpen] = useState(false);
+  const [isSelectedSourcesOpen, setIsSelectedSourcesOpen] = useState(false);
 
   const handleOpenPdf = () => {
     setIsPdfOpen(true);
@@ -49,6 +50,18 @@ const Home = () => {
     console.log("Scope Added:", description);
   };
 
+  const handleOpenSelectedSources = () => {
+    setIsSelectedSourcesOpen(true);
+  };
+
+  const handleCloseSelectedSources = () => {
+    setIsSelectedSourcesOpen(false);
+  };
+
+  const handleSelectSources = (selectedItems: any[]) => {
+    console.log("Selected Sources:", selectedItems);
+  };
+
   return (
     <div>
       <h1>Home Page</h1>
@@ -61,6 +74,9 @@ const Home = () => {
       </Button>
       <Button type="primary" onClick={handleOpenAddScopeDrawer}>
         Open Add Scope Drawer
+      </Button>
+      <Button type="primary" onClick={handleOpenSelectedSources}>
+        Open Selected Sources
       </Button>
 
       <PDFViewerDrawer
@@ -83,6 +99,12 @@ const Home = () => {
         open={isAddScopeDrawerOpen}
         onClose={handleCloseAddScopeDrawer}
         onAdd={handleAddScope}
+      />
+
+      <SelectedSourcesDrawer
+        open={isSelectedSourcesOpen}
+        onClose={handleCloseSelectedSources}
+        onSelect={handleSelectSources}
       />
     </div>
   );

@@ -4,6 +4,7 @@ import UserProfile from "./header/userProfile/UserProfile";
 import PDFViewerDrawer from "./pdfViewerDrawer/PdfViewerDrawer";
 import RiskAssessment from "./riskAssessment";
 import AddScopeDrawer from "./addScopeDrawer";
+import SelectedSourcesDrawer from "./selectedSourcesDrawer";
 import {
   AddScope,
   ScopeSidebar,
@@ -24,4 +25,5 @@ export {
   ScopeHeader,
   RiskAssessment,
   AddScopeDrawer,
+  SelectedSourcesDrawer,
 };
