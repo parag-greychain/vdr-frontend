@@ -3,7 +3,21 @@ import "./ProjectDetails.scss";
 const ProjectDetails = () => {
   return (
     <div className="project-details-page-container">
-      <div className="project-details-header">shell</div>
+      <div className="project-details-header">
+        <div className="project-details-header-text-wrap">
+          <span>shell</span>
+          <p>
+            Shell is a global energy company operating across exploration,
+            production, refining, and low-carbon solutions. With a presence in
+            over 70 countries, Shell supports industries with fuels, lubricants,
+            and advanced energy technologies.
+          </p>
+        </div>
+        <div className="project-details-header-breadcrumb">
+          <span>Service</span>
+          breadcrumb
+        </div>
+      </div>
       <div className="project-details-wrap">
         <div className="project-table-matrix-wrap">
           <div className="flag-matrix-wrap">
