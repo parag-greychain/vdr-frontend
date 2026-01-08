@@ -8,4 +8,6 @@ export const IMAGES = {
   addFlagIcon: "/assets/icons/add-flag-icon.svg",
   avatarImage: "/assets/images/avatar.jpg",
   sourceFolderIcon: "/assets/icons/source-folder-icon.svg",
+  sendIcon: "/assets/icons/send.svg",
+  replyIcon: "/assets/icons/reply.svg",
 };

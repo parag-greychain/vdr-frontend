@@ -11,6 +11,8 @@ import {
   RequestCard,
   ScopeFilterBar,
   ScopeHeader,
+  Comments,
+  Chat,
 } from "./scope";
 
 export {
@@ -22,8 +24,10 @@ export {
   Notifications,
   ScopeFilterBar,
   PDFViewerDrawer,
+  Comments,
   ScopeHeader,
   RiskAssessment,
   AddScopeDrawer,
   SelectedSourcesDrawer,
+  Chat,
 };
