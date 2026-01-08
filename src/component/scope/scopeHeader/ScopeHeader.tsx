@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Avatar, Breadcrumb, Button, Progress } from "antd";
 import "./ScopeHeader.scss";
 import { IMAGES } from "../../../shared";
+import { AddScopeDrawer } from "../../../component";
 
 interface IScopeHeader {
   isScopePage: boolean;
@@ -10,7 +12,20 @@ interface IScopeHeader {
   onChatToggle?: () => void;
 }
 const ScopeHeader = (props: IScopeHeader) => {
-  const { isScopePage, isCommentsOpen, isChatOpen, onCommentsToggle, onChatToggle } = props;
+  const { isCommentsOpen, isChatOpen, onCommentsToggle, onChatToggle } = props;
+  const [isAddScopeDrawerOpen, setIsAddScopeDrawerOpen] = useState(false);
+
+  const handleOpenAddScopeDrawer = () => {
+    setIsAddScopeDrawerOpen(true);
+  };
+
+  const handleCloseAddScopeDrawer = () => {
+    setIsAddScopeDrawerOpen(false);
+  };
+
+  const handleAddScope = (description: string) => {
+    console.log("Scope Added:", description);
+  };
 
   return (
     <div className="scope-header-wrapper">
@@ -22,16 +37,31 @@ const ScopeHeader = (props: IScopeHeader) => {
           </Breadcrumb>
         </div>
         <div className="scope-actions">
-          <Button 
+          <Button
             className={`primary-btn ${isChatOpen ? "active" : ""}`}
-            type="primary" 
+            type="primary"
             shape="round"
             onClick={onChatToggle}
           >
             <i className="erm-icon ai-icon" /> CHAT
           </Button>
-          <Button 
-            type="text" 
+          <Button
+            type="text"
+            aria-label="flagIcon"
+            className={isCommentsOpen ? "active" : ""}
+            onClick={handleOpenAddScopeDrawer}
+          >
+            <img src={IMAGES.flagIcon} alt="flagIcon" />
+          </Button>
+          <Button
+            type="text"
+            aria-label="checkPrimaryIcon"
+            className={isCommentsOpen ? "active" : ""}
+          >
+            <img src={IMAGES.checkPrimaryIcon} alt="checkPrimaryIcon" />
+          </Button>
+          <Button
+            type="text"
             aria-label="Comments"
             onClick={onCommentsToggle}
             className={isCommentsOpen ? "active" : ""}
@@ -50,7 +80,7 @@ const ScopeHeader = (props: IScopeHeader) => {
           from stationary (e.g., factories, power plants) and mobile sources...
         </p>
 
-        <div className="meta-row" hidden={!isScopePage}>
+        <div className="meta-row">
           <div className="meta-row-left">
             <div className="collaborators-wrapper">
               <Avatar size={24} src={IMAGES.avatarImage} />
@@ -65,8 +95,8 @@ const ScopeHeader = (props: IScopeHeader) => {
               </span>
             </span>
             <span className="date-wrap">
-              <i className="erm-icon calendar-icon" />
-              <span>Last Synced : 20/01/2024</span>
+              <i className="erm-icon refresh-double-icon" />
+              <span>Last Synced : 20/01/2024, 2:30 pm</span>
             </span>
           </div>
           <div className="meta-row-right">
@@ -82,6 +112,12 @@ const ScopeHeader = (props: IScopeHeader) => {
           </div>
         </div>
       </div>
+
+      <AddScopeDrawer
+        open={isAddScopeDrawerOpen}
+        onClose={handleCloseAddScopeDrawer}
+        onAdd={handleAddScope}
+      />
     </div>
   );
 };

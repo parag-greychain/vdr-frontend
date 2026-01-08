@@ -383,15 +383,13 @@ button:focus-visible {
 }
 
 //Tooltip styles
+.ant-tooltip .ant-tooltip-container {
+  background-color: #012C12 !important;
+}
 
-.ant-tooltip {
-  .ant-tooltip-inner {
-    background: var(--primary);
-  }
-
-  .ant-tooltip-arrow:before {
-    background: var(--primary);
-  }
+/* Tooltip arrow */
+.ant-tooltip-arrow::before {
+  background-color: #012C12 !important;
 }
 
 
