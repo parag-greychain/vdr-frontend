@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { Button, Col, Flex, Row, Table, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import "./ScopeDetails.scss";
@@ -23,49 +23,102 @@ interface FileData {
   userAvatar: string;
 }
 
+interface StatCard {
+  title: string;
+  value: string | number;
+  subtitle?: string;
+  iconClass: string;
+  colorClass: "blue" | "green" | "red";
+}
+
+interface RiskSignal {
+  color: "red" | "yellow" | "green" | "white";
+  text: string;
+  count: number;
+}
+
+const RISK_SIGNALS: RiskSignal[] = [
+  { color: "red", text: "Strong", count: 5 },
+  { color: "yellow", text: "Potential", count: 8 },
+  { color: "green", text: "No Signal", count: 10 },
+  { color: "white", text: "Not Reviewed", count: 6 },
+];
+
+const STAT_CARDS: StatCard[] = [
+  {
+    title: "All Files",
+    value: 5,
+    iconClass: "file-blue-icon",
+    colorClass: "blue",
+  },
+  {
+    title: "Reviewed Files",
+    value: "40%",
+    subtitle: "2 of 5 files",
+    iconClass: "check-icon",
+    colorClass: "green",
+  },
+  {
+    title: "Rejected Files",
+    value: "1%",
+    subtitle: "2 of 5 files",
+    iconClass: "reject-icon",
+    colorClass: "red",
+  },
+];
+
+const MOCK_DATA: FileData[] = [
+  {
+    key: "1",
+    title: "Q3 2024 Financial Statement",
+    path: "/Financial/Quarterly Reports",
+    icon: "pdf",
+    aiSummary: "Host your own AI deep research agent",
+    irl: "IRL 1: Provide the impact assessment",
+    aiScore: 10,
+    probability: 10,
+    status: "Strong",
+    userAvatar: IMAGES.avatarImage,
+  },
+  {
+    key: "2",
+    title: "2006 Waste Management",
+    path: "/Financial/Quarterly Reports",
+    icon: "xls",
+    aiSummary: "Host your own AI deep research agent",
+    irl: "IRL 2: Provide the impact assessment",
+    aiScore: 10,
+    probability: 10,
+    status: "No Signal",
+    userAvatar: IMAGES.avatarImage,
+  },
+];
+
 const ScopeDetails = () => {
   const [isRiskAssessmentOpen, setIsRiskAssessmentOpen] = useState(false);
 
-  const handleOpenRiskAssessment = () => {
+  const handleOpenRiskAssessment = useCallback(() => {
     setIsRiskAssessmentOpen(true);
-  };
+  }, []);
 
-  const handleCloseRiskAssessment = () => {
+  const handleCloseRiskAssessment = useCallback(() => {
     setIsRiskAssessmentOpen(false);
-  };
+  }, []);
 
-  const handleAddRisk = () => {
+  const handleAddRisk = useCallback(() => {
     console.log("Risk Assessment Added");
-  };
+  }, []);
 
-  const dataSource: FileData[] = [
-    {
-      key: "1",
-      title: "Q3 2024 Financial Statement",
-      path: "/Financial/Quarterly Reports",
-      icon: "pdf",
-      aiSummary: "Host your own AI deep research agent",
-      irl: "IRL 1: Provide the impact assessment",
-      aiScore: 10,
-      probability: 10,
-      status: "Strong",
-      userAvatar: IMAGES.avatarImage,
+  const handleRowSelectionChange = useCallback(
+    (selectedRowKeys: React.Key[], selectedRows: FileData[]) => {
+      console.log("Selected Row Keys:", selectedRowKeys);
+      console.log("Selected Rows:", selectedRows);
     },
-    {
-      key: "2",
-      title: "2006 Waste Management",
-      path: "/Financial/Quarterly Reports",
-      icon: "xls",
-      aiSummary: "Host your own AI deep research agent",
-      irl: "IRL 2: Provide the impact assessment",
-      aiScore: 10,
-      probability: 10,
-      status: "No Signal",
-      userAvatar: IMAGES.avatarImage,
-    },
-  ];
+    []
+  );
 
-  const columns: ColumnsType<FileData> = [
+  const columns: ColumnsType<FileData> = useMemo(
+    () => [
     {
       title: "Document",
       dataIndex: "title",
@@ -209,14 +262,16 @@ const ScopeDetails = () => {
         </div>
       ),
     },
-  ];
+  ],
+    []
+  );
 
-  const rowSelection = {
-    onChange: (selectedRowKeys: React.Key[], selectedRows: FileData[]) => {
-      console.log("Selected Row Keys:", selectedRowKeys);
-      console.log("Selected Rows:", selectedRows);
-    },
-  };
+  const rowSelection = useMemo(
+    () => ({
+      onChange: handleRowSelectionChange,
+    }),
+    [handleRowSelectionChange]
+  );
 
   return (
     <>
@@ -237,22 +292,16 @@ const ScopeDetails = () => {
                   <div className="signal-assessment-left">
                     <h5>Risk Signals :</h5>
                     <div className="risk-signal-cell">
-                      <div className="signal-wrap">
-                        <span className="signal-icon red"></span>
-                        <span className="signal-text">Strong (5)</span>
-                      </div>
-                      <div className="signal-wrap">
-                        <span className="signal-icon yellow"></span>
-                        <span className="signal-text">Potential (8)</span>
-                      </div>
-                      <div className="signal-wrap">
-                        <span className="signal-icon green"></span>
-                        <span className="signal-text">No Signal (10)</span>
-                      </div>
-                      <div className="signal-wrap">
-                        <span className="signal-icon white"></span>
-                        <span className="signal-text">Not Reviewed (6)</span>
-                      </div>
+                      {RISK_SIGNALS.map((signal, index) => (
+                        <div key={index} className="signal-wrap">
+                          <span
+                            className={`signal-icon ${signal.color}`}
+                          ></span>
+                          <span className="signal-text">
+                            {signal.text} ({signal.count})
+                          </span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                   <div className="signal-assessment-right">
@@ -268,40 +317,20 @@ const ScopeDetails = () => {
                   </div>
                 </div>
                 <div className="scope-stats">
-                  {/* All Files */}
-                  <div className="stat-card">
-                    <div className="stat-left">
-                      <div className="stat-title">All Files</div>
-                      <div className="stat-value">5</div>
+                  {STAT_CARDS.map((stat, index) => (
+                    <div key={index} className="stat-card">
+                      <div className="stat-left">
+                        <div className="stat-title">{stat.title}</div>
+                        <div className="stat-value">{stat.value}</div>
+                        {stat.subtitle && (
+                          <div className="stat-sub">{stat.subtitle}</div>
+                        )}
+                      </div>
+                      <div className={`stat-icon ${stat.colorClass}`}>
+                        <i className={`erm-icon ${stat.iconClass}`} />
+                      </div>
                     </div>
-                    <div className="stat-icon blue">
-                      <i className="erm-icon file-blue-icon" />
-                    </div>
-                  </div>
-
-                  {/* Reviewed Files */}
-                  <div className="stat-card">
-                    <div className="stat-left">
-                      <div className="stat-title">Reviewed Files</div>
-                      <div className="stat-value">40%</div>
-                      <div className="stat-sub">2 of 5 files</div>
-                    </div>
-                    <div className="stat-icon green">
-                      <i className="erm-icon check-icon" />
-                    </div>
-                  </div>
-
-                  {/* Rejected Files */}
-                  <div className="stat-card">
-                    <div className="stat-left">
-                      <div className="stat-title">Rejected Files</div>
-                      <div className="stat-value">1%</div>
-                      <div className="stat-sub">2 of 5 files</div>
-                    </div>
-                    <div className="stat-icon red">
-                      <i className="erm-icon reject-icon" />
-                    </div>
-                  </div>
+                  ))}
                 </div>
 
                 <ScopeFilterBar />
@@ -313,7 +342,7 @@ const ScopeDetails = () => {
                   }}
                   className="files-table"
                   columns={columns}
-                  dataSource={dataSource}
+                  dataSource={MOCK_DATA}
                   tableLayout="fixed"
                   pagination={false}
                 />
