@@ -17,4 +17,5 @@ export const IMAGES = {
   flagIcon: "/assets/icons/flag-icon.svg",
   checkPrimaryIcon: "/assets/icons/check-primary-icon.svg",
   projectDetailBg: "/assets/images/project-detail-bg.svg",
+  redFlagIcon: "/assets/icons/red-flag-icon.svg",
 };

@@ -1,4 +1,6 @@
+import { Breadcrumb } from "antd";
 import "./ProjectDetails.scss";
+import { IMAGES } from "../../shared";
 
 const ProjectDetails = () => {
   return (
@@ -15,14 +17,23 @@ const ProjectDetails = () => {
         </div>
         <div className="project-details-header-breadcrumb">
           <span>Service</span>
-          breadcrumb
+          <Breadcrumb className="page-breadcrumb" separator=">">
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>Shell - Air Quality</Breadcrumb.Item>
+          </Breadcrumb>
         </div>
       </div>
       <div className="project-details-wrap">
         <div className="project-table-matrix-wrap">
           <div className="flag-matrix-wrap">
-            <div>flag</div>
-            <div>matrix</div>
+            <div className="flag-count-wrap">
+              <div className="flag-icon">
+                <img src={IMAGES.redFlagIcon} alt="Red Flag" />
+              </div>
+              <div className="flag-text">Red Flags</div>
+              <div className="flag-count">5</div>
+            </div>
+            <div>Risk Assessment Matrix</div>
           </div>
           <div>table</div>
         </div>
