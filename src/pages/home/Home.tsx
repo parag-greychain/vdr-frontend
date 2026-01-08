@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { Button } from "antd";
-import { PDFViewerDrawer, RiskAssessment, AddScopeDrawer, SelectedSourcesDrawer } from "../../component";
+import {
+  PDFViewerDrawer,
+  RiskAssessment,
+  AddScopeDrawer,
+  SelectedSourcesDrawer,
+} from "../../component";
 
 const Home = () => {
   const [isPdfOpen, setIsPdfOpen] = useState(false);
@@ -62,20 +67,34 @@ const Home = () => {
     console.log("Selected Sources:", selectedItems);
   };
 
+  const isHidden = true;
+
   return (
     <div>
       <h1>Home Page</h1>
       <p>Welcome to the application!</p>
-      <Button type="primary" onClick={handleOpenPdf} hidden>
+      <Button type="primary" onClick={handleOpenPdf} hidden={isHidden}>
         Open PDF Viewer
       </Button>
-      <Button type="primary" onClick={handleOpenRiskAssessment}>
+      <Button
+        type="primary"
+        onClick={handleOpenRiskAssessment}
+        hidden={isHidden}
+      >
         Open Risk Assessment
       </Button>
-      <Button type="primary" onClick={handleOpenAddScopeDrawer}>
+      <Button
+        type="primary"
+        onClick={handleOpenAddScopeDrawer}
+        hidden={isHidden}
+      >
         Open Add Scope Drawer
       </Button>
-      <Button type="primary" onClick={handleOpenSelectedSources}>
+      <Button
+        type="primary"
+        onClick={handleOpenSelectedSources}
+        hidden={isHidden}
+      >
         Open Selected Sources
       </Button>
 
