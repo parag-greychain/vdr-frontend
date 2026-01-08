@@ -33,7 +33,20 @@ const ProjectDetails = () => {
               <div className="flag-text">Red Flags</div>
               <div className="flag-count">5</div>
             </div>
-            <div>Risk Assessment Matrix</div>
+            <div className="risk-management-matrix-container">
+              <div className="risk-management-header">
+                Risk Assessment Matrix
+                <span> 101 total risks identified</span>
+              </div>
+              <div className="risk-management-matrix-wrap">
+                <div className="risk-management-matrix-text">Severity →</div>
+
+                <div className="risk-management-matrix-grid">
+
+                  
+                </div>
+              </div>
+            </div>
           </div>
           <div>table</div>
         </div>
