@@ -42,7 +42,17 @@ const ProjectDetails = () => {
                 <div className="risk-management-matrix-text">Severity →</div>
 
                 <div className="risk-management-matrix-grid">
+                  {/* Empty cell for top-left corner */}
+                  <div className="label-cell empty"></div>
+
+                  {/* Column headers */}
+                  <div className="label-cell col-header">Unlikely</div>
+                  <div className="label-cell col-header">Possible</div>
+                  <div className="label-cell col-header">Likely</div>
+                  <div className="label-cell col-header">Certain</div>
+
                   {/* Row 1 - High */}
+                  <div className="label-cell row-header">High</div>
                   <div className="risk-cell green-dark">
                     <span className="risk-number">7</span>
                     <span className="risk-label">Risks</span>
@@ -61,6 +71,7 @@ const ProjectDetails = () => {
                   </div>
 
                   {/* Row 2 - Medium */}
+                  <div className="label-cell row-header">Medium</div>
                   <div className="risk-cell green-dark">
                     <span className="risk-number">5</span>
                     <span className="risk-label">Risks</span>
@@ -79,6 +90,7 @@ const ProjectDetails = () => {
                   </div>
 
                   {/* Row 3 - Low */}
+                  <div className="label-cell row-header">Low</div>
                   <div className="risk-cell green-light">
                     <span className="risk-number">14</span>
                     <span className="risk-label">Risks</span>
@@ -97,6 +109,7 @@ const ProjectDetails = () => {
                   </div>
 
                   {/* Row 4 - Negligible */}
+                  <div className="label-cell row-header">Negligible</div>
                   <div className="risk-cell green-pale">
                     <span className="risk-number">14</span>
                     <span className="risk-label">Risks</span>
