@@ -5,10 +5,12 @@ import { IMAGES } from "../../../shared";
 interface IScopeHeader {
   isScopePage: boolean;
   isCommentsOpen?: boolean;
+  isChatOpen?: boolean;
   onCommentsToggle?: () => void;
+  onChatToggle?: () => void;
 }
 const ScopeHeader = (props: IScopeHeader) => {
-  const { isScopePage, isCommentsOpen, onCommentsToggle } = props;
+  const { isScopePage, isCommentsOpen, isChatOpen, onCommentsToggle, onChatToggle } = props;
 
   return (
     <div className="scope-header-wrapper">
@@ -20,7 +22,12 @@ const ScopeHeader = (props: IScopeHeader) => {
           </Breadcrumb>
         </div>
         <div className="scope-actions">
-          <Button className="primary-btn" type="primary" shape="round">
+          <Button 
+            className={`primary-btn ${isChatOpen ? "active" : ""}`}
+            type="primary" 
+            shape="round"
+            onClick={onChatToggle}
+          >
             <i className="erm-icon ai-icon" /> CHAT
           </Button>
           <Button 

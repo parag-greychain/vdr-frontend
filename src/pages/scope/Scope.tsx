@@ -3,13 +3,15 @@ import {
   Button,
   Tabs
 } from "antd";
-import { ScopeSidebar, RequestCard, ScopeFilterBar, ScopeHeader, Comments } from "../../component";
+import { ScopeSidebar, RequestCard, ScopeFilterBar, ScopeHeader, Comments, Chat } from "../../component";
 import type { Comment } from "../../component/scope/comments/Comments";
 import "./Scope.scss";
 
+type RightPanelView = "comments" | "chat" | null;
+
 const Scope = () => {
   const { TabPane } = Tabs;
-  const [isCommentsOpen, setIsCommentsOpen] = useState(false);
+  const [rightPanelView, setRightPanelView] = useState<RightPanelView>(null);
   const [comments, setComments] = useState<Comment[]>([
     {
       id: "1",
@@ -21,6 +23,42 @@ const Scope = () => {
       isResolved: false,
     },
   ]);
+  const [chatMessages, setChatMessages] = useState<any[]>([]);
+
+  const isRightPanelOpen = rightPanelView !== null;
+  const isCommentsOpen = rightPanelView === "comments";
+  const isChatOpen = rightPanelView === "chat";
+
+  const handleCommentsToggle = () => {
+    if (rightPanelView === "comments") {
+      setRightPanelView(null);
+    } else {
+      setRightPanelView("comments");
+    }
+  };
+
+  const handleChatToggle = () => {
+    if (rightPanelView === "chat") {
+      setRightPanelView(null);
+    } else {
+      setRightPanelView("chat");
+    }
+  };
+
+  const handleClosePanel = () => {
+    setRightPanelView(null);
+  };
+
+  const handleSendMessage = (message: string) => {
+    const newMessage = {
+      id: Date.now().toString(),
+      text: message,
+      isUser: true,
+      timestamp: new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }),
+    };
+    setChatMessages([...chatMessages, newMessage]);
+    // TODO: Add AI response logic here
+  };
 
   return (
     <div className="scope-page-container">
@@ -32,11 +70,13 @@ const Scope = () => {
           </div>
 
           {/* MAIN CONTENT */}
-          <div className={`content ${isCommentsOpen ? "comments-open" : ""}`}>
+          <div className={`content ${isRightPanelOpen ? "panel-open" : ""}`}>
             <ScopeHeader 
               isScopePage={true} 
               isCommentsOpen={isCommentsOpen}
-              onCommentsToggle={() => setIsCommentsOpen(!isCommentsOpen)}
+              isChatOpen={isChatOpen}
+              onCommentsToggle={handleCommentsToggle}
+              onChatToggle={handleChatToggle}
             />
 
             {/* TABS */}
@@ -96,21 +136,28 @@ const Scope = () => {
             </Tabs>
           </div>
 
-          {/* COMMENTS PANEL */}
-          <div className={`right-panel ${isCommentsOpen ? "open" : ""}`}>
+          {/* RIGHT PANEL (COMMENTS OR CHAT) */}
+          <div className={`right-panel ${isRightPanelOpen ? "open" : ""}`}>
             <div className="right-panel-header">
-              <h3 className="right-panel-title">Comments</h3>
+              <h3 className="right-panel-title">
+                {isCommentsOpen ? "Comments" : isChatOpen ? "Chat" : ""}
+              </h3>
               <Button
                 type="text"
                 className="close-btn"
-                onClick={() => setIsCommentsOpen(false)}
-                aria-label="Close Comments"
+                onClick={handleClosePanel}
+                aria-label="Close Panel"
               >
                 <i className="erm-icon close-icon" />
               </Button>
             </div>
             <div className="right-panel-content">
-              <Comments comments={comments} onCommentsChange={setComments} />
+              {isCommentsOpen && (
+                <Comments comments={comments} onCommentsChange={setComments} />
+              )}
+              {isChatOpen && (
+                <Chat messages={chatMessages} onSendMessage={handleSendMessage} />
+              )}
             </div>
           </div>
         </div>
