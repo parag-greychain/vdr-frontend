@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Drawer, Input, Breadcrumb, Button, Checkbox } from "antd";
+import { Drawer, Input, Breadcrumb, Checkbox } from "antd";
 import {
   SearchOutlined,
   FilterOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
+import { IMAGES } from "../../shared";
 import "./SelectedSourcesDrawer.scss";
 
 interface DocumentItem {
@@ -160,17 +161,17 @@ const SelectedSourcesDrawer: React.FC<SelectedSourcesDrawerProps> = ({
             <span>{selectedItems.length} selected</span>
           </div>
           <div className="footer-actions">
-            <Button onClick={handleCancel} className="cancel-button">
+            <button className="cancel-btn" onClick={handleCancel}>
               CANCEL
-            </Button>
-            <Button
-              type="primary"
-              onClick={handleSelect}
-              className="select-button"
+            </button>
+
+            <button
+              className="add-btn"
               disabled={selectedItems.length === 0}
+              onClick={handleSelect}
             >
-              SELECT →
-            </Button>
+              ADD
+            </button>
           </div>
         </div>
       }
@@ -205,7 +206,9 @@ const SelectedSourcesDrawer: React.FC<SelectedSourcesDrawerProps> = ({
                   />
                 </div>
                 <div className="body-cell title-cell">
-                  <span className="folder-icon">📁</span>
+                  <span className="folder-icon">
+                    <img src={IMAGES.sourceFolderIcon} alt="Folder" />
+                  </span>
                   <div className="title-content">
                     <div className="title-text">{doc.title}</div>
                     <div className="subtitle-text">Folder</div>
