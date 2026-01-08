@@ -199,7 +199,7 @@ body .ant-table-wrapper .ant-table-tbody>tr>td {
     .erm-icon {
         position: absolute;
         right: 0;
-        top: 0;
+        top: -2px;
     }
 }
 
@@ -363,6 +363,56 @@ body .ant-table-wrapper .ant-table-tbody>tr>td {
     }
 }
 
+
+.signal-assessment-left,
+.signal-assessment-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    h5 {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--primary);
+        margin: 0;
+    }
+
+    .secondary-btn {
+        height: 26px;
+        min-width: 86px;
+    }
+}
+
+.signal-assessment {
+    width: 100%;
+    margin: 0 0 18px;
+    background: #FEF3DF;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .risk-signal-cell {
+        display: flex;
+        gap: 25px;
+        align-items: center;
+        text-align: left;
+        color: var(--primary);
+        font-size: 14px;
+        font-weight: 400;
+
+        .signal-wrap {
+            display: flex;
+            gap: 6px;
+
+            .signal-text {
+                opacity: 0.77;
+            }
+        }
+
+    }
+}
 
 .scope-stats {
     display: grid;

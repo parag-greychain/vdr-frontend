@@ -14,4 +14,6 @@ export const IMAGES = {
   sourceFolderIcon: "/assets/icons/source-folder-icon.svg",
   sendIcon: "/assets/icons/send.svg",
   replyIcon: "/assets/icons/reply.svg",
+  flagIcon: "/assets/icons/flag-icon.svg",
+  checkPrimaryIcon: "/assets/icons/check-primary-icon.svg",
 };
