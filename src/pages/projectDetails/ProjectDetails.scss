@@ -1,3 +1,30 @@
 .project-details-page-container {
   height: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-rows: 150px 1fr;
+
+  .project-details-header {
+    width: 100%;
+    border-radius: 11px;
+    background-image: url("/assets/images/project-detail-bg.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .project-details-wrap {
+    display: grid;
+    grid-template-columns: 1fr 100px;
+
+    .project-table-matrix-wrap {
+      display: grid;
+      grid-template-rows: 150px 1fr;
+
+      .flag-matrix-wrap {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+      }
+    }
+  }
 }

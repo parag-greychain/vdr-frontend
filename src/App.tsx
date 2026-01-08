@@ -6,11 +6,19 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import { Login, Home, Scope, Project, ScopeDetails } from "./pages";
+import {
+  Login,
+  Home,
+  Scope,
+  Project,
+  ScopeDetails,
+  ProjectDetails,
+} from "./pages";
 import { PATHS } from "./shared";
 import { AppLayout } from "./layout";
 import AuthLayout from "./layout/auth/AuthLayout";
 import "./App.scss";
+
 
 const App = () => {
   const router = createBrowserRouter(
@@ -24,6 +32,7 @@ const App = () => {
           <Route path={PATHS.projects} element={<Project />} />
           <Route path={PATHS.scope} element={<Scope />} />
           <Route path={PATHS.scopeDetails} element={<ScopeDetails />} />
+          <Route path={PATHS.projectDetails} element={<ProjectDetails />} />
         </Route>
       </Route>
     )

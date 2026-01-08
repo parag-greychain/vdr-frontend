@@ -16,4 +16,5 @@ export const IMAGES = {
   replyIcon: "/assets/icons/reply.svg",
   flagIcon: "/assets/icons/flag-icon.svg",
   checkPrimaryIcon: "/assets/icons/check-primary-icon.svg",
+  projectDetailBg: "/assets/images/project-detail-bg.svg",
 };
