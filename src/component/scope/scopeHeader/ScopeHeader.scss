@@ -47,4 +47,20 @@
     .orange-text {
         color: var(--orange);
     }
+
+    .scope-actions {
+        .ant-btn-text {
+            &.active {
+                background: rgba(1, 154, 32, 0.1);
+                border-radius: 4px;
+            }
+        }
+
+        .primary-btn {
+            &.active {
+                opacity: 0.9;
+                box-shadow: 0 2px 4px rgba(1, 154, 32, 0.3);
+            }
+        }
+    }
 }

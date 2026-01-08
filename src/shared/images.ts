@@ -6,4 +6,6 @@ export const IMAGES = {
   exportIcon: "/assets/icons/export.svg",
   copyIcon: "/assets/icons/copy-icon.svg",
   avatarImage: "/assets/images/avatar.jpg",
+  sendIcon: "/assets/icons/send.svg",
+  replyIcon: "/assets/icons/reply.svg",
 };

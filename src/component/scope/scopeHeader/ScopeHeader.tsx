@@ -4,9 +4,13 @@ import { IMAGES } from "../../../shared";
 
 interface IScopeHeader {
   isScopePage: boolean;
+  isCommentsOpen?: boolean;
+  isChatOpen?: boolean;
+  onCommentsToggle?: () => void;
+  onChatToggle?: () => void;
 }
 const ScopeHeader = (props: IScopeHeader) => {
-  const { isScopePage } = props;
+  const { isScopePage, isCommentsOpen, isChatOpen, onCommentsToggle, onChatToggle } = props;
 
   return (
     <div className="scope-header-wrapper">
@@ -18,10 +22,20 @@ const ScopeHeader = (props: IScopeHeader) => {
           </Breadcrumb>
         </div>
         <div className="scope-actions">
-          <Button className="primary-btn" type="primary" shape="round">
+          <Button 
+            className={`primary-btn ${isChatOpen ? "active" : ""}`}
+            type="primary" 
+            shape="round"
+            onClick={onChatToggle}
+          >
             <i className="erm-icon ai-icon" /> CHAT
           </Button>
-          <Button type="text" aria-label="Comments">
+          <Button 
+            type="text" 
+            aria-label="Comments"
+            onClick={onCommentsToggle}
+            className={isCommentsOpen ? "active" : ""}
+          >
             <img src={IMAGES.commentIcon} alt="Comments" />
           </Button>
           <Button type="text" aria-label="Export">
