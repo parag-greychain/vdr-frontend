@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Avatar, Breadcrumb, Button, Progress } from "antd";
 import "./ScopeHeader.scss";
 import { IMAGES } from "../../../shared";
+import { AddScopeDrawer } from "../../../component";
 
 interface IScopeHeader {
   isScopePage: boolean;
@@ -11,6 +13,19 @@ interface IScopeHeader {
 }
 const ScopeHeader = (props: IScopeHeader) => {
   const { isCommentsOpen, isChatOpen, onCommentsToggle, onChatToggle } = props;
+  const [isAddScopeDrawerOpen, setIsAddScopeDrawerOpen] = useState(false);
+
+  const handleOpenAddScopeDrawer = () => {
+    setIsAddScopeDrawerOpen(true);
+  };
+
+  const handleCloseAddScopeDrawer = () => {
+    setIsAddScopeDrawerOpen(false);
+  };
+
+  const handleAddScope = (description: string) => {
+    console.log("Scope Added:", description);
+  };
 
   return (
     <div className="scope-header-wrapper">
@@ -34,6 +49,7 @@ const ScopeHeader = (props: IScopeHeader) => {
             type="text"
             aria-label="flagIcon"
             className={isCommentsOpen ? "active" : ""}
+            onClick={handleOpenAddScopeDrawer}
           >
             <img src={IMAGES.flagIcon} alt="flagIcon" />
           </Button>
@@ -96,6 +112,12 @@ const ScopeHeader = (props: IScopeHeader) => {
           </div>
         </div>
       </div>
+
+      <AddScopeDrawer
+        open={isAddScopeDrawerOpen}
+        onClose={handleCloseAddScopeDrawer}
+        onAdd={handleAddScope}
+      />
     </div>
   );
 };

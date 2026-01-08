@@ -1,8 +1,14 @@
+import { useState } from "react";
 import { Button, Col, Flex, Row, Table, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import "./ScopeDetails.scss";
-import { ScopeFilterBar, ScopeHeader, ScopeSidebar } from "../../component";
 import { IMAGES } from "../../shared";
+import {
+  ScopeFilterBar,
+  ScopeHeader,
+  ScopeSidebar,
+  RiskAssessment,
+} from "../../component";
 
 interface FileData {
   key: string;
@@ -18,6 +24,20 @@ interface FileData {
 }
 
 const ScopeDetails = () => {
+  const [isRiskAssessmentOpen, setIsRiskAssessmentOpen] = useState(false);
+
+  const handleOpenRiskAssessment = () => {
+    setIsRiskAssessmentOpen(true);
+  };
+
+  const handleCloseRiskAssessment = () => {
+    setIsRiskAssessmentOpen(false);
+  };
+
+  const handleAddRisk = () => {
+    console.log("Risk Assessment Added");
+  };
+
   const dataSource: FileData[] = [
     {
       key: "1",
@@ -199,107 +219,115 @@ const ScopeDetails = () => {
   };
 
   return (
-    <div className="scope-page-container">
-      <Flex className="inner-app-wrap">
-        <Row className="inner-app-row" gutter={24}>
-          {/* LEFT SIDEBAR */}
-          <Col flex="253px" className="scope-sidebar">
-            <ScopeSidebar />
-          </Col>
+    <>
+      <div className="scope-page-container">
+        <Flex className="inner-app-wrap">
+          <Row className="inner-app-row" gutter={24}>
+            {/* LEFT SIDEBAR */}
+            <Col flex="253px" className="scope-sidebar">
+              <ScopeSidebar />
+            </Col>
 
-          {/* MAIN CONTENT */}
-          <Col flex="auto" className="content">
-            <ScopeHeader isScopePage={false} />
+            {/* MAIN CONTENT */}
+            <Col flex="auto" className="content">
+              <ScopeHeader isScopePage={false} />
 
-            <div className="scope-details-content">
-              <div className="signal-assessment">
-                <div className="signal-assessment-left">
-                  <h5>Risk Signals :</h5>
-                  <div className="risk-signal-cell">
-                    <div className="signal-wrap">
-                      <span className="signal-icon red"></span>
-                      <span className="signal-text">Strong (5)</span>
+              <div className="scope-details-content">
+                <div className="signal-assessment">
+                  <div className="signal-assessment-left">
+                    <h5>Risk Signals :</h5>
+                    <div className="risk-signal-cell">
+                      <div className="signal-wrap">
+                        <span className="signal-icon red"></span>
+                        <span className="signal-text">Strong (5)</span>
+                      </div>
+                      <div className="signal-wrap">
+                        <span className="signal-icon yellow"></span>
+                        <span className="signal-text">Potential (8)</span>
+                      </div>
+                      <div className="signal-wrap">
+                        <span className="signal-icon green"></span>
+                        <span className="signal-text">No Signal (10)</span>
+                      </div>
+                      <div className="signal-wrap">
+                        <span className="signal-icon white"></span>
+                        <span className="signal-text">Not Reviewed (6)</span>
+                      </div>
                     </div>
-                    <div className="signal-wrap">
-                      <span className="signal-icon yellow"></span>
-                      <span className="signal-text">Potential (8)</span>
+                  </div>
+                  <div className="signal-assessment-right">
+                    <h5>Risk Assessment :</h5>
+                    <Button
+                      className="secondary-btn"
+                      type="primary"
+                      shape="round"
+                      onClick={handleOpenRiskAssessment}
+                    >
+                      ADD
+                    </Button>
+                  </div>
+                </div>
+                <div className="scope-stats">
+                  {/* All Files */}
+                  <div className="stat-card">
+                    <div className="stat-left">
+                      <div className="stat-title">All Files</div>
+                      <div className="stat-value">5</div>
                     </div>
-                    <div className="signal-wrap">
-                      <span className="signal-icon green"></span>
-                      <span className="signal-text">No Signal (10)</span>
+                    <div className="stat-icon blue">
+                      <i className="erm-icon file-blue-icon" />
                     </div>
-                    <div className="signal-wrap">
-                      <span className="signal-icon white"></span>
-                      <span className="signal-text">Not Reviewed (6)</span>
+                  </div>
+
+                  {/* Reviewed Files */}
+                  <div className="stat-card">
+                    <div className="stat-left">
+                      <div className="stat-title">Reviewed Files</div>
+                      <div className="stat-value">40%</div>
+                      <div className="stat-sub">2 of 5 files</div>
+                    </div>
+                    <div className="stat-icon green">
+                      <i className="erm-icon check-icon" />
+                    </div>
+                  </div>
+
+                  {/* Rejected Files */}
+                  <div className="stat-card">
+                    <div className="stat-left">
+                      <div className="stat-title">Rejected Files</div>
+                      <div className="stat-value">1%</div>
+                      <div className="stat-sub">2 of 5 files</div>
+                    </div>
+                    <div className="stat-icon red">
+                      <i className="erm-icon reject-icon" />
                     </div>
                   </div>
                 </div>
-                <div className="signal-assessment-right">
-                  <h5>Risk Assessment :</h5>
-                  <Button
-                    className="secondary-btn"
-                    type="primary"
-                    shape="round"
-                  >
-                    ADD
-                  </Button>
-                </div>
+
+                <ScopeFilterBar />
+
+                <Table<FileData>
+                  rowSelection={{
+                    type: "checkbox",
+                    ...rowSelection,
+                  }}
+                  className="files-table"
+                  columns={columns}
+                  dataSource={dataSource}
+                  tableLayout="fixed"
+                  pagination={false}
+                />
               </div>
-              <div className="scope-stats">
-                {/* All Files */}
-                <div className="stat-card">
-                  <div className="stat-left">
-                    <div className="stat-title">All Files</div>
-                    <div className="stat-value">5</div>
-                  </div>
-                  <div className="stat-icon blue">
-                    <i className="erm-icon file-blue-icon" />
-                  </div>
-                </div>
-
-                {/* Reviewed Files */}
-                <div className="stat-card">
-                  <div className="stat-left">
-                    <div className="stat-title">Reviewed Files</div>
-                    <div className="stat-value">40%</div>
-                    <div className="stat-sub">2 of 5 files</div>
-                  </div>
-                  <div className="stat-icon green">
-                    <i className="erm-icon check-icon" />
-                  </div>
-                </div>
-
-                {/* Rejected Files */}
-                <div className="stat-card">
-                  <div className="stat-left">
-                    <div className="stat-title">Rejected Files</div>
-                    <div className="stat-value">1%</div>
-                    <div className="stat-sub">2 of 5 files</div>
-                  </div>
-                  <div className="stat-icon red">
-                    <i className="erm-icon reject-icon" />
-                  </div>
-                </div>
-              </div>
-
-              <ScopeFilterBar />
-
-              <Table<FileData>
-                rowSelection={{
-                  type: "checkbox",
-                  ...rowSelection,
-                }}
-                className="files-table"
-                columns={columns}
-                dataSource={dataSource}
-                tableLayout="fixed"
-                pagination={false}
-              />
-            </div>
-          </Col>
-        </Row>
-      </Flex>
-    </div>
+            </Col>
+          </Row>
+        </Flex>
+      </div>
+      <RiskAssessment
+        open={isRiskAssessmentOpen}
+        onClose={handleCloseRiskAssessment}
+        onAdd={handleAddRisk}
+      />
+    </>
   );
 };
 
