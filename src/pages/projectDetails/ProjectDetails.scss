@@ -1,10 +1,11 @@
 .project-details-page-container {
-  height: 100%;
+  height: calc(100vh - 56px);
   padding: 20px;
   display: grid;
   grid-template-rows: 150px 1fr;
   gap: 20px;
   background-color: #ffffff;
+  overflow: auto;
 
   .project-details-header {
     width: 100%;
@@ -80,7 +81,7 @@
 
   .project-details-wrap {
     display: grid;
-    grid-template-columns: 1fr 100px;
+    grid-template-columns: 1fr 300px;
 
     .project-table-matrix-wrap {
       display: grid;
@@ -144,6 +145,10 @@
           }
 
           .risk-management-matrix-wrap {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
             .risk-management-matrix-text {
               color: #012c12;
               font-weight: 500;
@@ -151,6 +156,91 @@
             }
 
             .risk-management-matrix-grid {
+              width: 100%;
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              grid-template-rows: repeat(4, 1fr);
+              gap: 8px;
+              padding: 10px 0;
+
+              .risk-cell {
+                border-radius: 8px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 12px;
+                gap: 4px;
+                min-height: 35px;
+
+                &.highlighted {
+                  border: 2px dashed #666;
+                }
+
+                .risk-number {
+                  font-size: 24px;
+                  font-weight: 600;
+                  color: #ffffff;
+                }
+
+                .risk-label {
+                  font-size: 11px;
+                  color: #ffffff;
+                  font-weight: 500;
+                }
+
+                &.green-dark {
+                  background-color: #22c55e;
+                }
+
+                &.green-medium {
+                  background-color: #10b981;
+                }
+
+                &.green-light {
+                  background-color: #86efac;
+                }
+
+                &.green-pale {
+                  background-color: #bbf7d0;
+                }
+
+                &.green-teal {
+                  background-color: #14b8a6;
+                }
+
+                &.green-bright {
+                  background-color: #00d084;
+                }
+
+                &.yellow {
+                  background-color: #fbbf24;
+                }
+
+                &.yellow-light {
+                  background-color: #fde047;
+                }
+
+                &.yellow-orange {
+                  background-color: #fb923c;
+                }
+
+                &.orange {
+                  background-color: #f97316;
+                }
+
+                &.red {
+                  background-color: #ef4444;
+                }
+
+                &.red-dark {
+                  background-color: #dc2626;
+                }
+
+                &.red-light {
+                  background-color: #fca5a5;
+                }
+              }
             }
           }
         }

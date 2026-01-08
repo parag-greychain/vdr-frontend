@@ -42,8 +42,77 @@ const ProjectDetails = () => {
                 <div className="risk-management-matrix-text">Severity →</div>
 
                 <div className="risk-management-matrix-grid">
+                  {/* Row 1 - High */}
+                  <div className="risk-cell green-dark">
+                    <span className="risk-number">7</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
+                  <div className="risk-cell yellow">
+                    <span className="risk-number">12</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
+                  <div className="risk-cell red">
+                    <span className="risk-number">15</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
+                  <div className="risk-cell red-dark">
+                    <span className="risk-number">8</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
 
-                  
+                  {/* Row 2 - Medium */}
+                  <div className="risk-cell green-dark">
+                    <span className="risk-number">5</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
+                  <div className="risk-cell yellow-light highlighted">
+                    <span className="risk-number">3</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
+                  <div className="risk-cell red-light highlighted">
+                    <span className="risk-number">0</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
+                  <div className="risk-cell orange">
+                    <span className="risk-number">9</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
+
+                  {/* Row 3 - Low */}
+                  <div className="risk-cell green-light">
+                    <span className="risk-number">14</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
+                  <div className="risk-cell green-medium">
+                    <span className="risk-number">8</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
+                  <div className="risk-cell green-teal">
+                    <span className="risk-number">4</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
+                  <div className="risk-cell yellow-orange">
+                    <span className="risk-number">5</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
+
+                  {/* Row 4 - Negligible */}
+                  <div className="risk-cell green-pale">
+                    <span className="risk-number">14</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
+                  <div className="risk-cell green-light">
+                    <span className="risk-number">8</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
+                  <div className="risk-cell green-teal">
+                    <span className="risk-number">4</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
+                  <div className="risk-cell green-bright">
+                    <span className="risk-number">5</span>
+                    <span className="risk-label">Risks</span>
+                  </div>
                 </div>
               </div>
             </div>
