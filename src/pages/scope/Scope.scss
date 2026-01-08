@@ -4,6 +4,7 @@
     .inner-app-row {
         width: 100%;
         margin: 0 !important;
+        flex-wrap: nowrap;
     }
 
     .content {
@@ -125,6 +126,21 @@
             .erm-icon[class*="search-icon"] {
                 width: 20px;
                 height: 20px;
+            }
+        }
+
+        .status-trigger {
+            width: 96px;
+            height: 40px;
+            gap: 8px;
+            color: var(--primary);
+            font-size: var(--overall-paragraph-size);
+            font-weight: 500;
+
+            .erm-icon {
+                color: var(--primary);
+                width: 16px;
+                height: 16px;
             }
         }
     }

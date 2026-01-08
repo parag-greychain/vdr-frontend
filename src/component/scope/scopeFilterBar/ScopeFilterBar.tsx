@@ -1,4 +1,4 @@
-import { Button, Input, Select } from "antd";
+import { Button, Input } from "antd";
 
 const ScopeFilterBar = () => {
   return (
@@ -9,8 +9,16 @@ const ScopeFilterBar = () => {
           prefix={<i className="erm-icon search-icon" />}
           className="quick-search"
         />
+        <button
+          type="button"
+          className="status-trigger"
+          aria-label="Filter by status"
+        >
+          <i className="erm-icon filter-icon"></i>
+          Filter
+        </button>
 
-        <Select
+        {/* <Select
           defaultValue="all"
           className="dropdown-ui"
           suffixIcon={
@@ -21,18 +29,26 @@ const ScopeFilterBar = () => {
           }
         >
           <Select.Option value="all">All</Select.Option>
-        </Select>
+        </Select> */}
       </div>
 
       <div className="filter-right">
         <Button
+          icon={<i className="erm-icon refresh-double-icon" />}
+          className="primary-btn"
+          type="primary"
+          shape="round"
+        >
+          MANAGE SYNC
+        </Button>
+        {/* <Button
           icon={<i className="erm-icon plus-icon" />}
           className="primary-btn"
           type="primary"
           shape="round"
         >
           CREATE REQUEST
-        </Button>
+        </Button> */}
       </div>
     </div>
   );

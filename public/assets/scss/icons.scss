@@ -122,4 +122,46 @@
     height: 16px;
     color: var(--primary);
   }
+
+  &[class*="info-icon"] {
+    mask-image: url(/assets/icons/info-icon.svg);
+    width: 16px;
+    height: 16px;
+    color: var(--black);
+  }
+
+  &[class*="approve-icon"] {
+    mask-image: url(/assets/icons/approve-icon.svg);
+    width: 15px;
+    height: 15px;
+    color: #6AC265F5;
+  }
+
+  &[class*="reject-icon"] {
+    mask-image: url(/assets/icons/reject-icon.svg);
+    width: 15px;
+    height: 15px;
+    color: #FD582DAB;
+  }
+
+  &[class*="refresh-icon"] {
+    mask-image: url(/assets/icons/refresh-icon.svg);
+    width: 14px;
+    height: 14px;
+    color: var(--primary);
+  }
+
+  &[class*="refresh-double-icon"] {
+    mask-image: url(/assets/icons/refresh-double-icon.svg);
+    width: 20px;
+    height: 20px;
+    color: var(--primary);
+  }
+
+  &[class*="file-blue-icon"] {
+    mask-image: url(/assets/icons/file-blue-icon.svg);
+    width: 28px;
+    height: 28px;
+    color: #007A8E;
+  }
 }
