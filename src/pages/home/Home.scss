@@ -1,0 +1,186 @@
+.home-page {
+    .container {
+        padding: 25px;
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+
+    // Summary Cards
+    .summary-card {
+        border: 1px solid #C8EDC8;
+        padding: 20px 24px;
+        border-radius: 12px;
+        background: #F6F9F6;
+        position: relative;
+        height: 100%;
+
+        .summary-card-content {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ant-statistic-header {
+            padding-bottom: 0px;
+        }
+
+        .ant-statistic-title {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--primary);
+            opacity: 0.65;
+        }
+
+        .ant-statistic-content-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .summary-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &.flag-icon {
+                background: #EB23221C;
+                color: #EB2322;
+            }
+
+            &.scope-icon {
+                background: #C9E8ED87;
+                color: #007A8E;
+            }
+
+            &.check-icon {
+                background: #DEF5DF;
+                color: #019A20;
+            }
+
+            .erm-icon {
+                font-size: 28px;
+                width: 28px;
+                height: 28px;
+            }
+        }
+    }
+
+    .section-title {
+        margin-top: 0px;
+        margin-bottom: 16px;
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--primary);
+    }
+
+    // Project Cards
+    .project-card {
+        border-radius: 12px;
+        box-shadow: none;
+        border: 1px solid var(--border-color);
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: 0px 8px 24.6px 0px #0000000D;
+        }
+
+        .ant-card-body {
+            padding: 20px;
+        }
+
+        .date-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--primary);
+            opacity: 0.65;
+        }
+
+        .risk-tag {
+            padding: 5px 8px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 400;
+
+            .erm-icon {
+                width: 14px;
+                height: 14px;
+            }
+
+            &.low-risk {
+                background: #0DAD551C;
+                color: #0DAD55;
+
+                .erm-icon {
+                    color: #0DAD55;
+                }
+            }
+
+            &.medium-risk {
+                background: #FFF7EA;
+                color: #EE9300;
+
+                .erm-icon {
+                    color: #EE9300;
+                }
+            }
+
+            &.high-risk {
+                background: #FFF2EADE;
+                color: #FD582D;
+
+                .erm-icon {
+                    color: #FD582D;
+                }
+            }
+        }
+
+        .scope-tag {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 400;
+            border: 1px solid #D3DFD49E;
+            background: #ffffff;
+
+            .ant-divider {
+                margin: 0 2px;
+            }
+        }
+
+        .file-blue-icon,
+        .scope-icon {
+            color: #5A7665;
+            font-size: 15px;
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    .status-badge {
+        background-color: #d3dfd461;
+        padding: 4px 10px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        .status-title {
+            color: #012c12;
+            font-size: 12px;
+        }
+    }
+
+}

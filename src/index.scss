@@ -480,3 +480,17 @@ button:focus-visible {
   font-size: 12px;
   margin-top: 2px;
 }
+
+.prompt-btn {
+  background: #d3dfd4b5;
+  color: var(--primary) !important;
+  font-weight: 400;
+  font-size: 14px;
+  border: 1px solid rgba(211, 223, 212, .5098039216) !important;
+  box-shadow: none !important;
+  border-radius: 37px !important;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  gap: 4px;
+  display: flex;
+}

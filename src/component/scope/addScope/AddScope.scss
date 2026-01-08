@@ -1,4 +1,8 @@
 .add-scope-drawer {
+    .ant-drawer-header {
+        display: block;
+    }
+
     .ant-drawer-header-title {
         align-items: self-start;
         flex-direction: row-reverse;

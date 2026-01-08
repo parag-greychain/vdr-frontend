@@ -1,6 +1,6 @@
 import { Drawer, Input, Button } from "antd";
-import "./AddScopeDrawer.scss";
 import { IMAGES } from "../../shared";
+import "./AddScopeDrawer.scss";
 
 const { TextArea } = Input;
 
@@ -22,7 +22,7 @@ const AddScopeDrawer = ({ open, onClose }: AddScopeDrawerProps) => {
       placement="right"
       width={400}
       closable={true}
-      className="add-scope-drawer"
+      className="add-scope-drawer add-flag-drawer"
       footer={null}
     >
       <div className="add-scope-drawer-content">

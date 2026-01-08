@@ -1,5 +1,6 @@
 export const IMAGES = {
   logo: "/assets/icons/logo.svg",
+  chatLogo: "/assets/icons/chat-logo.svg",
   microsoft: "/assets/icons/microsoft.svg",
   notificationIcon: "/assets/icons/notification-icon.svg",
   commentIcon: "/assets/icons/comment.svg",
@@ -16,4 +17,8 @@ export const IMAGES = {
   replyIcon: "/assets/icons/reply.svg",
   flagIcon: "/assets/icons/flag-icon.svg",
   checkPrimaryIcon: "/assets/icons/check-primary-icon.svg",
+  chatCopyIcon: "/assets/icons/copy.svg",
+  likeIcon: "/assets/icons/like.svg",
+  dislikeIcon: "/assets/icons/dislike.svg",
+  regenerateChat: "/assets/icons/regenerate-chat.svg",
 };

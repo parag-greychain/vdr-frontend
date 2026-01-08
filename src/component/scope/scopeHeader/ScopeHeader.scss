@@ -1,4 +1,12 @@
 .scope-header-wrapper {
+
+    .scope-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+    }
+
     .page-heading {
         margin: 0 0 5px;
         font-size: 25px;
@@ -37,8 +45,6 @@
             gap: 25px;
         }
 
-
-
         .progress {
             width: 200px;
         }
@@ -49,18 +55,90 @@
     }
 
     .scope-actions {
-        .ant-btn-text {
-            &.active {
-                background: rgba(1, 154, 32, 0.1);
-                border-radius: 4px;
-            }
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        .ant-btn {
+            color: var(--primary);
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 11px;
+            height: 28px;
+            margin-right: 7px;
         }
 
-        .primary-btn {
-            &.active {
-                opacity: 0.9;
-                box-shadow: 0 2px 4px rgba(1, 154, 32, 0.3);
-            }
+        .ant-btn-text {
+            padding: 4px 6px;
+            font-size: 18px;
+            margin: 0px;
+
+            // &.active {
+            //     background: rgba(1, 154, 32, 0.1);
+            // }
+        }
+    }
+
+    //breadcrumb override
+    .page-breadcrumb {
+        font-family: var(--primary-font);
+
+        .ant-breadcrumb-item {
+            opacity: 0.4;
+        }
+
+        .ant-breadcrumb-link {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .ant-breadcrumb-separator {
+            margin: 0 10px;
+            color: var(--primary);
+            opacity: 0.4;
+        }
+
+        li:last-child {
+            opacity: 1;
+        }
+    }
+
+    //progress bar override
+    .custom-progress {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .progress-text {
+        font-family: var(--primary-font);
+        font-size: 14px;
+        font-weight: 400;
+        color: #587564;
+        white-space: nowrap;
+    }
+
+    /* AntD progress override */
+    .progress-bar {
+        width: 200px;
+
+        .ant-progress-outer {
+            padding-right: 0;
+        }
+
+        .ant-progress-rail {
+            background: #e1e9e3;
+            height: 8px;
+        }
+
+        .ant-progress-track {
+            height: 8px;
+            background: linear-gradient(to right,
+                    #14a800 0%,
+                    #14a800 50%,
+                    #f5a623 50%,
+                    #f5a623 100%);
         }
     }
 }

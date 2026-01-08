@@ -171,4 +171,48 @@
     height: 14px;
     color: #EB2322;
   }
+
+  &[class*="assessment-icon"] {
+    mask-image: url(/assets/icons/assessment.svg);
+  }
+
+  &[class*="scope-icon"] {
+    mask-image: url(/assets/icons/scope-icon.svg);
+    color: #007A8E;
+  }
+
+  &[class*="warning-icon"] {
+    mask-image: url(/assets/icons/warning-icon.svg);
+    color: #F49A00;
+  }
+
+  &[class*="active-icon"] {
+    mask-image: url(/assets/icons/active.svg);
+    width: 10px;
+    height: 10px;
+    color: #76f28f;
+  }
+
+  &[class*="inactive-icon"] {
+    mask-image: url(/assets/icons/active.svg);
+    width: 10px;
+    height: 10px;
+    color: #c4c4c4;
+  }
+
+  &[class*="prompts-icon"] {
+    mask-image: url(/assets/icons/prompts-icon.svg);
+    width: 12px;
+    color: var(--primary-green);
+  }
+
+  &[class*="source"] {
+    mask-image: url(/assets/icons/source.svg);
+  }
+
+  &[class*="history"] {
+    mask-image: url(/assets/icons/chat-history.svg);
+    color: var(--primary);
+  }
+
 }

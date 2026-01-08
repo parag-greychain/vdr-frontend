@@ -1,6 +1,9 @@
 .add-scope-drawer {
-  .ant-drawer-header {
-    display: none;
+
+  &.add-flag-drawer {
+    .ant-drawer-header {
+      display: none;
+    }
   }
 
   .ant-drawer-body {

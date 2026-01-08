@@ -14,6 +14,7 @@ import {
   Comments,
   Chat,
 } from "./scope";
+import { Collaborators, RecentActivity } from "./dashboard";
 
 export {
   Header,
@@ -30,4 +31,6 @@ export {
   AddScopeDrawer,
   SelectedSourcesDrawer,
   Chat,
+  Collaborators,
+  RecentActivity,
 };
