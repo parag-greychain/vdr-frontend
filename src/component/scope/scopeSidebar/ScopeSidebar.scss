@@ -3,6 +3,10 @@
     border-right: 1px solid var(--border-color);
     height: calc(100vh - 56px);
     overflow: auto;
+
+    .ant-progress-indicator {
+        font-size: 0;
+    }
 }
 
 .sidebar-heading {
@@ -106,6 +110,22 @@
         gap: 10px;
         display: flex;
         align-items: center;
+        position: relative;
+        padding-right: 30px;
+
+        .flag-icon-wrap {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .side-menu-text {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
 
         &:hover,
         &.active {

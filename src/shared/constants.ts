@@ -13,3 +13,13 @@ export enum LocalStorageName {
   MultiUploadAssetIds = "multiUploadAssetIds_vdr",
   SPAccessToken = "spAccessToken",
 }
+
+export enum MessageType {
+  User = "user",
+  Assistant = "assistant",
+}
+
+export const PAGE_SIZE = {
+  chatHistory: 20,
+  projects: 20,
+};

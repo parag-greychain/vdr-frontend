@@ -12,17 +12,19 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // localStorage
 import appSlice from "./app/appSlice";
+import knowledgeAIChatSlice from "./knowledgeAIChat/knowledgeAIChatSlice";
 
 //  Persist config
 const persistConfig = {
   key: "erm-frontend",
   storage, // localStorage
-  whitelist: ["app"],
+  whitelist: ["app", "knowledgeAIChat"],
 };
 
 //  Combine reducers
 const appReducer = combineReducers({
   app: appSlice,
+  knowledgeAIChat: knowledgeAIChatSlice,
 });
 
 //  Types

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Button, Card, Input, Progress, Avatar, Row, Col, Statistic, Tag, Badge, List, Space, Typography, Divider, Flex } from "antd";
+import { Button, Card, Progress, Row, Col, Statistic, Space, Typography, Divider, Flex } from "antd";
+import { Collaborators, RecentActivity, type Activity } from "../../component/dashboard";
 import "./Home.scss";
 
 const { Title, Text } = Typography;
@@ -17,20 +18,12 @@ interface Project {
   };
   documents: {
     completed: number;
+    inProgress?: number;
     total: number;
   };
   collaborators: string[];
 }
 
-interface Activity {
-  id: string;
-  type: "upload" | "review" | "assign" | "due";
-  title: string;
-  subtitle: string;
-  project: string;
-  timeAgo: string;
-  isNew?: boolean;
-}
 
 const Home = () => {
   const [summaryData] = useState({
@@ -47,7 +40,7 @@ const Home = () => {
       date: "Mar 15, 2024",
       risk: "Medium Risk",
       scope: { flagged: 13, completed: 5, total: 22 },
-      documents: { completed: 981, total: 1556 },
+      documents: { completed: 981, inProgress: 200, total: 1556 },
       collaborators: ["S", "J", "M"],
     },
     {
@@ -57,7 +50,7 @@ const Home = () => {
       date: "Mar 15, 2024",
       risk: "High Risk",
       scope: { flagged: 3, completed: 5, total: 22 },
-      documents: { completed: 981, total: 1556 },
+      documents: { completed: 981, inProgress: 200, total: 1556 },
       collaborators: ["S", "J", "M"],
     },
     {
@@ -67,7 +60,7 @@ const Home = () => {
       date: "Mar 15, 2024",
       risk: "Low Risk",
       scope: { flagged: 3, completed: 5, total: 22 },
-      documents: { completed: 981, total: 1556 },
+      documents: { completed: 981, inProgress: 200, total: 1556 },
       collaborators: ["S", "J", "M"],
     },
   ]);
@@ -108,37 +101,11 @@ const Home = () => {
     },
   ]);
 
-  const getRiskIcon = (risk: string) => {
-    if (risk === "High Risk") return "high-risk-icon";
-    if (risk === "Medium Risk") return "medium-risk-icon";
-    return "low-risk-icon";
-  };
-
-  const getRiskColor = (risk: string) => {
-    if (risk === "High Risk") return "#FD582D";
-    if (risk === "Medium Risk") return "#F59F0B";
-    return "#019A20";
-  };
-
-  const getActivityIcon = (type: string) => {
-    switch (type) {
-      case "upload":
-        return "file-icon";
-      case "review":
-        return "check-icon";
-      case "assign":
-        return "arrow-right-icon";
-      case "due":
-        return "time-icon";
-      default:
-        return "file-icon";
-    }
-  };
 
   return (
     <div className="home-page">
       <div className="container">
-        <Space direction="vertical" size="large"  style={{ width: "100%" }}>
+        <Space direction="vertical" size="large" style={{ width: "100%" }}>
           {/* Header */}
           <Row justify="space-between" align="middle">
             <Col>
@@ -166,7 +133,7 @@ const Home = () => {
                     title="Red Flags"
                     value={`${summaryData.redFlags.current}/${summaryData.redFlags.total}`}
                   />
-                  <div className="summary-icon">
+                  <div className="summary-icon flag-icon">
                     <i className="erm-icon flag-icon" />
                   </div>
                 </div>
@@ -180,7 +147,7 @@ const Home = () => {
                     title="Open Scope Items"
                     value={`${summaryData.openScopeItems.current}/${summaryData.openScopeItems.total}`}
                   />
-                  <div className="summary-icon">
+                  <div className="summary-icon scope-icon">
                     <i className="erm-icon scope-icon" />
                   </div>
                 </div>
@@ -194,7 +161,7 @@ const Home = () => {
                     title="Reviewed Documents"
                     value={`${summaryData.reviewedDocuments.current}/${summaryData.reviewedDocuments.total}`}
                   />
-                  <div className="summary-icon">
+                  <div className="summary-icon check-icon">
                     <i className="erm-icon check-icon" />
                   </div>
                 </div>
@@ -213,11 +180,13 @@ const Home = () => {
                 <Row gutter={[20, 20]}>
                   {projects.map((project) => {
                     const scopePercent = (project.scope.completed / project.scope.total) * 100;
-                    const docsPercent = (project.documents.completed / project.documents.total) * 100;
+                    const docsCompletedPercent = (project.documents.completed / project.documents.total) * 100;
+                    const docsInProgressPercent = ((project.documents.inProgress || 0) / project.documents.total) * 100;
+                    const docsTotalPercent = docsCompletedPercent + docsInProgressPercent;
 
                     return (
                       <Col xs={24} sm={12} lg={8} key={project.id}>
-                        <Card>
+                        <Card className="project-card">
                           <Space direction="vertical" size="middle" style={{ width: "100%" }}>
                             <Row justify="space-between" align="middle">
                               <Col>
@@ -227,24 +196,20 @@ const Home = () => {
                               </Col>
                               <Col>
                                 <div className="status-badge">
-                                  <i className="erm-icon active-icon" />
+                                  <i className={`erm-icon ${project.status === "Active" ? "active-icon" : "inactive-icon"}`} />
                                   <span className="status-title">{project.status}</span>
                                 </div>
                               </Col>
                             </Row>
 
                             <Flex justify="space-between" align="center">
-                              <Space size="small">
+                              <Space size="small" className="date-wrapper">
                                 <i className="erm-icon calendar-icon" />
-                                <Text type="secondary" style={{ fontSize: 12 }}>
-                                  {project.date}
-                                </Text>
+                                <span>{project.date}</span>
                               </Space>
-                              <Space size="small">
-                                <i className={`erm-icon ${getRiskIcon(project.risk)}`} />
-                                <Text style={{ fontSize: 12, color: getRiskColor(project.risk) }}>
-                                  {project.risk}
-                                </Text>
+                              <Space className={`risk-tag ${project.risk.toLowerCase().replace(" ", "-")}`}>
+                                <i className="erm-icon warning-icon" />
+                                <span>{project.risk}</span>
                               </Space>
                             </Flex>
 
@@ -253,16 +218,18 @@ const Home = () => {
                                 <Col>
                                   <Space size="small">
                                     <i className="erm-icon scope-icon" />
-                                    <Text style={{ fontSize: 12 }}>Scope</Text>
+                                    <Text style={{ fontSize: 12, color: "var(--primary)" }}>Scope</Text>
                                     {project.scope.flagged > 0 && (
-                                      <Tag color="red" icon={<i className="erm-icon flag-icon" />}>
-                                        {project.scope.flagged}
-                                      </Tag>
+                                      <div className="scope-tag">
+                                        <i className="erm-icon flag-icon" />
+                                        <Divider type="vertical" style={{ height: "14px" }} />
+                                        <span className="scope-tag-text">{project.scope.flagged}</span>
+                                      </div>
                                     )}
                                   </Space>
                                 </Col>
                                 <Col>
-                                  <Text style={{ fontSize: 12 }}>
+                                  <Text style={{ fontSize: 12, color: "var(--primary)" }}>
                                     {project.scope.completed}/{project.scope.total}
                                   </Text>
                                 </Col>
@@ -271,8 +238,9 @@ const Home = () => {
                                 percent={scopePercent}
                                 showInfo={false}
                                 strokeColor="#019A20"
+                                className="scope-progress"
                                 trailColor="#EEF3EF"
-                                strokeWidth={8}
+                                strokeWidth={6}
                               />
                             </div>
 
@@ -280,37 +248,28 @@ const Home = () => {
                               <Row justify="space-between" align="middle">
                                 <Col>
                                   <Space size="small">
-                                    <i className="erm-icon file-icon" />
-                                    <Text style={{ fontSize: 12 }}>Documents</Text>
+                                    <i className="erm-icon file-blue-icon " />
+                                    <Text style={{ fontSize: 12, color: "var(--primary)" }}>Documents</Text>
                                   </Space>
                                 </Col>
                                 <Col>
-                                  <Text style={{ fontSize: 12 }}>
+                                  <Text style={{ fontSize: 12, color: "var(--primary)" }}>
                                     {project.documents.completed}/{project.documents.total}
                                   </Text>
                                 </Col>
                               </Row>
+
                               <Progress
-                                percent={docsPercent}
+                                percent={docsTotalPercent}
                                 showInfo={false}
-                                strokeColor="#F59F0B"
+                                strokeLinecap="round"
+                                className="docs-progress"
                                 trailColor="#EEF3EF"
-                                strokeWidth={8}
+                                strokeWidth={6}
                               />
                             </div>
 
-                            <div className="collaborators-wrapper">
-                              <Text type="secondary" style={{ fontSize: 12 }} className="collaborators-title">Collaborators</Text>
-
-                              <Avatar.Group maxCount={3} maxStyle={{ backgroundColor: "#d3dfd4", color: "var(--primary)" }}>
-                                {project.collaborators.map((collab, idx) => (
-                                  <Avatar key={idx} style={{ backgroundColor: "#d3dfd4", color: "var(--primary)" }}>
-                                    {collab}
-                                  </Avatar>
-                                ))}
-                                <Avatar style={{ backgroundColor: "#d3dfd4", color: "var(--primary)" }}>+2</Avatar>
-                              </Avatar.Group>
-                            </div>
+                            <Collaborators collaborators={project.collaborators} additionalCount={2} />
                           </Space>
                         </Card>
                       </Col>
@@ -322,47 +281,7 @@ const Home = () => {
 
             {/* Recent Activity Section */}
             <Col xs={24} sm={6}>
-              <div>
-                <Title level={4} className="section-title">
-                  Recent Activity
-                </Title>
-
-                <div className="activity-wrapper">
-                  <div className="search-container">
-                    <Input
-                      placeholder="Search..."
-                      prefix={<i className="erm-icon search-icon" />}
-                      className="search-input"
-                    />
-                  </div>
-
-                  <List
-                    className="activity-list"
-                    dataSource={activities}
-                    renderItem={(activity) => (
-                      <List.Item>
-                        <List.Item.Meta
-                          avatar={
-                            <Badge dot={activity.isNew} offset={[-2, 2]}>
-                              <Avatar
-                                icon={<i className={`erm-icon ${getActivityIcon(activity.type)}`} />}
-                                style={{ backgroundColor: "#f5f5f5" }}
-                              />
-                            </Badge>
-                          }
-                          title={activity.title}
-                          description={activity.subtitle}
-                        />
-                        {activity.isNew && (
-                          <Tag color="orange" style={{ borderRadius: 12 }}>
-                            NEW
-                          </Tag>
-                        )}
-                      </List.Item>
-                    )}
-                  />
-                </div>
-              </div>
+              <RecentActivity activities={activities} />
             </Col>
           </Row>
         </Space>

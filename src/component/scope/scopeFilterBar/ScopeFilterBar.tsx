@@ -1,16 +1,41 @@
-import { Button, Input, Select } from "antd";
+import { useState } from "react";
+import { Button, Input } from "antd";
+import { SelectedSourcesDrawer } from "../../../component";
 
 const ScopeFilterBar = () => {
-  return (
-    <div className="filter-bar">
-      <div className="filter-left">
-        <Input
-          placeholder="Search..."
-          prefix={<i className="erm-icon search-icon" />}
-          className="quick-search"
-        />
+  const [isSelectedSourcesOpen, setIsSelectedSourcesOpen] = useState(false);
 
-        <Select
+  const handleOpenSelectedSources = () => {
+    setIsSelectedSourcesOpen(true);
+  };
+
+  const handleCloseSelectedSources = () => {
+    setIsSelectedSourcesOpen(false);
+  };
+
+  const handleSelectSources = (selectedItems: any[]) => {
+    console.log("Selected Sources:", selectedItems);
+  };
+
+  return (
+    <>
+      <div className="filter-bar">
+        <div className="filter-left">
+          <Input
+            placeholder="Search..."
+            prefix={<i className="erm-icon search-icon" />}
+            className="quick-search"
+          />
+          <button
+            type="button"
+            className="status-trigger"
+            aria-label="Filter by status"
+          >
+            <i className="erm-icon filter-icon"></i>
+            Filter
+          </button>
+
+          {/* <Select
           defaultValue="all"
           className="dropdown-ui"
           suffixIcon={
@@ -21,20 +46,36 @@ const ScopeFilterBar = () => {
           }
         >
           <Select.Option value="all">All</Select.Option>
-        </Select>
-      </div>
+        </Select> */}
+        </div>
 
-      <div className="filter-right">
-        <Button
+        <div className="filter-right">
+          <Button
+            icon={<i className="erm-icon refresh-double-icon" />}
+            className="primary-btn"
+            type="primary"
+            shape="round"
+            onClick={handleOpenSelectedSources}
+          >
+            MANAGE SYNC
+          </Button>
+          {/* <Button
           icon={<i className="erm-icon plus-icon" />}
           className="primary-btn"
           type="primary"
           shape="round"
         >
           CREATE REQUEST
-        </Button>
+        </Button> */}
+        </div>
       </div>
-    </div>
+
+      <SelectedSourcesDrawer
+        open={isSelectedSourcesOpen}
+        onClose={handleCloseSelectedSources}
+        onSelect={handleSelectSources}
+      />
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Input, Button } from "antd";
+import { Input, Button, Progress } from "antd";
 import "./ScopeSidebar.scss";
 import { useState } from "react";
 import { AddScope } from "../../../component";
@@ -48,7 +48,17 @@ const ScopeSidebar = () => {
             key={item}
             className={`scope-item ${item === "Air Quality" ? "active" : ""}`}
           >
-            {item}
+            <Progress
+              type="circle"
+              percent={50}
+              size={24}
+              strokeWidth={24}
+              strokeColor="#82A78D"
+            />
+            <span className="side-menu-text">{item}</span>
+            <span className="flag-icon-wrap">
+              <i className="erm-icon flag-icon" />
+            </span>
           </div>
         ))}
       </div>
