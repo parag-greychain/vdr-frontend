@@ -21,4 +21,6 @@ export const IMAGES = {
   likeIcon: "/assets/icons/like.svg",
   dislikeIcon: "/assets/icons/dislike.svg",
   regenerateChat: "/assets/icons/regenerate-chat.svg",
+  projectDetailBg: "/assets/images/project-detail-bg.svg",
+  redFlagIcon: "/assets/icons/red-flag-icon.svg",
 };

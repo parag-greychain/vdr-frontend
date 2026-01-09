@@ -2,6 +2,7 @@ export enum PATHS {
   home = "/",
   login = "/login",
   projects = "/projects",
+  projectDetails = "/project-details",
   scope = "/scope",
   scopeDetails = "/scope/scope-details",
 }
