@@ -158,9 +158,9 @@
             .risk-management-matrix-grid {
               width: 100%;
               display: grid;
-              grid-template-columns: 80px repeat(4, 1fr);
-              grid-template-rows: 30px repeat(4, 1fr);
-              gap: 8px;
+              grid-template-columns: 50px repeat(4, 1fr);
+              grid-template-rows: 20px repeat(4, 1fr);
+              gap: 5px;
               padding: 10px 0;
 
               .label-cell {
@@ -177,7 +177,8 @@
 
                 &.col-header {
                   font-weight: 600;
-                  padding: 5px;
+                  font-size: 10px;
+                  color: #012c12;
                 }
 
                 &.row-header {
@@ -192,8 +193,8 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                padding: 12px;
-                gap: 4px;
+                padding: 4px;
+                gap: 2px;
                 min-height: 35px;
 
                 &.highlighted {
@@ -201,7 +202,7 @@
                 }
 
                 .risk-number {
-                  font-size: 24px;
+                  font-size: 14px;
                   font-weight: 600;
                   color: #ffffff;
                 }
@@ -213,7 +214,7 @@
                 }
 
                 &.green-dark {
-                  background-color: #22c55e;
+                  background-color: #02ae50;
                 }
 
                 &.green-medium {
@@ -237,11 +238,11 @@
                 }
 
                 &.yellow {
-                  background-color: #fbbf24;
+                  background-color: #fdc112;
                 }
 
                 &.yellow-light {
-                  background-color: #fde047;
+                  background-color: #fdc113;
                 }
 
                 &.yellow-orange {
@@ -253,11 +254,11 @@
                 }
 
                 &.red {
-                  background-color: #ef4444;
+                  background-color: #ec3d3b;
                 }
 
                 &.red-dark {
-                  background-color: #dc2626;
+                  background-color: #be2026;
                 }
 
                 &.red-light {

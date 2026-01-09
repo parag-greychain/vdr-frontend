@@ -76,11 +76,11 @@ const ProjectDetails = () => {
                     <span className="risk-number">5</span>
                     <span className="risk-label">Risks</span>
                   </div>
-                  <div className="risk-cell yellow-light highlighted">
+                  <div className="risk-cell yellow-light">
                     <span className="risk-number">3</span>
                     <span className="risk-label">Risks</span>
                   </div>
-                  <div className="risk-cell red-light highlighted">
+                  <div className="risk-cell red-light">
                     <span className="risk-number">0</span>
                     <span className="risk-label">Risks</span>
                   </div>
