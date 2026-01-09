@@ -85,7 +85,7 @@
 
     .project-table-matrix-wrap {
       display: grid;
-      grid-template-rows: 150px 1fr;
+      grid-template-rows: 300px 1fr;
 
       .flag-matrix-wrap {
         display: grid;
@@ -153,6 +153,10 @@
               color: #012c12;
               font-weight: 500;
               font-size: 10px;
+              writing-mode: vertical-rl;
+              transform: rotate(180deg);
+              text-transform: uppercase;
+              letter-spacing: 1px;
             }
 
             .risk-management-matrix-grid {
