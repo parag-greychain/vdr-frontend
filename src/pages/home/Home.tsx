@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Button, Card, Progress, Row, Col, Statistic, Space, Typography, Divider, Flex } from "antd";
-import { Collaborators, RecentActivity, type Activity } from "../../component/dashboard";
+import { Button, Card, Progress, Row, Col, Statistic, Space, Typography, Divider, Flex, Tooltip } from "antd";
+import { RecentActivity, type Activity } from "../../component/dashboard";
+import { Collaborators } from "../../component";
 import "./Home.scss";
 
 const { Title, Text } = Typography;
@@ -61,7 +62,7 @@ const Home = () => {
       risk: "Low Risk",
       scope: { flagged: 3, completed: 5, total: 22 },
       documents: { completed: 981, inProgress: 200, total: 1556 },
-      collaborators: ["S", "J", "M"],
+      collaborators: ["S", "J", "M", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",],
     },
   ]);
 
@@ -234,14 +235,17 @@ const Home = () => {
                                   </Text>
                                 </Col>
                               </Row>
-                              <Progress
-                                percent={scopePercent}
-                                showInfo={false}
-                                strokeColor="#019A20"
-                                className="scope-progress"
-                                trailColor="#EEF3EF"
-                                strokeWidth={6}
-                              />
+                              <div className="custom-progress">
+                                <Tooltip title={`${project.scope.completed}`}>
+                                  <Progress
+                                    percent={scopePercent}
+                                    showInfo={false}
+                                    strokeLinecap="round"
+                                    className="progress-bar scope-progress"
+                                    strokeWidth={6}
+                                  />
+                                </Tooltip>
+                              </div>
                             </div>
 
                             <div>
@@ -259,17 +263,24 @@ const Home = () => {
                                 </Col>
                               </Row>
 
-                              <Progress
-                                percent={docsTotalPercent}
-                                showInfo={false}
-                                strokeLinecap="round"
-                                className="docs-progress"
-                                trailColor="#EEF3EF"
-                                strokeWidth={6}
-                              />
+                              <div className="custom-progress">
+                                <Tooltip title={`${project.documents.completed}`}>
+                                  <Progress
+                                    percent={docsTotalPercent}
+                                    showInfo={false}
+                                    strokeLinecap="round"
+                                    className="progress-bar docs-progress"
+                                    strokeWidth={6}
+                                  />
+                                </Tooltip>
+                              </div>
                             </div>
 
-                            <Collaborators collaborators={project.collaborators} additionalCount={2} />
+                            <Collaborators collaborators={project.collaborators.map((collaborator) => ({
+                              user_id: collaborator,
+                              user_name: collaborator.charAt(0),
+                              role: "Collaborator",
+                            }))} />
                           </Space>
                         </Card>
                       </Col>

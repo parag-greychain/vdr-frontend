@@ -215,4 +215,26 @@
     color: var(--primary);
   }
 
+  &[class*="setting"] {
+    mask-image: url(/assets/icons/setting.svg);
+    height: 21px;
+    width: 21px;
+  }
+
+  &[class*="guides"] {
+    mask-image: url(/assets/icons/guides.svg);
+    height: 21px;
+    width: 21px;
+  }
+
+  &[class*="deep-research"] {
+    mask-image: url(/assets/icons/deep-research.svg);
+  }
+
+  &[class*="logout"] {
+    mask-image: url(/assets/icons/logout.svg);
+    height: 21px;
+    width: 21px;
+  }
+
 }

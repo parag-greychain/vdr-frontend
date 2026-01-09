@@ -183,4 +183,13 @@
         }
     }
 
+    .ant-progress-track {
+        height: 8px;
+        background: linear-gradient(to right,
+                #14a800 0%,
+                #14a800 50%,
+                #f5a623 50%,
+                #f5a623 100%);
+    }
+
 }
