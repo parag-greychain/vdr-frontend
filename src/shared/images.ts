@@ -21,4 +21,7 @@ export const IMAGES = {
   likeIcon: "/assets/icons/like.svg",
   dislikeIcon: "/assets/icons/dislike.svg",
   regenerateChat: "/assets/icons/regenerate-chat.svg",
+  firmexImg: "/assets/icons/firmex.svg",
+  ansarada: "/assets/icons/ansarada.svg",
+  sharepoint: "/assets/icons/sharepoint.svg",
 };

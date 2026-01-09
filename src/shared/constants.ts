@@ -4,6 +4,7 @@ export enum PATHS {
   projects = "/projects",
   scope = "/scope",
   scopeDetails = "/scope/scope-details",
+  createProject = "/create-project",
 }
 
 export enum LocalStorageName {
