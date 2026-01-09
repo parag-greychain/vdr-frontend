@@ -119,16 +119,21 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+button:disabled {
+  opacity: 0.5;
+}
+
 .primary-btn {
-  background: var(--primary-btn-bg);
-  color: var(--primary);
+  background: var(--primary-btn-bg) !important;
+  color: var(--primary) !important;
   font-weight: 600;
   font-size: 13px;
   text-transform: uppercase;
   border: none !important;
   box-shadow: none !important;
 
-  &.ant-btn-variant-solid:not(:disabled):not(.ant-btn-disabled):hover {
+  &.ant-btn-variant-solid:not(:disabled):not(.ant-btn-disabled):hover,
+  &:not(:disabled):hover {
     background: var(--primary-btn-hover-bg) !important;
     color: var(--primary);
 
@@ -263,6 +268,13 @@ button:focus-visible {
   }
 }
 
+.field-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #0A0A0A;
+  margin-bottom: 6px;
+}
+
 .dropdown-ui {
   .erm-icon {
     position: absolute;
@@ -290,42 +302,64 @@ button:focus-visible {
   }
 }
 
-//dropdown override
+//input field override
 
+.input-field,
+.textarea {
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: var(--overall-paragraph-size);
+  font-weight: 400;
+  color: var(--primary);
+  background: var(--white);
+  resize: none !important;
+  width: 100%;
+  outline: none !important;
+  box-shadow: none !important;
 
-.ant-select-dropdown {
-  border-radius: var(--border-radius);
-  box-shadow: 0px 0px 6.6px 0px #012c122b;
-  border: 1px solid #d3dfd4;
-}
+  &:focus,
+  &:hover {
+    border-color: var(--primary-green);
+    box-shadow: none;
+  }
 
-.ant-select-dropdown .ant-select-item-option {
-  height: 40px;
-  display: flex;
-  align-items: center;
-  font-size: 13px;
-  font-weight: 400 !important;
-  color: var(--primary) !important;
-}
+  &.select-field {
+    background: var(--white);
+    outline: none !important;
+    box-shadow: none !important;
+    width: 100%;
 
-.select-option {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  .erm-icon {
-    font-size: 18px;
+    &:focus {
+      border-color: var(--primary-green);
+      box-shadow: none;
+      outline: none;
+    }
   }
 }
+
+.ant-picker-outlined:focus,
+.ant-picker-outlined:focus-within {
+  border-color: var(--primary-green);
+}
+
+//dropdown override
 
 .dropdown-ui {
   border: 1px solid var(--input-border) !important;
   background: transparent !important;
   box-shadow: none !important;
-  border-radius: 3px;
+  border-radius: 8px;
   height: 40px;
   padding: 5px 10px !important;
   position: relative;
+
+  &:focus,
+  &:hover,
+  &.ant-select-open {
+    border-color: var(--primary-green) !important;
+    box-shadow: none;
+  }
 
   .ant-select-content-value {
     color: var(--primary);

@@ -1,9 +1,6 @@
-import { Drawer, Input, Button } from "antd";
+import { Drawer, Input, Button, Form } from "antd";
 import { IMAGES } from "../../shared";
 import "./AddScopeDrawer.scss";
-
-const { TextArea } = Input;
-
 interface AddScopeDrawerProps {
   open: boolean;
   onClose: () => void;
@@ -20,74 +17,49 @@ const AddScopeDrawer = ({ open, onClose }: AddScopeDrawerProps) => {
       open={open}
       onClose={onClose}
       placement="right"
-      width={400}
+      width={480}
       closable={true}
       className="add-scope-drawer add-flag-drawer"
-      footer={null}
-    >
-      <div className="add-scope-drawer-content">
+      closeIcon={<i className="erm-icon close-icon" />}
+      title={
         <div className="drawer-header">
-          <div className="header-top">
-            <div className="header-left">
-              <div className="header-icon">
-                <img src={IMAGES.addFlagIcon} alt="Add Flag" />
-              </div>
-              <h2 className="drawer-title">Add Flag</h2>
+          <h3 className="drawer-title">
+            <div className="header-icon">
+              <img src={IMAGES.addFlagIcon} alt="Add Flag" />
             </div>
-            <button className="close-btn" onClick={onClose}>
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M18 6L6 18M6 6L18 18"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-          </div>
-          <p className="drawer-subtitle">
-            Add description to the flagged scope
-          </p>
+            Add Flag
+          </h3>
+          <p className="drawer-subtitle">Add description to the flagged scope</p>
         </div>
-
-        <div className="drawer-body">
-          <div className="form-field">
-            <label className="field-label">Description</label>
-            <TextArea
-              className="scope-description-textarea"
-              placeholder="Briefly describe what this scope covers for compliance and reporting"
-              rows={8}
-            />
-          </div>
-        </div>
-
+      }
+      footer={
         <div className="drawer-footer">
-          <Button
-            className="cancel-btn"
-            size="large"
-            shape="round"
-            onClick={onClose}
-          >
+          <Button className="secondary-btn" size="large" shape="round" onClick={onClose}>
             Cancel
           </Button>
           <Button
-            className="add-btn"
+            className="primary-btn"
             type="primary"
             size="large"
             shape="round"
-            onClick={handleAdd}
-          >
+            onClick={handleAdd}>
             ADD
           </Button>
         </div>
-      </div>
+      }>
+      <Form layout="vertical" className="add-scope-form">
+        <Form.Item
+          name="description"
+          label="Description"
+          rules={[{ max: 500, message: "Description must not exceed 500 characters" }]}>
+          <Input.TextArea
+            className="textarea"
+            rows={8}
+            maxLength={500}
+            placeholder="Briefly describe what this scope covers for compliance and reporting"
+          />
+        </Form.Item>
+      </Form>
     </Drawer>
   );
 };

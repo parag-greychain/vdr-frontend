@@ -26,11 +26,7 @@ const ScopeFilterBar = () => {
             prefix={<i className="erm-icon search-icon" />}
             className="quick-search"
           />
-          <button
-            type="button"
-            className="status-trigger"
-            aria-label="Filter by status"
-          >
+          <button type="button" className="status-trigger" aria-label="Filter by status">
             <i className="erm-icon filter-icon"></i>
             Filter
           </button>
@@ -55,8 +51,7 @@ const ScopeFilterBar = () => {
             className="primary-btn"
             type="primary"
             shape="round"
-            onClick={handleOpenSelectedSources}
-          >
+            onClick={handleOpenSelectedSources}>
             MANAGE SYNC
           </Button>
           {/* <Button

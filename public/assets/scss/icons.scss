@@ -99,7 +99,7 @@
     mask-image: url(/assets/icons/close-icon.svg);
     width: 20px;
     height: 20px;
-    color: #587564;
+    color: #000;
   }
 
   &[class*="zoom-plus-icon"] {
@@ -212,6 +212,20 @@
 
   &[class*="history"] {
     mask-image: url(/assets/icons/chat-history.svg);
+    color: var(--primary);
+  }
+
+  &[class*="arrow-right-icon"] {
+    mask-image: url(/assets/icons/arrow-right.svg);
+    width: 16px;
+    height: 16px;
+    color: var(--primary);
+  }
+
+  &[class*="next-icon"] {
+    mask-image: url(/assets/icons/next.svg);
+    width: 5px;
+    height: 8px;
     color: var(--primary);
   }
 

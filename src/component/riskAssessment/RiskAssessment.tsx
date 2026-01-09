@@ -1,4 +1,4 @@
-import { Modal, Select } from "antd";
+import { Button, Modal, Select } from "antd";
 import "./RiskAssessment.scss";
 
 interface RiskAssessmentProps {
@@ -21,8 +21,7 @@ const RiskAssessment = ({ open, onClose, onAdd }: RiskAssessmentProps) => {
       closable={true}
       className="risk-assessment-modal"
       width={550}
-      centered
-    >
+      centered>
       <div className="risk-assessment-content">
         <h2 className="risk-assessment-title">Risk Assessment</h2>
 
@@ -32,9 +31,13 @@ const RiskAssessment = ({ open, onClose, onAdd }: RiskAssessmentProps) => {
               <label className="field-label">Severity</label>
               <Select
                 defaultValue="moderate"
-                className="risk-select"
-                suffixIcon={<i className="erm-icon dropdown-arrow-icon" />}
-              >
+                className="dropdown-ui"
+                suffixIcon={
+                  <>
+                    <i className="erm-icon dropdown-arrow-icon" />
+                    <i className="erm-icon dropdown-top-arrow-icon" />
+                  </>
+                }>
                 <Select.Option value="low">Low</Select.Option>
                 <Select.Option value="moderate">Moderate</Select.Option>
                 <Select.Option value="high">High</Select.Option>
@@ -46,9 +49,13 @@ const RiskAssessment = ({ open, onClose, onAdd }: RiskAssessmentProps) => {
               <label className="field-label">Likelihood</label>
               <Select
                 defaultValue="possible"
-                className="risk-select"
-                suffixIcon={<i className="erm-icon dropdown-arrow-icon" />}
-              >
+                className="dropdown-ui"
+                suffixIcon={
+                  <>
+                    <i className="erm-icon dropdown-arrow-icon" />
+                    <i className="erm-icon dropdown-top-arrow-icon" />
+                  </>
+                }>
                 <Select.Option value="rare">Rare</Select.Option>
                 <Select.Option value="unlikely">Unlikely</Select.Option>
                 <Select.Option value="possible">Possible</Select.Option>
@@ -70,12 +77,12 @@ const RiskAssessment = ({ open, onClose, onAdd }: RiskAssessmentProps) => {
         </div>
 
         <div className="risk-assessment-footer">
-          <button className="cancel-btn" onClick={onClose}>
+          <Button className="secondary-btn" shape="round" onClick={onClose}>
             CANCEL
-          </button>
-          <button className="add-btn" onClick={handleAdd}>
+          </Button>
+          <Button className="primary-btn" shape="round" onClick={handleAdd}>
             ADD
-          </button>
+          </Button>
         </div>
       </div>
     </Modal>
