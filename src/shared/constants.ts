@@ -2,8 +2,10 @@ export enum PATHS {
   home = "/",
   login = "/login",
   projects = "/projects",
+  projectDetails = "/project-details",
   scope = "/scope",
   scopeDetails = "/scope/scope-details",
+  createProject = "/create-project",
 }
 
 export enum LocalStorageName {

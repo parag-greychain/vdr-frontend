@@ -14,8 +14,9 @@ import {
   Comments,
   Chat,
 } from "./scope";
-import { Collaborators, RecentActivity } from "./dashboard";
-
+import { RecentActivity } from "./dashboard";
+import Collaborators from "./collaborators/Collaborators";
+import CollaboratorsPopover from "./collaborators/collaboratorsPopover/CollaboratorsPopover";
 export {
   Header,
   AddScope,
@@ -33,4 +34,5 @@ export {
   Chat,
   Collaborators,
   RecentActivity,
+  CollaboratorsPopover
 };

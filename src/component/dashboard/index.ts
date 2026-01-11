@@ -1,6 +1,7 @@
-import Collaborators from "./collaborators/Collaborators";
 import RecentActivity from "./recentActivity/RecentActivity";
+import ProjectCard from "./projectCard/ProjectCard";
 
-export { Collaborators, RecentActivity };
+export { RecentActivity, ProjectCard };
 export type { Activity } from "./recentActivity/RecentActivity";
+export type { ProjectCardData } from "./projectCard/ProjectCard";
 

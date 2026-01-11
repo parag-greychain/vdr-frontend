@@ -6,11 +6,12 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import { Login, Home, Scope, Project, ScopeDetails } from "./pages";
+import { Login, Home, Scope, Project, ScopeDetails, ProjectDetails, CreateProject } from "./pages";
 import { PATHS } from "./shared";
 import { AppLayout } from "./layout";
 import AuthLayout from "./layout/auth/AuthLayout";
 import "./App.scss";
+
 
 const App = () => {
   const router = createBrowserRouter(
@@ -24,8 +25,10 @@ const App = () => {
           <Route path={PATHS.projects} element={<Project />} />
           <Route path={PATHS.scope} element={<Scope />} />
           <Route path={PATHS.scopeDetails} element={<ScopeDetails />} />
-        </Route>
-      </Route>
+          <Route path={PATHS.projectDetails} element={<ProjectDetails />} />
+          <Route path={PATHS.createProject} element={<CreateProject />} />
+        </Route >
+      </Route >
     )
   );
 
@@ -45,12 +48,7 @@ const App = () => {
       />
 
       <Suspense
-        fallback={
-          <div className="d-flex d-flex-middle d-flex-center h-full">
-            Loading...
-          </div>
-        }
-      >
+        fallback={<div className="d-flex d-flex-middle d-flex-center h-full">Loading...</div>}>
         <RouterProvider router={router} />
       </Suspense>
     </>

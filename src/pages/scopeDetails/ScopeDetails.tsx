@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { Button, Table, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { IMAGES } from "../../shared";
@@ -102,6 +102,8 @@ const MOCK_DATA: FileData[] = [
 const ScopeDetails = () => {
   const [isRiskAssessmentOpen, setIsRiskAssessmentOpen] = useState(false);
   const [rightPanelView, setRightPanelView] = useState<RightPanelView>(null);
+  const [rightPanelWidth, setRightPanelWidth] = useState(400);
+  const [isResizing, setIsResizing] = useState(false);
   const [comments, setComments] = useState<Comment[]>([
     {
       id: "1",
@@ -158,6 +160,49 @@ const ScopeDetails = () => {
     []
   );
 
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsResizing(true);
+  }, []);
+
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (!isResizing) return;
+      const newWidth = window.innerWidth - e.clientX;
+      const minWidth = 300;
+      const maxWidth = 800;
+      if (newWidth >= minWidth && newWidth <= maxWidth) {
+        setRightPanelWidth(newWidth);
+      }
+    },
+    [isResizing]
+  );
+
+  const handleMouseUp = useCallback(() => {
+    setIsResizing(false);
+  }, []);
+
+  useEffect(() => {
+    if (isResizing) {
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
+      document.body.style.cursor = "col-resize";
+      document.body.style.userSelect = "none";
+    } else {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    }
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    };
+  }, [isResizing, handleMouseMove, handleMouseUp]);
+
   const columns: ColumnsType<FileData> = useMemo(
     () => [
       {
@@ -168,12 +213,9 @@ const ScopeDetails = () => {
         render: (_, record) => (
           <div className="file-title">
             <div className="file-icon">
-              <img
-                src={record.icon === "pdf" ? IMAGES.pdfIcon : IMAGES.xlsIcon}
-                alt="file"
-              />
+              <img src={record.icon === "pdf" ? IMAGES.pdfIcon : IMAGES.xlsIcon} alt="file" />
             </div>
-            <div>
+            <div className="file-content">
               <div className="file-name">{record.title}</div>
               <div className="file-path">{record.path}</div>
             </div>
@@ -341,9 +383,7 @@ const ScopeDetails = () => {
                     <div className="risk-signal-cell">
                       {RISK_SIGNALS.map((signal, index) => (
                         <div key={index} className="signal-wrap">
-                          <span
-                            className={`signal-icon ${signal.color}`}
-                          ></span>
+                          <span className={`signal-icon ${signal.color}`}></span>
                           <span className="signal-text">
                             {signal.text} ({signal.count})
                           </span>
@@ -357,8 +397,7 @@ const ScopeDetails = () => {
                       className="secondary-btn"
                       type="primary"
                       shape="round"
-                      onClick={handleOpenRiskAssessment}
-                    >
+                      onClick={handleOpenRiskAssessment}>
                       ADD
                     </Button>
                   </div>
@@ -369,9 +408,7 @@ const ScopeDetails = () => {
                       <div className="stat-left">
                         <div className="stat-title">{stat.title}</div>
                         <div className="stat-value">{stat.value}</div>
-                        {stat.subtitle && (
-                          <div className="stat-sub">{stat.subtitle}</div>
-                        )}
+                        {stat.subtitle && <div className="stat-sub">{stat.subtitle}</div>}
                       </div>
                       <div className={`stat-icon ${stat.colorClass}`}>
                         <i className={`erm-icon ${stat.iconClass}`} />
@@ -380,7 +417,7 @@ const ScopeDetails = () => {
                   ))}
                 </div>
 
-                <ScopeFilterBar />
+                <ScopeFilterBar isScopePage={false} />
 
                 <Table<FileData>
                   rowSelection={{
@@ -397,33 +434,38 @@ const ScopeDetails = () => {
             </div>
 
             {/* RIGHT PANEL (COMMENTS OR CHAT) */}
-            <div className={`right-panel ${isRightPanelOpen ? "open" : ""}`}>
-              <div className="right-panel-header">
-                <h3 className="right-panel-title">
-                  {isCommentsOpen ? "Comments" : isChatOpen ? "Chat" : ""}
-                </h3>
-                <Button
-                  type="text"
-                  className="close-btn"
-                  onClick={handleClosePanel}
-                  aria-label="Close Panel"
-                >
-                  <i className="erm-icon close-icon" />
-                </Button>
+            {isRightPanelOpen && (
+              <div
+                className={`right-panel ${isRightPanelOpen ? "open" : ""} ${isResizing ? "resizing" : ""}`}
+                style={{ width: `${rightPanelWidth}px` }}>
+                <div
+                  className="right-panel-resizer"
+                  onMouseDown={handleMouseDown}
+                />
+                <div className="right-panel-header">
+                  <h3 className="right-panel-title">
+                    {isCommentsOpen ? "Comments" : isChatOpen ? "Chat" : ""}
+                  </h3>
+                  <Button
+                    type="text"
+                    className="close-btn"
+                    onClick={handleClosePanel}
+                    aria-label="Close Panel">
+                    <i className="erm-icon close-icon" />
+                  </Button>
+                </div>
+                <div className="right-panel-content">
+                  {isCommentsOpen && <Comments comments={comments} onCommentsChange={setComments} />}
+                  {isChatOpen && (
+                    <ChatPanel
+                      title="Deal Room AI"
+                      subtitle="Leverage Request files to ask queries"
+                      className="scope-chat-panel"
+                    />
+                  )}
+                </div>
               </div>
-              <div className="right-panel-content">
-                {isCommentsOpen && (
-                  <Comments comments={comments} onCommentsChange={setComments} />
-                )}
-                {isChatOpen && (
-                  <ChatPanel
-                    title="Deal Room AI"
-                    subtitle="Leverage Request files to ask queries"
-                    className="scope-chat-panel"
-                  />
-                )}
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

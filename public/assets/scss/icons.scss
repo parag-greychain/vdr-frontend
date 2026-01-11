@@ -99,7 +99,7 @@
     mask-image: url(/assets/icons/close-icon.svg);
     width: 20px;
     height: 20px;
-    color: #587564;
+    color: #000;
   }
 
   &[class*="zoom-plus-icon"] {
@@ -212,6 +212,49 @@
 
   &[class*="history"] {
     mask-image: url(/assets/icons/chat-history.svg);
+    color: var(--primary);
+  }
+
+  &[class*="setting"] {
+    mask-image: url(/assets/icons/setting.svg);
+    height: 21px;
+    width: 21px;
+  }
+
+  &[class*="guides"] {
+    mask-image: url(/assets/icons/guides.svg);
+    height: 21px;
+    width: 21px;
+  }
+
+  &[class*="deep-research"] {
+    mask-image: url(/assets/icons/deep-research.svg);
+  }
+
+  &[class*="logout"] {
+    mask-image: url(/assets/icons/logout.svg);
+    height: 21px;
+    width: 21px;
+  }
+
+
+  &[class*="breadcrumb-separator-icon"] {
+    mask-image: url(/assets/icons/right-arrow.svg);
+    width: 20px;
+    height: 20px;
+    color: #084F30;
+  }
+  &[class*="arrow-right-icon"] {
+    mask-image: url(/assets/icons/arrow-right.svg);
+    width: 16px;
+    height: 16px;
+    color: var(--primary);
+  }
+
+  &[class*="next-icon"] {
+    mask-image: url(/assets/icons/next.svg);
+    width: 5px;
+    height: 8px;
     color: var(--primary);
   }
 
