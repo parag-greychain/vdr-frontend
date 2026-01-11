@@ -7,15 +7,6 @@
         margin-bottom: 14px;
     }
 
-    .page-heading {
-        margin: 0 0 5px;
-        font-size: 25px;
-        font-weight: 500;
-        color: var(--primary);
-        line-height: 1;
-        font-family: var(--primary-font);
-    }
-
     .scope-page-header {
         border-bottom: solid 1px var(--border-color);
         padding: 0 25px 16px;
@@ -141,4 +132,13 @@
                     #f5a623 100%);
         }
     }
+}
+
+.page-heading {
+    margin: 0 0 5px;
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--primary);
+    line-height: 1;
+    font-family: var(--primary-font);
 }

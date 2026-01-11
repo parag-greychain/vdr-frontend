@@ -23,4 +23,7 @@ export const IMAGES = {
   regenerateChat: "/assets/icons/regenerate-chat.svg",
   projectDetailBg: "/assets/images/project-detail-bg.svg",
   redFlagIcon: "/assets/icons/red-flag-icon.svg",
+  firmexImg: "/assets/icons/firmex.svg",
+  ansarada: "/assets/icons/ansarada.svg",
+  sharepoint: "/assets/icons/sharepoint.svg",
 };

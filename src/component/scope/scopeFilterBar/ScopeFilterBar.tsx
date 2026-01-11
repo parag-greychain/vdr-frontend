@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Input, Select } from "antd";
+import { Button, Input } from "antd";
 import { SelectedSourcesDrawer } from "../../../component";
 import "./ScopeFilterBar.scss";
 
@@ -27,11 +27,7 @@ const ScopeFilterBar = ({ isScopePage }: { isScopePage?: boolean }) => {
             prefix={<i className="erm-icon search-icon" />}
             className="quick-search"
           />
-          <button
-            type="button"
-            className="status-trigger"
-            aria-label="Filter by status"
-          >
+          <button type="button" className="status-trigger" aria-label="Filter by status">
             <i className="erm-icon filter-icon"></i>
             Filter
           </button>
@@ -61,14 +57,16 @@ const ScopeFilterBar = ({ isScopePage }: { isScopePage?: boolean }) => {
             >
               MANAGE SYNC
             </Button>
-            {/* <Button
-            icon={<i className="erm-icon plus-icon" />}
-            className="primary-btn"
-            type="primary"
-            shape="round"
-          >
-            CREATE REQUEST
-          </Button> */}
+
+            <Button
+              icon={<i className="erm-icon plus-icon" />}
+              className="primary-btn"
+              type="primary"
+              shape="round"
+            >
+              CREATE REQUEST
+            </Button>
+
           </div>
         )}
       </div>

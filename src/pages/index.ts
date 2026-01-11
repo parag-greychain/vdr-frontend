@@ -4,5 +4,8 @@ import Scope from "./scope/Scope";
 import Project from "./project/Project";
 import ScopeDetails from "./scopeDetails/ScopeDetails";
 import ProjectDetails from "./projectDetails/ProjectDetails";
+import CreateProject from "./createProject/CreateProject";
 
-export { Login, Home, Scope, ScopeDetails, Project, ProjectDetails };
+export { Login, Home, Scope, ScopeDetails, Project, ProjectDetails, CreateProject };
+
+

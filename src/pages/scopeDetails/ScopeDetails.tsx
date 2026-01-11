@@ -168,12 +168,9 @@ const ScopeDetails = () => {
         render: (_, record) => (
           <div className="file-title">
             <div className="file-icon">
-              <img
-                src={record.icon === "pdf" ? IMAGES.pdfIcon : IMAGES.xlsIcon}
-                alt="file"
-              />
+              <img src={record.icon === "pdf" ? IMAGES.pdfIcon : IMAGES.xlsIcon} alt="file" />
             </div>
-            <div>
+            <div className="file-content">
               <div className="file-name">{record.title}</div>
               <div className="file-path">{record.path}</div>
             </div>
@@ -341,9 +338,7 @@ const ScopeDetails = () => {
                     <div className="risk-signal-cell">
                       {RISK_SIGNALS.map((signal, index) => (
                         <div key={index} className="signal-wrap">
-                          <span
-                            className={`signal-icon ${signal.color}`}
-                          ></span>
+                          <span className={`signal-icon ${signal.color}`}></span>
                           <span className="signal-text">
                             {signal.text} ({signal.count})
                           </span>
@@ -357,8 +352,7 @@ const ScopeDetails = () => {
                       className="secondary-btn"
                       type="primary"
                       shape="round"
-                      onClick={handleOpenRiskAssessment}
-                    >
+                      onClick={handleOpenRiskAssessment}>
                       ADD
                     </Button>
                   </div>
@@ -369,9 +363,7 @@ const ScopeDetails = () => {
                       <div className="stat-left">
                         <div className="stat-title">{stat.title}</div>
                         <div className="stat-value">{stat.value}</div>
-                        {stat.subtitle && (
-                          <div className="stat-sub">{stat.subtitle}</div>
-                        )}
+                        {stat.subtitle && <div className="stat-sub">{stat.subtitle}</div>}
                       </div>
                       <div className={`stat-icon ${stat.colorClass}`}>
                         <i className={`erm-icon ${stat.iconClass}`} />
@@ -406,15 +398,12 @@ const ScopeDetails = () => {
                   type="text"
                   className="close-btn"
                   onClick={handleClosePanel}
-                  aria-label="Close Panel"
-                >
+                  aria-label="Close Panel">
                   <i className="erm-icon close-icon" />
                 </Button>
               </div>
               <div className="right-panel-content">
-                {isCommentsOpen && (
-                  <Comments comments={comments} onCommentsChange={setComments} />
-                )}
+                {isCommentsOpen && <Comments comments={comments} onCommentsChange={setComments} />}
                 {isChatOpen && (
                   <ChatPanel
                     title="Deal Room AI"

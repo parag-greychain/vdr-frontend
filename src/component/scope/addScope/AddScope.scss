@@ -15,18 +15,25 @@
     }
 
     .ant-drawer-body {
-        padding: 25px 30px;
+        padding: 25px;
     }
 
     .ant-drawer-header {
         border-color: var(--border-color);
-        padding: 25px 30px;
+        padding: 25px;
 
         .drawer-title {
             color: var(--primary);
             font-size: 20px;
             font-weight: 600;
             margin: 0 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            .header-icon {
+                display: flex;
+            }
         }
 
         .drawer-subtitle {
@@ -123,33 +130,6 @@
         }
     }
 
-    .input-field {
-        border: 1px solid var(--input-border);
-        border-radius: 8px;
-        padding: 8px 16px;
-        font-size: var(--overall-paragraph-size);
-        font-weight: 400;
-        color: var(--primary);
-        background: var(--white);
-
-        &:focus {
-            border-color: var(--primary-green);
-            box-shadow: none;
-        }
-
-        &.select-field {
-            background: var(--white);
-            outline: none !important;
-            box-shadow: none !important;
-            width: 100%;
-
-            &:focus {
-                border-color: var(--primary-green);
-                box-shadow: none;
-                outline: none;
-            }
-        }
-    }
 
     .info-text {
         font-size: 12px;
