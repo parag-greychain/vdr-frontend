@@ -1,9 +1,58 @@
+import { useState } from "react";
+import { Row, Col, Typography } from "antd";
+import { ProjectCard, type ProjectCardData } from "../../component/dashboard";
 import "./Project.scss";
 
+const { Title } = Typography;
+
 const Project = () => {
+  const [projects] = useState<ProjectCardData[]>([
+    {
+      id: "1",
+      name: "Shell",
+      status: "Active",
+      date: "Mar 15, 2024",
+      risk: "Medium Risk",
+      scope: { flagged: 13, completed: 5, total: 22 },
+      documents: { completed: 981, inProgress: 200, total: 1556 },
+      collaborators: ["S", "J", "M"],
+    },
+    {
+      id: "2",
+      name: "ExxonMobil",
+      status: "Active",
+      date: "Mar 15, 2024",
+      risk: "High Risk",
+      scope: { flagged: 3, completed: 5, total: 22 },
+      documents: { completed: 981, inProgress: 200, total: 1556 },
+      collaborators: ["S", "J", "M"],
+    },
+    {
+      id: "3",
+      name: "Ford",
+      status: "Active",
+      date: "Mar 15, 2024",
+      risk: "Low Risk",
+      scope: { flagged: 3, completed: 5, total: 22 },
+      documents: { completed: 981, inProgress: 200, total: 1556 },
+      collaborators: ["S", "J", "M", "A", "B", "C"],
+    },
+  ]);
+
   return (
-    <div className="project-page-container ">
-      <div>Project Name</div>
+    <div className="project-page-container">
+      <div className="container">
+        <Title level={2} className="section-title">
+          My Projects ({projects.length})
+        </Title>
+        <Row gutter={[20, 20]}>
+          {projects.map((project) => (
+            <Col xs={24} sm={12} lg={6} key={project.id}>
+              <ProjectCard project={project} />
+            </Col>
+          ))}
+        </Row>
+      </div>
     </div>
   );
 };

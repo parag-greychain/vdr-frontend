@@ -1,10 +1,11 @@
 import { Breadcrumb, Table, Avatar, Button, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import "./ProjectDetails.scss";
-import { IMAGES } from "../../shared";
+import { IMAGES, PATHS } from "../../shared";
 import { RecentActivity, ScopeFilterBar } from "../../component";
 import { useState, useMemo } from "react";
 import { Activity } from "../../component/dashboard/recentActivity/RecentActivity";
+import { useNavigate } from "react-router-dom";
 
 interface ScopeData {
   key: string;
@@ -26,6 +27,8 @@ interface ScopeData {
 }
 
 const ProjectDetails = () => {
+  const navigate = useNavigate();
+
   const [scopeData] = useState<ScopeData[]>([
     {
       key: "1",
@@ -135,6 +138,12 @@ const ProjectDetails = () => {
     }
   ]);
 
+
+
+  const handleViewDetails = () => {
+    navigate(PATHS.scopeDetails);
+  };
+
   const columns: ColumnsType<ScopeData> = useMemo(
     () => [
       {
@@ -209,7 +218,7 @@ const ProjectDetails = () => {
         key: "viewDetails",
         width: "10%",
         render: () => (
-          <Button variant="outlined" shape="round" className="view-details-btn">
+          <Button variant="outlined" shape="round" className="view-details-btn" onClick={handleViewDetails}>
             VIEW DETAILS
           </Button>
         ),

@@ -6,11 +6,11 @@ import "./SelectedSourcesDrawer.scss";
 import Table, { ColumnsType } from "antd/es/table";
 
 interface DocumentItem {
-  id: string;
+  key: string;
   title: string;
   sharePointPath: string;
   lastSynced: string;
-  isFolder: boolean;
+  isFolder?: boolean;
 }
 
 interface SelectedSourcesDrawerProps {
@@ -24,61 +24,37 @@ const SelectedSourcesDrawer: React.FC<SelectedSourcesDrawerProps> = ({
   onClose,
   onSelect,
 }) => {
-  const [searchText, setSearchText] = useState("");
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
-
-  // Mock data - replace with actual data
-
-  const handleCheckboxChange = (id: string, checked: boolean) => {
-    if (checked) {
-      setSelectedItems([...selectedItems, id]);
-    } else {
-      setSelectedItems(selectedItems.filter((item) => item !== id));
-    }
-  };
-
-  const handleSelectAll = (checked: boolean) => {
-    if (checked) {
-      setSelectedItems(documents.map((doc) => doc.id));
-    } else {
-      setSelectedItems([]);
-    }
-  };
-
-  const handleCancel = () => {
-    setSelectedItems([]);
-    onClose();
-  };
-
-  const handleSelect = () => {
-    const selected = documents.filter((doc) => selectedItems.includes(doc.id));
-    onSelect?.(selected);
-    onClose();
-  };
-
-  interface DocumentItem {
-    key: string;
-    title: string;
-    sharePointPath: string;
-    lastSynced: string;
-  }
-
   const documents: DocumentItem[] = [
     {
       key: "1",
       title: "ESG Reports",
       sharePointPath: "ERM > Communities > Marine",
       lastSynced: "20/01/2024\n2:30 pm",
+      isFolder: true,
     },
     {
       key: "2",
       title: "Compliance Files",
       sharePointPath: "ERM > Communities > Marine",
       lastSynced: "18/01/2024\n11:15 am",
+      isFolder: true,
     },
   ];
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+
+  const handleCancel = () => {
+    setSelectedRowKeys([]);
+    onClose();
+  };
+
+  const handleSelect = () => {
+    const selected = documents.filter((doc) => selectedRowKeys.includes(doc.key));
+    onSelect?.(selected);
+    setSelectedRowKeys([]);
+    onClose();
+  };
+
   const rowSelection = {
     selectedRowKeys,
     onChange: (newSelectedRowKeys: React.Key[]) => {
@@ -158,8 +134,8 @@ const SelectedSourcesDrawer: React.FC<SelectedSourcesDrawerProps> = ({
       footer={
         <div className="drawer-footer">
           <div className="selected-count">
-            <CloseOutlined className="clear-icon" onClick={() => setSelectedItems([])} />
-            <span>{selectedItems.length} selected</span>
+            <CloseOutlined className="clear-icon" onClick={() => setSelectedRowKeys([])} />
+            <span>{selectedRowKeys.length} selected</span>
           </div>
           <div className="footer-actions">
             <Button className="secondary-btn" shape="round" onClick={handleCancel}>
@@ -169,7 +145,7 @@ const SelectedSourcesDrawer: React.FC<SelectedSourcesDrawerProps> = ({
             <Button
               className="primary-btn"
               shape="round"
-              disabled={selectedItems.length === 0}
+              disabled={selectedRowKeys.length === 0}
               onClick={handleSelect}>
               SELECT <i className="erm-icon arrow-right-icon" />
             </Button>
@@ -185,49 +161,6 @@ const SelectedSourcesDrawer: React.FC<SelectedSourcesDrawerProps> = ({
           pagination={false}
           rowKey="key"
         />
-        {/* <div className="sources-table">
-          <div className="table-header">
-            <div className="header-cell checkbox-cell">
-              <Checkbox
-                onChange={(e) => handleSelectAll(e.target.checked)}
-                checked={selectedItems.length === documents.length}
-                indeterminate={selectedItems.length > 0 && selectedItems.length < documents.length}
-              />
-            </div>
-            <div className="header-cell title-cell">Title</div>
-            <div className="header-cell path-cell">Sharepoint File Path</div>
-            <div className="header-cell synced-cell">Last Synced</div>
-          </div>
-          <div className="table-body">
-            {documents.map((doc) => (
-              <div key={doc.id} className="table-row">
-                <div className="body-cell checkbox-cell">
-                  <Checkbox
-                    checked={selectedItems.includes(doc.id)}
-                    onChange={(e) => handleCheckboxChange(doc.id, e.target.checked)}
-                    className={selectedItems.includes(doc.id) ? "checked" : ""}
-                  />
-                </div>
-                <div className="body-cell title-cell">
-                  <span className="folder-icon">
-                    <img src={IMAGES.sourceFolderIcon} alt="Folder" />
-                  </span>
-                  <div className="title-content">
-                    <div className="title-text">{doc.title}</div>
-                    <div className="subtitle-text">Folder</div>
-                  </div>
-                  <span className="arrow-icon">›</span>
-                </div>
-                <div className="body-cell path-cell">{doc.sharePointPath}</div>
-                <div className="body-cell synced-cell">
-                  {doc.lastSynced.split("\n").map((line, index) => (
-                    <div key={index}>{line}</div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div> */}
       </div>
     </Drawer>
   );

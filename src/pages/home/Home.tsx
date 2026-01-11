@@ -1,39 +1,22 @@
 import { useState } from "react";
-import { Button, Card, Progress, Row, Col, Statistic, Space, Typography, Divider, Flex, Tooltip } from "antd";
-import { RecentActivity, type Activity } from "../../component/dashboard";
-import { Collaborators } from "../../component";
+import { Button, Row, Col, Statistic, Space, Typography } from "antd";
+import { RecentActivity, ProjectCard, type Activity, type ProjectCardData } from "../../component/dashboard";
 import "./Home.scss";
+import { PATHS } from "../../shared/constants";
+import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
-interface Project {
-  id: string;
-  name: string;
-  status: "Active" | "Inactive";
-  date: string;
-  risk: "Low Risk" | "Medium Risk" | "High Risk";
-  scope: {
-    flagged: number;
-    completed: number;
-    total: number;
-  };
-  documents: {
-    completed: number;
-    inProgress?: number;
-    total: number;
-  };
-  collaborators: string[];
-}
-
 
 const Home = () => {
+  const navigate = useNavigate();
   const [summaryData] = useState({
     redFlags: { current: 48, total: 60 },
     openScopeItems: { current: 48, total: 60 },
     reviewedDocuments: { current: 3, total: 100 },
   });
 
-  const [projects] = useState<Project[]>([
+  const [projects] = useState<ProjectCardData[]>([
     {
       id: "1",
       name: "Shell",
@@ -102,6 +85,10 @@ const Home = () => {
     },
   ]);
 
+  const handleCreateProject = () => {
+    navigate(PATHS.createProject);
+  };
+
 
   return (
     <div className="home-page">
@@ -118,7 +105,7 @@ const Home = () => {
               </Text>
             </Col>
             <Col>
-              <Button type="primary" className="primary-btn" shape="round">
+              <Button type="primary" className="primary-btn" shape="round" onClick={handleCreateProject}>
                 <i className="erm-icon plus-icon" />
                 CREATE PROJECT
               </Button>
@@ -179,113 +166,11 @@ const Home = () => {
                   Projects ({projects.length})
                 </Title>
                 <Row gutter={[20, 20]}>
-                  {projects.map((project) => {
-                    const scopePercent = (project.scope.completed / project.scope.total) * 100;
-                    const docsCompletedPercent = (project.documents.completed / project.documents.total) * 100;
-                    const docsInProgressPercent = ((project.documents.inProgress || 0) / project.documents.total) * 100;
-                    const docsTotalPercent = docsCompletedPercent + docsInProgressPercent;
-
-                    return (
-                      <Col xs={24} sm={12} lg={8} key={project.id}>
-                        <Card className="project-card">
-                          <Space direction="vertical" size="middle" style={{ width: "100%" }}>
-                            <Row justify="space-between" align="middle">
-                              <Col>
-                                <Title level={5} style={{ margin: 0 }}>
-                                  {project.name}
-                                </Title>
-                              </Col>
-                              <Col>
-                                <div className="status-badge">
-                                  <i className={`erm-icon ${project.status === "Active" ? "active-icon" : "inactive-icon"}`} />
-                                  <span className="status-title">{project.status}</span>
-                                </div>
-                              </Col>
-                            </Row>
-
-                            <Flex justify="space-between" align="center">
-                              <Space size="small" className="date-wrapper">
-                                <i className="erm-icon calendar-icon" />
-                                <span>{project.date}</span>
-                              </Space>
-                              <Space className={`risk-tag ${project.risk.toLowerCase().replace(" ", "-")}`}>
-                                <i className="erm-icon warning-icon" />
-                                <span>{project.risk}</span>
-                              </Space>
-                            </Flex>
-
-                            <div>
-                              <Row justify="space-between" align="middle">
-                                <Col>
-                                  <Space size="small">
-                                    <i className="erm-icon scope-icon" />
-                                    <Text style={{ fontSize: 12, color: "var(--primary)" }}>Scope</Text>
-                                    {project.scope.flagged > 0 && (
-                                      <div className="scope-tag">
-                                        <i className="erm-icon flag-icon" />
-                                        <Divider type="vertical" style={{ height: "14px" }} />
-                                        <span className="scope-tag-text">{project.scope.flagged}</span>
-                                      </div>
-                                    )}
-                                  </Space>
-                                </Col>
-                                <Col>
-                                  <Text style={{ fontSize: 12, color: "var(--primary)" }}>
-                                    {project.scope.completed}/{project.scope.total}
-                                  </Text>
-                                </Col>
-                              </Row>
-                              <div className="custom-progress">
-                                <Tooltip title={`${project.scope.completed}`}>
-                                  <Progress
-                                    percent={scopePercent}
-                                    showInfo={false}
-                                    strokeLinecap="round"
-                                    className="progress-bar scope-progress"
-                                    strokeWidth={6}
-                                  />
-                                </Tooltip>
-                              </div>
-                            </div>
-
-                            <div>
-                              <Row justify="space-between" align="middle">
-                                <Col>
-                                  <Space size="small">
-                                    <i className="erm-icon file-blue-icon " />
-                                    <Text style={{ fontSize: 12, color: "var(--primary)" }}>Documents</Text>
-                                  </Space>
-                                </Col>
-                                <Col>
-                                  <Text style={{ fontSize: 12, color: "var(--primary)" }}>
-                                    {project.documents.completed}/{project.documents.total}
-                                  </Text>
-                                </Col>
-                              </Row>
-
-                              <div className="custom-progress">
-                                <Tooltip title={`${project.documents.completed}`}>
-                                  <Progress
-                                    percent={docsTotalPercent}
-                                    showInfo={false}
-                                    strokeLinecap="round"
-                                    className="progress-bar docs-progress"
-                                    strokeWidth={6}
-                                  />
-                                </Tooltip>
-                              </div>
-                            </div>
-
-                            <Collaborators collaborators={project.collaborators.map((collaborator) => ({
-                              user_id: collaborator,
-                              user_name: collaborator.charAt(0),
-                              role: "Collaborator",
-                            }))} />
-                          </Space>
-                        </Card>
-                      </Col>
-                    );
-                  })}
+                  {projects.map((project) => (
+                    <Col xs={24} sm={12} lg={8} key={project.id}>
+                      <ProjectCard project={project} />
+                    </Col>
+                  ))}
                 </Row>
               </div>
             </Col>

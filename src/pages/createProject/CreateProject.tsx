@@ -1,9 +1,16 @@
 import { Breadcrumb, Button, Form, Input, Select } from "antd";
 import { ScopeSidebar } from "../../component";
 import "./CreateProject.scss";
-import { IMAGES } from "../../shared";
+import { IMAGES, PATHS } from "../../shared";
+import { useNavigate } from "react-router-dom";
 
 const CreateProject = () => {
+  const navigate = useNavigate();
+
+  const handleCreateProject = () => {
+    navigate(PATHS.projectDetails);
+  };
+
   return (
     <>
       <div className="scope-page-container create-project-page">
@@ -139,7 +146,7 @@ const CreateProject = () => {
                 <Button className="secondary-btn" size="large" shape="round">
                   Cancel
                 </Button>
-                <Button className="primary-btn" type="primary" size="large" shape="round">
+                <Button className="primary-btn" type="primary" size="large" shape="round" onClick={handleCreateProject}>
                   CREATE PROJECT
                 </Button>
               </div>

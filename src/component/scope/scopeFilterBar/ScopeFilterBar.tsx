@@ -58,14 +58,14 @@ const ScopeFilterBar = ({ isScopePage }: { isScopePage?: boolean }) => {
               MANAGE SYNC
             </Button>
 
-            <Button
+            {/* <Button
               icon={<i className="erm-icon plus-icon" />}
               className="primary-btn"
               type="primary"
               shape="round"
             >
               CREATE REQUEST
-            </Button>
+            </Button> */}
 
           </div>
         )}

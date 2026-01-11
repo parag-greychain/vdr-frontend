@@ -394,93 +394,7 @@ body .ant-table-wrapper .ant-table-tbody>tr>td {
                 margin-right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        // Right Panel Styles (Comments Panel)
-        .right-panel {
-            width: 0;
-            min-width: 0;
-            max-width: 0;
-            opacity: 0;
-            overflow: hidden;
-            flex-shrink: 0;
-            height: calc(100vh - 56px);
-            background: var(--white);
-            border-left: 1px solid transparent;
-            display: flex;
-            flex-direction: column;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                min-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: translateX(20px);
 
-            &.open {
-                width: 380px;
-                min-width: 380px;
-                max-width: 380px;
-                opacity: 1;
-                border-left-color: var(--border-color);
-                transform: translateX(0);
-                overflow: visible;
-                pointer-events: auto;
-            }
-
-            &:not(.open) {
-                pointer-events: none;
-            }
-
-            .right-panel-header {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 16px 20px;
-                border-bottom: 1px solid var(--border-color);
-                flex-shrink: 0;
-
-                .right-panel-title {
-                    margin: 0;
-                    font-size: 16px;
-                    font-weight: 600;
-                    color: var(--primary);
-                    font-family: var(--primary-font);
-                }
-
-                .close-btn {
-                    padding: 4px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: var(--primary);
-                    width: 32px;
-                    height: 32px;
-
-                    &:hover {
-                        background: rgba(0, 0, 0, 0.06);
-                        border-radius: 4px;
-                    }
-
-                    .erm-icon {
-                        font-size: 18px;
-                    }
-                }
-            }
-
-            .right-panel-content {
-                flex: 1;
-                overflow-y: auto;
-                overflow-x: hidden;
-                display: flex;
-                flex-direction: column;
-                min-height: 0;
-                opacity: 0;
-                transition: opacity 0.2s ease 0.1s;
-            }
-
-            &.open .right-panel-content {
-                opacity: 1;
-            }
-        }
     }
 
 }
@@ -610,5 +524,117 @@ body .ant-table-wrapper .ant-table-tbody>tr>td {
             height: 28px;
             color: #fd582d;
         }
+    }
+}
+
+// Right Panel Styles (Comments Panel)
+.right-panel {
+    width: 0;
+    min-width: 0;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    flex-shrink: 0;
+    height: calc(100vh - 56px);
+    background: var(--white);
+    border-left: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(20px);
+
+    &.open {
+        min-width: 300px;
+        max-width: 800px;
+        opacity: 1;
+        border-left-color: var(--border-color);
+        transform: translateX(0);
+        overflow: visible;
+        pointer-events: auto;
+    }
+
+    &.resizing {
+        transition: none;
+    }
+
+    &:not(.open) {
+        pointer-events: none;
+    }
+
+    .right-panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border-color);
+        flex-shrink: 0;
+
+        .right-panel-title {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            font-family: var(--primary-font);
+        }
+
+        .close-btn {
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            width: 32px;
+            height: 32px;
+
+            &:hover {
+                background: rgba(0, 0, 0, 0.06);
+                border-radius: 4px;
+            }
+
+            .erm-icon {
+                font-size: 18px;
+            }
+        }
+    }
+
+    .right-panel-content {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        opacity: 0;
+        transition: opacity 0.2s ease 0.1s;
+    }
+
+    &.open .right-panel-content {
+        opacity: 1;
+    }
+}
+
+.right-panel-resizer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    cursor: col-resize;
+    background: transparent;
+    z-index: 10;
+    user-select: none;
+    transition: background 0.2s ease;
+
+    &:hover {
+        background: var(--primary);
+        opacity: 0.3;
+    }
+
+    &:active {
+        background: var(--primary);
+        opacity: 0.5;
     }
 }
