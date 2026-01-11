@@ -380,7 +380,7 @@ const ScopeDetails = () => {
                   ))}
                 </div>
 
-                <ScopeFilterBar />
+                <ScopeFilterBar isScopePage={false} />
 
                 <Table<FileData>
                   rowSelection={{

@@ -61,35 +61,39 @@
         }
 
         .ant-breadcrumb-link {
-          background: #d3dfd447;
-          color: #019a20;
-          padding: 8px 16px;
-          border-radius: 4px;
-          font-size: 13px;
-          font-weight: 500;
+          border: 0.8px solid #D3DFD44D;
+          background: #D3DFD447;
+          color: #019A20;      
+          padding: 4px 8px;
+          border-radius: 37px;
+          font-size: 12px;
+          font-weight: 400;
           display: inline-block;
         }
 
         .ant-breadcrumb-separator {
           margin: 0 8px;
-          color: #019a20;
-          font-size: 23px;
+          color: #084F30;
+          font-size: 20px;
         }
       }
     }
   }
 
   .project-details-wrap {
-    display: grid;
-    grid-template-columns: 1fr 300px;
+    display: flex;
+    gap: 20px;
+
+    .recent-activity-wrap {
+      min-width: 330px;
+    }
 
     .project-table-matrix-wrap {
-      display: grid;
-      grid-template-rows: 300px 1fr;
+      flex: 1;
 
       .flag-matrix-wrap {
-        display: grid;
-        grid-template-columns: 300px 1fr;
+        display: flex;
+
         gap: 20px;
 
         .flag-count-wrap {
@@ -101,12 +105,14 @@
           justify-content: center;
           flex-direction: column;
           gap: 15px;
+          min-width: 270px;
 
           .flag-text {
             color: #012c12;
             font-weight: 500;
             font-size: 12px;
           }
+
           .flag-count {
             color: #012c12;
             font-weight: 600;
@@ -124,11 +130,21 @@
           }
         }
 
+        .likelihood {
+          color: var(--primary);
+          font-weight: 500;
+          font-size: 9px;
+          text-transform: uppercase;
+          letter-spacing: 0.4px;
+          text-align: center;
+        }
+
         .risk-management-matrix-container {
           background-color: #f6f9f6;
           border-radius: 11px;
           border: 1px solid #c8edc8;
           padding: 10px;
+          flex: 1;
 
           .risk-management-header {
             color: #012c12;
@@ -198,7 +214,6 @@
                 align-items: center;
                 justify-content: center;
                 padding: 4px;
-                gap: 2px;
                 min-height: 35px;
 
                 &.highlighted {
@@ -212,7 +227,7 @@
                 }
 
                 .risk-label {
-                  font-size: 11px;
+                  font-size: 8px;
                   color: #ffffff;
                   font-weight: 500;
                 }
@@ -222,23 +237,23 @@
                 }
 
                 &.green-medium {
-                  background-color: #10b981;
+                  background-color: #02AE50;
                 }
 
                 &.green-light {
-                  background-color: #86efac;
+                  background-color: #94C956;
                 }
 
                 &.green-pale {
-                  background-color: #bbf7d0;
+                  background-color: #94C956;
                 }
 
                 &.green-teal {
-                  background-color: #14b8a6;
+                  background-color: #02AE50;
                 }
 
                 &.green-bright {
-                  background-color: #00d084;
+                  background-color: #02AE50;
                 }
 
                 &.yellow {
@@ -250,11 +265,11 @@
                 }
 
                 &.yellow-orange {
-                  background-color: #fb923c;
+                  background-color: #FDC113;
                 }
 
                 &.orange {
-                  background-color: #f97316;
+                  background-color: #EC3D3B;
                 }
 
                 &.red {
@@ -266,12 +281,124 @@
                 }
 
                 &.red-light {
-                  background-color: #fca5a5;
+                  background-color: rgba(253, 194, 19, 0.88);
                 }
               }
             }
           }
         }
+      }
+    }
+  }
+
+  .risk-management-table-wrap {
+    margin-top: 25px;
+
+    .scope-table {
+      .ant-table-tbody>tr {
+        &:hover {
+          .open-comments-cell {
+            .view-details-btn {
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+        }
+      }
+
+      .assigned-to-cell {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        .assigned-name {
+          margin-left: 8px;
+        }
+      }
+
+      .risk-assessment-cell {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 5px;
+        max-width: 60px;
+        text-align: center;
+
+        .risk-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          display: inline-block;
+
+          &.moderate {
+            background-color: #EFB200;
+          }
+
+          &.very-high {
+            background-color: #BE2026;
+          }
+
+          &.low {
+            background-color: #00AE50;
+          }
+
+          &.high {
+            background-color: #ED2025;
+          }
+        }
+      }
+
+      .red-flag-cell {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        border: 0.75px solid #D3DFD49E;
+        border-radius: 3px;
+        padding: 2px 6px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 500;
+        color: #012C12;
+        width: 46px;
+
+        .flag-divider {
+          height: 16px;
+          width: 1px;
+          background-color: #D3DFD49E;
+        }
+      }
+
+      .open-comments-cell {
+        display: flex;
+        align-items: center;
+
+        .comments-count {
+          font-size: 14px;
+          font-weight: 500;
+          color: #012C12;
+        }
+      }
+
+      .view-details-btn {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 5%;
+        color: var(--primary);
+        border: 1px solid var(--primary);
+      }
+
+      .ant-table-tbody>tr:hover {
+        .view-details-btn {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+
+      .due-date-overdue {
+        color: #ED2025;
       }
     }
   }

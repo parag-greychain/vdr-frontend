@@ -237,4 +237,11 @@
     width: 21px;
   }
 
+
+  &[class*="breadcrumb-separator-icon"] {
+    mask-image: url(/assets/icons/right-arrow.svg);
+    width: 20px;
+    height: 20px;
+    color: #084F30;
+  }
 }
