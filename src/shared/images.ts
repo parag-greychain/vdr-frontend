@@ -26,4 +26,5 @@ export const IMAGES = {
   firmexImg: "/assets/icons/firmex.svg",
   ansarada: "/assets/icons/ansarada.svg",
   sharepoint: "/assets/icons/sharepoint.svg",
+  circleCheckIcon: "/assets/icons/circle-check.svg",
 };
