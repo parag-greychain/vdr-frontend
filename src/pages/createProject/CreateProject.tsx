@@ -1,17 +1,83 @@
-import { Breadcrumb, Button, Form, Input, Select, Radio } from "antd";
+import { Breadcrumb, Button, Form, Input, Select, Radio, message } from "antd";
 import { ScopeSidebar } from "../../component";
 import "./CreateProject.scss";
 import { IMAGES, PATHS } from "../../shared";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+export interface CreateProjectData {
+  projectName: string;
+  description?: string;
+  services?: string;
+  vdrIntegration: string;
+  selectedScopes: string[];
+}
+
 const CreateProject = () => {
   const navigate = useNavigate();
+  const [form] = Form.useForm();
   const [selectedVDR, setSelectedVDR] = useState<string>("firmex-1");
   const [selectedScopes, setSelectedScopes] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleCreateProject = () => {
-    navigate(PATHS.projectDetails);
+  const projectName = Form.useWatch("projectName", form);
+  const isFormValid = projectName && projectName.trim().length >= 4;
+
+  const handleCancel = () => {
+    form.resetFields();
+    setSelectedVDR("firmex-1");
+    setSelectedScopes([]);
+    navigate(PATHS.projects);
+  };
+
+  const handleCreateProject = async () => {
+    try {
+      const values = await form.validateFields();
+
+      if (selectedScopes.length === 0) {
+        message.warning("Please select at least one scope");
+        return;
+      }
+
+      setIsSubmitting(true);
+
+      // Prepare project data
+      const projectData: CreateProjectData = {
+        projectName: values.projectName.trim(),
+        description: values.description?.trim(),
+        services: values.services,
+        vdrIntegration: selectedVDR,
+        selectedScopes: selectedScopes,
+      };
+
+      // API Integration: Uncomment when ready to use real API
+      // import { createProjectAPI } from "../../services/projectApi";
+      // const response = await createProjectAPI(projectData);
+      // const newProject = response.data;
+
+      // Simulate API call for now
+      console.log("Project data to be sent to API:", projectData);
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API delay
+
+      // Temporary project ID - should come from API response
+      const tempProjectId = Date.now().toString();
+
+      message.success("Project created successfully!");
+
+      // Navigate to project details with project ID
+      navigate(PATHS.projectDetails, {
+        state: { projectId: tempProjectId },
+      });
+    } catch (error: any) {
+      console.error("Validation or submission failed:", error);
+      if (error.errorFields) {
+        message.error("Please fill in all required fields correctly");
+      } else {
+        message.error("Failed to create project. Please try again.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -26,6 +92,11 @@ const CreateProject = () => {
                 selectedScopes={selectedScopes}
                 onScopeSelectionChange={setSelectedScopes}
               />
+              {selectedScopes.length === 0 && (
+                <div className="scope-selection-hint" style={{ padding: "10px", color: "#ff4d4f", fontSize: "12px" }}>
+                  Please select at least one scope
+                </div>
+              )}
             </div>
 
             {/* MAIN CONTENT */}
@@ -33,10 +104,21 @@ const CreateProject = () => {
               <div className="scope-header-wrapper">
                 <div className="scope-header">
                   <div className="breadcrumb-wrapper">
-                    <Breadcrumb className="page-breadcrumb">
-                      <Breadcrumb.Item onClick={() => navigate(PATHS.home)}>Home</Breadcrumb.Item>
-                      <Breadcrumb.Item>Create Project</Breadcrumb.Item>
-                    </Breadcrumb>
+                    <Breadcrumb
+                      className="page-breadcrumb"
+                      items={[
+                        {
+                          title: (
+                            <span className="breadcrumb-clickable" onClick={() => navigate(PATHS.home)}>
+                              Home
+                            </span>
+                          ),
+                        },
+                        {
+                          title: "Create Project",
+                        },
+                      ]}
+                    />
                   </div>
                 </div>
                 <div className="scope-page-header">
@@ -46,15 +128,15 @@ const CreateProject = () => {
 
               <div className="scope-details-content">
                 <div className="create-project-form">
-                  <Form layout="vertical" className="add-scope-form">
+                  <Form form={form} layout="vertical" className="add-scope-form">
                     <Form.Item
-                      name="scopeName"
+                      name="projectName"
                       label={<span>Project Name</span>}
                       required={false}
                       rules={[
                         { required: true, message: "Please enter project name" },
-                        { min: 4, message: "project name must be at least 4 characters" },
-                        { max: 100, message: "project name must not exceed 100 characters" },
+                        { min: 4, message: "Project name must be at least 4 characters" },
+                        { max: 100, message: "Project name must not exceed 100 characters" },
                       ]}>
                       <Input className="input-field" placeholder="Enter project name" />
                     </Form.Item>
@@ -166,10 +248,22 @@ const CreateProject = () => {
                 </div>
               </div>
               <div className="create-project-footer">
-                <Button className="secondary-btn" size="large" shape="round">
+                <Button
+                  className="secondary-btn"
+                  size="large"
+                  shape="round"
+                  onClick={handleCancel}
+                  disabled={isSubmitting}>
                   Cancel
                 </Button>
-                <Button className="primary-btn" type="primary" size="large" shape="round" onClick={handleCreateProject}>
+                <Button
+                  className="primary-btn"
+                  type="primary"
+                  size="large"
+                  shape="round"
+                  onClick={handleCreateProject}
+                  disabled={!isFormValid || selectedScopes.length === 0 || isSubmitting}
+                  loading={isSubmitting}>
                   CREATE PROJECT
                 </Button>
               </div>

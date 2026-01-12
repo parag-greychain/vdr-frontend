@@ -7,3 +7,7 @@ import Comments from "./comments/Comments";
 import Chat from "./chat/Chat";
 
 export { ScopeSidebar, AddScope, ScopeFilterBar, RequestCard, ScopeHeader, Comments, Chat };
+
+// Export types
+export type { ScopeData } from "./addScope/AddScope";
+export type { ScopeItem } from "./scopeSidebar/ScopeSidebar";

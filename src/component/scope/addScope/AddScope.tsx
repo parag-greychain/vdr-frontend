@@ -1,11 +1,24 @@
+import { useState } from "react";
 import { Drawer, Input, Select, Button, DatePicker, Form, message } from "antd";
 import type { Dayjs } from "dayjs";
 
 import "./AddScope.scss";
 
+export interface ScopeData {
+  id?: string;
+  name: string;
+  description?: string;
+  category: string;
+  riskLevel: string;
+  scopeOwner?: string;
+  defaultDueDate?: string;
+  progress?: number;
+}
+
 interface AddScopeProps {
   open: boolean;
   onClose: () => void;
+  onAdd?: (scope: ScopeData) => void | Promise<void>;
 }
 
 interface ScopeFormValues {
@@ -17,8 +30,9 @@ interface ScopeFormValues {
   defaultDueDate?: Dayjs;
 }
 
-const AddScope = ({ open, onClose }: AddScopeProps) => {
+const AddScope = ({ open, onClose, onAdd }: AddScopeProps) => {
   const [form] = Form.useForm<ScopeFormValues>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const scopeName = Form.useWatch("scopeName", form);
 
   // Check if required field is valid (not empty and meets minimum length)
@@ -27,13 +41,37 @@ const AddScope = ({ open, onClose }: AddScopeProps) => {
   const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
-      console.log("Form values:", values);
-      // TODO: Add API call to submit the form
+      setIsSubmitting(true);
+
+      // Prepare scope data for API
+      const scopeData: ScopeData = {
+        name: values.scopeName.trim(),
+        description: values.description?.trim(),
+        category: values.category,
+        riskLevel: values.riskLevel,
+        scopeOwner: values.scopeOwner,
+        defaultDueDate: values.defaultDueDate?.toISOString(),
+        progress: 0, // New scope starts at 0%
+      };
+
+      // Call the onAdd callback (which can handle API call)
+      if (onAdd) {
+        await onAdd(scopeData);
+      } else {
+        // Fallback: Simulate API call if no callback provided
+        // TODO: Replace with actual API call
+        // await addScopeAPI(scopeData);
+        console.log("Scope data to be sent to API:", scopeData);
+      }
+
       message.success("Scope added successfully!");
       form.resetFields();
       onClose();
     } catch (error) {
-      console.error("Validation failed:", error);
+      console.error("Validation or submission failed:", error);
+      message.error("Failed to add scope. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -45,7 +83,7 @@ const AddScope = ({ open, onClose }: AddScopeProps) => {
   return (
     <Drawer
       placement="right"
-      width={480}
+      size={480}
       open={open}
       onClose={handleClose}
       closeIcon={<i className="erm-icon close-icon" />}
@@ -68,7 +106,8 @@ const AddScope = ({ open, onClose }: AddScopeProps) => {
             className="primary-btn"
             shape="round"
             onClick={handleSubmit}
-            disabled={!isFormValid}>
+            disabled={!isFormValid || isSubmitting}
+            loading={isSubmitting}>
             ADD SCOPE
           </Button>
         </div>

@@ -1,16 +1,78 @@
+import { useState, useCallback } from "react";
 import { Input, Button, Progress, Checkbox } from "antd";
 import "./ScopeSidebar.scss";
-import { useState } from "react";
 import { AddScope } from "../../../component";
+import type { ScopeData } from "../addScope/AddScope";
+
+export interface ScopeItem {
+  id: string;
+  name: string;
+  progress: number;
+}
 
 interface ScopeSidebarProps {
   showCheckboxes?: boolean;
   selectedScopes?: string[];
   onScopeSelectionChange?: (selectedScopes: string[]) => void;
+  scopes?: ScopeItem[];
+  onScopesChange?: (scopes: ScopeItem[]) => void;
 }
 
-const ScopeSidebar = ({ showCheckboxes = false, selectedScopes = [], onScopeSelectionChange }: ScopeSidebarProps) => {
+const DEFAULT_SCOPES: ScopeItem[] = [
+  { id: "1", name: "Air Quality", progress: 50 },
+  { id: "2", name: "Business Ethics", progress: 50 },
+  { id: "3", name: "Critical Incident Risk Management", progress: 50 },
+  { id: "4", name: "Customer Welfare", progress: 50 },
+  { id: "5", name: "Data Security", progress: 50 },
+  { id: "6", name: "Ecological Impacts", progress: 50 },
+  { id: "7", name: "Employee Engagement, Diversity & inclusion", progress: 50 },
+  { id: "8", name: "Employee Health & Safety", progress: 50 },
+  { id: "9", name: "Energy Management", progress: 50 },
+];
+
+const ScopeSidebar = ({
+  showCheckboxes = false,
+  selectedScopes = [],
+  onScopeSelectionChange,
+  scopes: externalScopes,
+  onScopesChange,
+}: ScopeSidebarProps) => {
   const [isAddScopeOpen, setIsAddScopeOpen] = useState(false);
+  const [internalScopes, setInternalScopes] = useState<ScopeItem[]>(DEFAULT_SCOPES);
+
+  // Use external scopes if provided, otherwise use internal state
+  const scopes = externalScopes ?? internalScopes;
+  const setScopes = onScopesChange ?? setInternalScopes;
+
+  const handleAddScope = useCallback(
+    async (scopeData: ScopeData) => {
+      try {
+        // API Integration: Uncomment when ready to use real API
+        // import { addScopeAPI } from "../../../services/scopeApi";
+        // const newScope = await addScopeAPI(scopeData);
+
+        // For now, simulate API response
+        const newScope: ScopeItem = {
+          id: Date.now().toString(), // Temporary ID, should come from API
+          name: scopeData.name,
+          progress: scopeData.progress ?? 0,
+        };
+
+        // Add new scope to the list
+        setScopes([...scopes, newScope]);
+
+        // If using checkboxes, optionally select the new scope
+        if (showCheckboxes) {
+          const newSelected = [...selectedScopes, newScope.name];
+          onScopeSelectionChange?.(newSelected);
+        }
+      } catch (error) {
+        console.error("Failed to add scope:", error);
+        throw error; // Re-throw to let AddScope handle the error
+      }
+    },
+    [scopes, setScopes, showCheckboxes, selectedScopes, onScopeSelectionChange]
+  );
 
   return (
     <>
@@ -39,40 +101,29 @@ const ScopeSidebar = ({ showCheckboxes = false, selectedScopes = [], onScopeSele
       </Button>
 
       <div className="scope-list">
-        {[
-          "Air Quality",
-          "Business Ethics",
-          "Critical Incident Risk Management",
-          "Customer Welfare",
-          "Data Security",
-          "Ecological Impacts",
-          "Employee Engagement, Diversity & inclusion",
-          "Employee Health & Safety",
-          "Energy Management",
-        ].map((item) => {
-          const isSelected = selectedScopes.includes(item);
-          const isActive = !showCheckboxes && item === "Air Quality";
-          
+        {scopes.map((scope) => {
+          const isSelected = selectedScopes.includes(scope.name);
+          const isActive = !showCheckboxes && scope.id === "1";
+
           return (
             <div
-              key={item}
+              key={scope.id}
               className={`scope-item ${isActive ? "active" : ""} ${showCheckboxes ? "with-checkbox" : ""}`}
               onClick={() => {
                 if (!showCheckboxes) return;
                 const newSelected = isSelected
-                  ? selectedScopes.filter((scope) => scope !== item)
-                  : [...selectedScopes, item];
+                  ? selectedScopes.filter((s) => s !== scope.name)
+                  : [...selectedScopes, scope.name];
                 onScopeSelectionChange?.(newSelected);
-              }}
-            >
+              }}>
               {showCheckboxes && (
                 <Checkbox
                   checked={isSelected}
                   onChange={(e) => {
                     e.stopPropagation();
                     const newSelected = e.target.checked
-                      ? [...selectedScopes, item]
-                      : selectedScopes.filter((scope) => scope !== item);
+                      ? [...selectedScopes, scope.name]
+                      : selectedScopes.filter((s) => s !== scope.name);
                     onScopeSelectionChange?.(newSelected);
                   }}
                   onClick={(e) => e.stopPropagation()}
@@ -81,13 +132,13 @@ const ScopeSidebar = ({ showCheckboxes = false, selectedScopes = [], onScopeSele
               {!showCheckboxes && (
                 <Progress
                   type="circle"
-                  percent={50}
+                  percent={scope.progress}
                   size={24}
                   strokeWidth={24}
                   strokeColor="#82A78D"
                 />
               )}
-              <span className="side-menu-text">{item}</span>
+              <span className="side-menu-text">{scope.name}</span>
               {!showCheckboxes && (
                 <span className="flag-icon-wrap">
                   <i className="erm-icon flag-icon" />
@@ -101,6 +152,7 @@ const ScopeSidebar = ({ showCheckboxes = false, selectedScopes = [], onScopeSele
       <AddScope
         open={isAddScopeOpen}
         onClose={() => setIsAddScopeOpen(false)}
+        onAdd={handleAddScope}
       />
     </>
   );

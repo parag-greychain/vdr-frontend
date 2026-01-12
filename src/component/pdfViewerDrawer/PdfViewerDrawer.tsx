@@ -79,9 +79,9 @@ const PdfViewerDrawer: React.FC<PdfViewerDrawerProps> = ({
       placement="right"
       onClose={onClose}
       open={open}
-      width="70%"
+      size="large"
       className="pdf-viewer-drawer"
-      styles={{ header: { display: "none" }, body: { padding: 0 } }}
+      styles={{ header: { display: "none" }, body: { padding: 0,  width: "70%" } }}
       footer={null}
     >
       <div className="pdf-viewer-container">

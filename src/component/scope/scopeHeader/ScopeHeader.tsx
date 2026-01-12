@@ -35,10 +35,25 @@ const ScopeHeader = (props: IScopeHeader) => {
     <div className="scope-header-wrapper">
       <div className="scope-header">
         <div className="breadcrumb-wrapper">
-          <Breadcrumb className="page-breadcrumb">
-            <Breadcrumb.Item onClick={() => navigate(PATHS.home)} className="breadcrumb-clickable">Home</Breadcrumb.Item>
-            <Breadcrumb.Item onClick={() => navigate(PATHS.projectDetails)} className="breadcrumb-clickable">Shell - Air Quality</Breadcrumb.Item>
-          </Breadcrumb>
+          <Breadcrumb
+            className="page-breadcrumb"
+            items={[
+              {
+                title: (
+                  <span className="breadcrumb-clickable" onClick={() => navigate(PATHS.home)}>
+                    Home
+                  </span>
+                ),
+              },
+              {
+                title: (
+                  <span className="breadcrumb-clickable" onClick={() => navigate(PATHS.projectDetails)}>
+                    Shell - Air Quality
+                  </span>
+                ),
+              },
+            ]}
+          />
         </div>
 
         <div className="scope-actions">

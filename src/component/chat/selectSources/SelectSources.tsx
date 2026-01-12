@@ -159,7 +159,7 @@ const SelectSources: React.FC<SelectSourcesProps> = ({
   const totalSelected = selectedFiles.project.length + selectedFiles.knowledge.length;
 
   return (
-    <Drawer className="source-drawer" width={549} closable={false} open={open} onClose={onClose}>
+    <Drawer className="source-drawer" size={549} closable={false} open={open} onClose={onClose}>
       {/* HEADER */}
       <div className="drawer-header">
         <div className="title">Sources</div>

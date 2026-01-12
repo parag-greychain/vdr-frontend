@@ -241,10 +241,18 @@ const ProjectDetails = () => {
         </div>
         <div className="project-details-header-breadcrumb">
           <span>Service</span>
-          <Breadcrumb className="page-breadcrumb" separator={<i className="erm-icon breadcrumb-separator-icon"></i>}>
-            <Breadcrumb.Item>Mergers & Acquisitions</Breadcrumb.Item>
-            <Breadcrumb.Item>Private Markets ESG/Value Creation</Breadcrumb.Item>
-          </Breadcrumb>
+          <Breadcrumb
+            className="page-breadcrumb"
+            separator={<i className="erm-icon breadcrumb-separator-icon"></i>}
+            items={[
+              {
+                title: "Mergers & Acquisitions",
+              },
+              {
+                title: "Private Markets ESG/Value Creation",
+              },
+            ]}
+          />
         </div>
       </div>
       <div className="project-details-wrap">
