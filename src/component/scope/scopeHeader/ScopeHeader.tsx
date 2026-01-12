@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Avatar, Breadcrumb, Button, Progress } from "antd";
 import "./ScopeHeader.scss";
-import { IMAGES } from "../../../shared";
+import { IMAGES, PATHS } from "../../../shared";
 import { AddScopeDrawer } from "../../../component";
+import { useNavigate } from "react-router-dom";
 
 interface IScopeHeader {
   isScopePage: boolean;
@@ -15,7 +16,7 @@ interface IScopeHeader {
 
 const ScopeHeader = (props: IScopeHeader) => {
   const { isCommentsOpen, isChatOpen, onCommentsToggle, onChatToggle, onOpenReviewerModal } = props;
-
+  const navigate = useNavigate();
   const [isAddScopeDrawerOpen, setIsAddScopeDrawerOpen] = useState(false);
 
   const handleOpenAddScopeDrawer = () => {
@@ -35,8 +36,8 @@ const ScopeHeader = (props: IScopeHeader) => {
       <div className="scope-header">
         <div className="breadcrumb-wrapper">
           <Breadcrumb className="page-breadcrumb">
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Shell - Air Quality</Breadcrumb.Item>
+            <Breadcrumb.Item onClick={() => navigate(PATHS.home)}>Home</Breadcrumb.Item>
+            <Breadcrumb.Item onClick={() => navigate(PATHS.projectDetails)}>Shell - Air Quality</Breadcrumb.Item>
           </Breadcrumb>
         </div>
 

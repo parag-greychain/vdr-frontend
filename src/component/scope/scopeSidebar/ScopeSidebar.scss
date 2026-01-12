@@ -122,14 +122,26 @@
 
         .side-menu-text {
             display: -webkit-box;
+            line-clamp: 2;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
+            box-orient: vertical;
             overflow: hidden;
         }
 
         &:hover,
         &.active {
             background: #F6F9F6;
+        }
+
+        &.with-checkbox {
+            padding-left: 10px;
+            cursor: pointer;
+
+            .ant-checkbox-wrapper {
+                margin-right: 10px;
+                flex-shrink: 0;
+            }
         }
     }
 }
