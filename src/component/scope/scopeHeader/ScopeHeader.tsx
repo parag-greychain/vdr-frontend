@@ -36,8 +36,8 @@ const ScopeHeader = (props: IScopeHeader) => {
       <div className="scope-header">
         <div className="breadcrumb-wrapper">
           <Breadcrumb className="page-breadcrumb">
-            <Breadcrumb.Item onClick={() => navigate(PATHS.home)}>Home</Breadcrumb.Item>
-            <Breadcrumb.Item onClick={() => navigate(PATHS.projectDetails)}>Shell - Air Quality</Breadcrumb.Item>
+            <Breadcrumb.Item onClick={() => navigate(PATHS.home)} className="breadcrumb-clickable">Home</Breadcrumb.Item>
+            <Breadcrumb.Item onClick={() => navigate(PATHS.projectDetails)} className="breadcrumb-clickable">Shell - Air Quality</Breadcrumb.Item>
           </Breadcrumb>
         </div>
 

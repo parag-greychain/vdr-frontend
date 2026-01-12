@@ -1,13 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Row, Col, Typography, Input, Button } from "antd";
 import { ProjectCard, type ProjectCardData } from "../../component/dashboard";
-import "./Project.scss";
 import { PlusOutlined } from "@ant-design/icons";
 import CustomPagination from "../../component/pagination/CustomPagination";
+import { PATHS } from "../../shared";
+import "./Project.scss";
 
 const { Title } = Typography;
 
 const Project = () => {
+  const navigate = useNavigate();
   const [projects] = useState<ProjectCardData[]>([
     {
       id: "1",
@@ -39,6 +42,16 @@ const Project = () => {
       documents: { completed: 981, inProgress: 200, total: 1556 },
       collaborators: ["S", "J", "M", "A", "B", "C"],
     },
+    {
+      id: "4",
+      name: "Ford",
+      status: "Inactive",
+      date: "Mar 15, 2024",
+      risk: "Low Risk",
+      scope: { flagged: 3, completed: 5, total: 22 },
+      documents: { completed: 981, inProgress: 200, total: 1556 },
+      collaborators: ["S", "J", "M", "A", "B", "C"],
+    },
   ]);
 
   return (
@@ -54,7 +67,7 @@ const Project = () => {
                 prefix={<i className="erm-icon search-icon" />}
               />
             </div>
-            <Button type="primary" shape="round" className="primary-btn" icon={<PlusOutlined />}>
+            <Button type="primary" shape="round" className="primary-btn" icon={<PlusOutlined />} onClick={() => navigate(PATHS.createProject)}>
               CREATE PROJECT
             </Button>
           </div>

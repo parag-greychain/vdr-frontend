@@ -93,6 +93,14 @@
         li:last-child {
             opacity: 1;
         }
+
+        .breadcrumb-clickable {
+            cursor: pointer;
+
+            .ant-breadcrumb-link {
+                cursor: pointer;
+            }
+        }
     }
 
     //progress bar override
