@@ -244,6 +244,7 @@
     height: 20px;
     color: #084F30;
   }
+
   &[class*="arrow-right-icon"] {
     mask-image: url(/assets/icons/arrow-right.svg);
     width: 16px;
@@ -258,4 +259,10 @@
     color: var(--primary);
   }
 
+  &[class*="edit-icon"] {
+    mask-image: url(/assets/icons/edit-icon.svg);
+    width: 15px;
+    height: 15px;
+    color: #3C5B44;
+  }
 }
