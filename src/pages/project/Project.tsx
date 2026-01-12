@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { Row, Col, Typography } from "antd";
+import { useNavigate } from "react-router-dom";
+import { Row, Col, Typography, Input, Button } from "antd";
 import { ProjectCard, type ProjectCardData } from "../../component/dashboard";
+import { PlusOutlined } from "@ant-design/icons";
+import CustomPagination from "../../component/pagination/CustomPagination";
+import { PATHS } from "../../shared";
 import "./Project.scss";
 
 const { Title } = Typography;
 
 const Project = () => {
+  const navigate = useNavigate();
   const [projects] = useState<ProjectCardData[]>([
     {
       id: "1",
@@ -37,22 +42,53 @@ const Project = () => {
       documents: { completed: 981, inProgress: 200, total: 1556 },
       collaborators: ["S", "J", "M", "A", "B", "C"],
     },
+    {
+      id: "4",
+      name: "Ford",
+      status: "Inactive",
+      date: "Mar 15, 2024",
+      risk: "Low Risk",
+      scope: { flagged: 3, completed: 5, total: 22 },
+      documents: { completed: 981, inProgress: 200, total: 1556 },
+      collaborators: ["S", "J", "M", "A", "B", "C"],
+    },
   ]);
 
   return (
     <div className="project-page-container">
       <div className="container">
         <Title level={2} className="section-title">
-          My Projects ({projects.length})
+          <div className="section-title-left">My Projects</div>
+          <div className="page-header-right">
+            <div className="search-wrapper">
+              <Input
+                className="quick-search"
+                placeholder="Search..."
+                prefix={<i className="erm-icon search-icon" />}
+              />
+            </div>
+            <Button type="primary" shape="round" className="primary-btn" icon={<PlusOutlined />} onClick={() => navigate(PATHS.createProject)}>
+              CREATE PROJECT
+            </Button>
+          </div>
         </Title>
-        <Row gutter={[20, 20]}>
-          {projects.map((project) => (
-            <Col xs={24} sm={12} lg={6} key={project.id}>
-              <ProjectCard project={project} />
-            </Col>
-          ))}
-        </Row>
+        <div className="project-list-wrapper">
+          <Row gutter={[20, 20]}>
+            {projects.map((project) => (
+              <Col xs={24} sm={12} lg={6} key={project.id}>
+                <ProjectCard project={project} />
+              </Col>
+            ))}
+          </Row>
+        </div>
       </div>
+      <CustomPagination
+        currentPage={1}
+        pageSize={10}
+        total={50}
+        handlePagination={(page) => console.log(page)}
+        isHidePagination={false}
+      />
     </div>
   );
 };

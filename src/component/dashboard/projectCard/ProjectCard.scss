@@ -82,10 +82,10 @@
 
   .file-blue-icon,
   .scope-icon {
-    color: #5A7665;
-    font-size: 15px;
-    width: 16px;
-    height: 16px;
+    color: #5A7665 !important;
+    font-size: 15px !important;
+    width: 16px !important;
+    height: 16px !important;
   }
 
   .status-badge {
@@ -111,4 +111,3 @@
         #f5a623 100%);
   }
 }
-

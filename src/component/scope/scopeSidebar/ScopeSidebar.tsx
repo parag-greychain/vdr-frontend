@@ -1,9 +1,15 @@
-import { Input, Button, Progress } from "antd";
+import { Input, Button, Progress, Checkbox } from "antd";
 import "./ScopeSidebar.scss";
 import { useState } from "react";
 import { AddScope } from "../../../component";
 
-const ScopeSidebar = () => {
+interface ScopeSidebarProps {
+  showCheckboxes?: boolean;
+  selectedScopes?: string[];
+  onScopeSelectionChange?: (selectedScopes: string[]) => void;
+}
+
+const ScopeSidebar = ({ showCheckboxes = false, selectedScopes = [], onScopeSelectionChange }: ScopeSidebarProps) => {
   const [isAddScopeOpen, setIsAddScopeOpen] = useState(false);
 
   return (
@@ -43,24 +49,53 @@ const ScopeSidebar = () => {
           "Employee Engagement, Diversity & inclusion",
           "Employee Health & Safety",
           "Energy Management",
-        ].map((item) => (
-          <div
-            key={item}
-            className={`scope-item ${item === "Air Quality" ? "active" : ""}`}
-          >
-            <Progress
-              type="circle"
-              percent={50}
-              size={24}
-              strokeWidth={24}
-              strokeColor="#82A78D"
-            />
-            <span className="side-menu-text">{item}</span>
-            <span className="flag-icon-wrap">
-              <i className="erm-icon flag-icon" />
-            </span>
-          </div>
-        ))}
+        ].map((item) => {
+          const isSelected = selectedScopes.includes(item);
+          const isActive = !showCheckboxes && item === "Air Quality";
+          
+          return (
+            <div
+              key={item}
+              className={`scope-item ${isActive ? "active" : ""} ${showCheckboxes ? "with-checkbox" : ""}`}
+              onClick={() => {
+                if (!showCheckboxes) return;
+                const newSelected = isSelected
+                  ? selectedScopes.filter((scope) => scope !== item)
+                  : [...selectedScopes, item];
+                onScopeSelectionChange?.(newSelected);
+              }}
+            >
+              {showCheckboxes && (
+                <Checkbox
+                  checked={isSelected}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    const newSelected = e.target.checked
+                      ? [...selectedScopes, item]
+                      : selectedScopes.filter((scope) => scope !== item);
+                    onScopeSelectionChange?.(newSelected);
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              )}
+              {!showCheckboxes && (
+                <Progress
+                  type="circle"
+                  percent={50}
+                  size={24}
+                  strokeWidth={24}
+                  strokeColor="#82A78D"
+                />
+              )}
+              <span className="side-menu-text">{item}</span>
+              {!showCheckboxes && (
+                <span className="flag-icon-wrap">
+                  <i className="erm-icon flag-icon" />
+                </span>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       <AddScope

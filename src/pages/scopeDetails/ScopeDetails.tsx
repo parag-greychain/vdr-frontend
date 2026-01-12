@@ -27,6 +27,11 @@ interface FileData {
   probability: number;
   status: "Strong" | "No Signal" | "Potential";
   userAvatar: string;
+  fileStatus?: "rejected" | "assigned" | "pending" | "approved";
+  assignedUser?: {
+    name: string;
+    avatar: string;
+  };
 }
 
 interface StatCard {
@@ -85,6 +90,7 @@ const MOCK_DATA: FileData[] = [
     probability: 10,
     status: "Strong",
     userAvatar: IMAGES.avatarImage,
+    fileStatus: "rejected",
   },
   {
     key: "2",
@@ -97,6 +103,24 @@ const MOCK_DATA: FileData[] = [
     probability: 10,
     status: "No Signal",
     userAvatar: IMAGES.avatarImage,
+    fileStatus: "assigned",
+    assignedUser: {
+      name: "John Anderson",
+      avatar: IMAGES.avatarImage,
+    },
+  },
+  {
+    key: "3",
+    title: "Annual Report 2023",
+    path: "/Financial/Annual Reports",
+    icon: "pdf",
+    aiSummary: "Annual financial report for 2023",
+    irl: "IRL 3: Provide the impact assessment",
+    aiScore: 8,
+    probability: 8,
+    status: "Potential",
+    userAvatar: IMAGES.avatarImage,
+    fileStatus: "pending",
   },
 ];
 
@@ -345,44 +369,63 @@ const ScopeDetails = () => {
         key: "Status",
         width: 160,
         className: "text-align-right",
-        render: () => (
-          <div className="table-actions">
-            <div className="rejected-refresh">
-              <div className="rejected-tag">
-                REJECTED
-                <Tooltip
-                  rootClassName="w-160"
-                  title="Certain details could not be verified during the internal review process.">
-                  <i className="erm-icon info-icon" />
-                </Tooltip>
+        render: (_, record: FileData) => {
+          const { fileStatus, assignedUser } = record;
+
+          if (fileStatus === "rejected") {
+            return (
+              <div className="table-actions">
+                <div className="rejected-refresh">
+                  <div className="rejected-tag">
+                    REJECTED
+                    <Tooltip
+                      rootClassName="w-160"
+                      title="Certain details could not be verified during the internal review process.">
+                      <i className="erm-icon info-icon" />
+                    </Tooltip>
+                  </div>
+                  <span className="refresh-btn" title="Refresh Status">
+                    <i className="erm-icon close-icon" />
+                  </span>
+                </div>
               </div>
-              <span className="refresh-btn" title="Refresh Status">
-                <i className="erm-icon close-icon" />
-              </span>
-              {/* <span className="refresh-btn" title="Refresh Status">
-                <i className="erm-icon refresh-icon" />
-              </span> */}
-            </div>
-            {/* <div className="user-detail-wrap">
-            <img src={IMAGES.avatarImage} alt="User Avatar" />
-            <span className="user-name">John Ander...</span>
-            <span>
-              <i className="erm-icon close-icon" />
-            </span>
-          </div> */}
-            {/* <div className="approve-reject">
-            <Button className="no-style" type="primary" shape="round">
-              <i className="erm-icon approve-icon" />
-              APPROVE
-            </Button>
-            <span className="divider-vertical"></span>
-            <Button className="no-style" type="primary" shape="round">
-              <i className="erm-icon reject-icon" />
-              REJECT
-            </Button>
-          </div> */}
-          </div>
-        ),
+            );
+          }
+
+          if (fileStatus === "assigned" && assignedUser) {
+            return (
+              <div className="table-actions">
+                <div className="user-detail-wrap">
+                  <img src={assignedUser.avatar} alt="User Avatar" />
+                  <span className="user-name">{assignedUser.name}</span>
+                  <span>
+                    <i className="erm-icon close-icon" />
+                  </span>
+                </div>
+              </div>
+            );
+          }
+
+          if (fileStatus === "pending") {
+            return (
+              <div className="table-actions">
+                <div className="approve-reject">
+                  <Button className="no-style" type="primary" shape="round">
+                    <i className="erm-icon approve-icon" />
+                    APPROVE
+                  </Button>
+                  <span className="divider-vertical"></span>
+                  <Button className="no-style" type="primary" shape="round">
+                    <i className="erm-icon reject-icon" />
+                    REJECT
+                  </Button>
+                </div>
+              </div>
+            );
+          }
+
+          return null;
+        },
       },
     ],
     []

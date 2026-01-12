@@ -6,7 +6,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import { Login, Home, Scope, Project, ScopeDetails, ProjectDetails, CreateProject } from "./pages";
+import { Login, Home, Project, ScopeDetails, ProjectDetails, CreateProject } from "./pages";
 import { PATHS } from "./shared";
 import { AppLayout } from "./layout";
 import AuthLayout from "./layout/auth/AuthLayout";
@@ -23,7 +23,6 @@ const App = () => {
         <Route element={<AppLayout />}>
           <Route index path={PATHS.home} element={<Home />} />
           <Route path={PATHS.projects} element={<Project />} />
-          <Route path={PATHS.scope} element={<Scope />} />
           <Route path={PATHS.scopeDetails} element={<ScopeDetails />} />
           <Route path={PATHS.projectDetails} element={<ProjectDetails />} />
           <Route path={PATHS.createProject} element={<CreateProject />} />

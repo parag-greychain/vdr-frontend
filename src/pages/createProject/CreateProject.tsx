@@ -1,11 +1,14 @@
-import { Breadcrumb, Button, Form, Input, Select } from "antd";
+import { Breadcrumb, Button, Form, Input, Select, Radio } from "antd";
 import { ScopeSidebar } from "../../component";
 import "./CreateProject.scss";
 import { IMAGES, PATHS } from "../../shared";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const CreateProject = () => {
   const navigate = useNavigate();
+  const [selectedVDR, setSelectedVDR] = useState<string>("firmex-1");
+  const [selectedScopes, setSelectedScopes] = useState<string[]>([]);
 
   const handleCreateProject = () => {
     navigate(PATHS.projectDetails);
@@ -18,7 +21,11 @@ const CreateProject = () => {
           <div className="inner-app-row">
             {/* LEFT SIDEBAR */}
             <div className="scope-sidebar">
-              <ScopeSidebar />
+              <ScopeSidebar
+                showCheckboxes={true}
+                selectedScopes={selectedScopes}
+                onScopeSelectionChange={setSelectedScopes}
+              />
             </div>
 
             {/* MAIN CONTENT */}
@@ -27,7 +34,7 @@ const CreateProject = () => {
                 <div className="scope-header">
                   <div className="breadcrumb-wrapper">
                     <Breadcrumb className="page-breadcrumb">
-                      <Breadcrumb.Item>Home</Breadcrumb.Item>
+                      <Breadcrumb.Item onClick={() => navigate(PATHS.home)}>Home</Breadcrumb.Item>
                       <Breadcrumb.Item>Create Project</Breadcrumb.Item>
                     </Breadcrumb>
                   </div>
@@ -83,63 +90,79 @@ const CreateProject = () => {
                     <h2 className="page-heading">Connect VDR</h2>
                     <p>Select your document source</p>
                   </div>
-                  <div className="project-card-row">
-                    <div className="project-card active">
-                      <span className="radio-ui"></span>
-                      <span className="project-card-icon">
-                        <img src={IMAGES.firmexImg} alt="Add Flag" />
-                      </span>
-                      <h5>Firmex Integration</h5>
-                      <p>
-                        Integrate Firmex with your M&A platform to automate document ingestion,
-                        permissions, and downstream analysis.
-                      </p>
+                  <Radio.Group
+                    value={selectedVDR}
+                    onChange={(e) => setSelectedVDR(e.target.value)}
+                    className="vdr-radio-group"
+                  >
+                    <div className="project-card-row">
+                      <label className={`project-card-label ${selectedVDR === "firmex-1" ? "selected" : ""}`}>
+                        <Radio value="firmex-1" />
+                        <div className="project-card">
+                          <span className="project-card-icon">
+                            <img src={IMAGES.firmexImg} alt="Firmex" />
+                          </span>
+                          <h5>Firmex Integration</h5>
+                          <p>
+                            Integrate Firmex with your M&A platform to automate document ingestion,
+                            permissions, and downstream analysis.
+                          </p>
+                        </div>
+                      </label>
+                      <label className={`project-card-label ${selectedVDR === "ansarada-1" ? "selected" : ""}`}>
+                        <Radio value="ansarada-1" />
+                        <div className="project-card">
+                          <span className="project-card-icon">
+                            <img src={IMAGES.ansarada} alt="Ansarada" />
+                          </span>
+                          <h5>Ansarada Integration</h5>
+                          <p>
+                            Integrate Ansarada to support governed, view-only document workflows aligned
+                            with its encryption and security model.
+                          </p>
+                        </div>
+                      </label>
+                      <label className={`project-card-label ${selectedVDR === "firmex-2" ? "selected" : ""}`}>
+                        <Radio value="firmex-2" />
+                        <div className="project-card">
+                          <span className="project-card-icon">
+                            <img src={IMAGES.firmexImg} alt="Firmex" />
+                          </span>
+                          <h5>Firmex Integration</h5>
+                          <p>
+                            Integrate Firmex with your M&A platform to automate document ingestion,
+                            permissions, and downstream analysis.
+                          </p>
+                        </div>
+                      </label>
+                      <label className={`project-card-label ${selectedVDR === "ansarada-2" ? "selected" : ""}`}>
+                        <Radio value="ansarada-2" />
+                        <div className="project-card">
+                          <span className="project-card-icon">
+                            <img src={IMAGES.ansarada} alt="Ansarada" />
+                          </span>
+                          <h5>Ansarada Integration</h5>
+                          <p>
+                            Integrate Ansarada to support governed, view-only document workflows aligned
+                            with its encryption and security model.
+                          </p>
+                        </div>
+                      </label>
+                      <label className={`project-card-label ${selectedVDR === "sharepoint" ? "selected" : ""}`}>
+                        <Radio value="sharepoint" />
+                        <div className="project-card">
+                          <span className="project-card-icon">
+                            <img src={IMAGES.sharepoint} alt="SharePoint" />
+                          </span>
+                          <h5>SharePoint Integration</h5>
+                          <p>
+                            Integrate SharePoint with your M&A platform to automate document ingestion,
+                            permissions, and downstream analysis.
+                          </p>
+                        </div>
+                      </label>
                     </div>
-                    <div className="project-card">
-                      <span className="radio-ui"></span>
-                      <span className="project-card-icon">
-                        <img src={IMAGES.ansarada} alt="Add Flag" />
-                      </span>
-                      <h5>Ansarada Integration</h5>
-                      <p>
-                        Integrate Ansarada to support governed, view-only document workflows aligned
-                        with its encryption and security model.
-                      </p>
-                    </div>
-                    <div className="project-card">
-                      <span className="radio-ui"></span>
-                      <span className="project-card-icon">
-                        <img src={IMAGES.firmexImg} alt="Add Flag" />
-                      </span>
-                      <h5>Firmex Integration</h5>
-                      <p>
-                        Integrate Firmex with your M&A platform to automate document ingestion,
-                        permissions, and downstream analysis.
-                      </p>
-                    </div>
-                    <div className="project-card">
-                      <span className="radio-ui"></span>
-                      <span className="project-card-icon">
-                        <img src={IMAGES.ansarada} alt="Add Flag" />
-                      </span>
-                      <h5>Ansarada Integration</h5>
-                      <p>
-                        Integrate Ansarada to support governed, view-only document workflows aligned
-                        with its encryption and security model.
-                      </p>
-                    </div>
-                    <div className="project-card">
-                      <span className="radio-ui"></span>
-                      <span className="project-card-icon">
-                        <img src={IMAGES.sharepoint} alt="Add Flag" />
-                      </span>
-                      <h5>Firmex Integration</h5>
-                      <p>
-                        Integrate Firmex with your M&A platform to automate document ingestion,
-                        permissions, and downstream analysis.
-                      </p>
-                    </div>
-                  </div>
+                  </Radio.Group>
                 </div>
               </div>
               <div className="create-project-footer">

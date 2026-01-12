@@ -3,6 +3,42 @@
     width: 100%;
 }
 
+.scope-page-container {
+    width: 100%;
+    height: 100%;
+
+    .inner-app-wrap {
+        display: flex;
+        height: 100%;
+    }
+
+    .inner-app-row {
+        width: 100%;
+        margin: 0 !important;
+        flex-wrap: nowrap;
+        display: flex;
+        margin: 0;
+    }
+
+    .scope-sidebar {
+        width: 253px;
+        flex-shrink: 0;
+    }
+
+    .content {
+        flex: 1;
+        padding: 25px !important;
+        height: calc(100vh - 56px);
+        overflow: auto;
+        min-width: 0;
+        max-width: 100%;
+        transition: flex 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+            margin-right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+
+}
+
 body .ant-table-wrapper table {
     border: solid 1px #eff1f3;
     border-bottom: none;
@@ -186,7 +222,9 @@ body .ant-table-wrapper .ant-table-tbody>tr>td {
 .table-two-line {
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
+    box-orient: vertical;
     overflow: hidden;
 }
 
@@ -359,42 +397,6 @@ body .ant-table-wrapper .ant-table-tbody>tr>td {
     }
 
 
-
-    .scope-page-container {
-        width: 100%;
-        height: 100%;
-
-        .inner-app-wrap {
-            display: flex;
-            height: 100%;
-        }
-
-        .inner-app-row {
-            width: 100%;
-            margin: 0 !important;
-            flex-wrap: nowrap;
-            display: flex;
-            margin: 0;
-        }
-
-        .scope-sidebar {
-            width: 253px;
-            flex-shrink: 0;
-        }
-
-        .content {
-            flex: 1;
-            padding: 25px !important;
-            height: calc(100vh - 56px);
-            overflow: auto;
-            min-width: 0;
-            max-width: 100%;
-            transition: flex 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                margin-right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-
-    }
 
 }
 
