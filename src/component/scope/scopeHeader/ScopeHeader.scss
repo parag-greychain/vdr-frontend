@@ -110,6 +110,82 @@
         white-space: nowrap;
     }
 
+    .date-wrap {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--primary-font);
+        font-size: 12px;
+        font-weight: 400;
+        color: #587564;
+
+        .erm-icon {
+            color: #5A7665;
+            width: 15px;
+            height: 15px;
+
+        }
+    }
+
+    .collaborators-wrapper {
+        display: flex;
+        align-items: center;
+
+        .no-collaborators {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted-green);
+            opacity: 0.52;
+            font-style: italic;
+        }
+
+        .ant-avatar {
+            width: 24px;
+            height: 24px;
+            border: solid 2px var(--white);
+            position: relative;
+
+            .ant-avatar-string {
+                line-height: 22px;
+                color: var(--primary);
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+            &+.ant-avatar {
+                margin-left: -8px;
+            }
+        }
+
+        .collaborators-plus-more {
+            min-width: 24px;
+            height: 24px;
+            margin-left: -8px;
+            border-radius: 50%;
+            border: solid 2px var(--white);
+            background: #d3dfd4;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 500;
+            z-index: 9;
+            position: relative;
+            cursor: pointer;
+
+            .erm-icon {
+                width: 13px;
+                height: 13px;
+                color: var(--primary);
+            }
+
+            &:hover {
+                background: #b8c7be;
+            }
+        }
+    }
+
     /* AntD progress override */
     .progress-bar {
         width: 200px;
