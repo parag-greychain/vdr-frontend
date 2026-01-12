@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
-import { Button, Table, Tooltip } from "antd";
+import { Button, Popover, Table, Tooltip } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { IMAGES } from "../../shared";
 import type { Comment } from "../../component/scope/comments/Comments";
@@ -12,6 +12,7 @@ import {
 } from "../../component";
 import "./ScopeDetails.scss";
 import ChatPanel from "../../component/chat/chatPanel/ChatPanel";
+import SelectReviewerModal from "../../component/scope/SelectReviewerModal/SelectReviewerModal";
 
 type RightPanelView = "comments" | "chat" | null;
 
@@ -100,6 +101,15 @@ const MOCK_DATA: FileData[] = [
 ];
 
 const ScopeDetails = () => {
+  const [isReviewerModalOpen, setIsReviewerModalOpen] = useState(false);
+
+  const handleOpenReviewerModal = useCallback(() => {
+    setIsReviewerModalOpen(true);
+  }, []);
+
+  const handleCloseReviewerModal = useCallback(() => {
+    setIsReviewerModalOpen(false);
+  }, []);
   const [isRiskAssessmentOpen, setIsRiskAssessmentOpen] = useState(false);
   const [rightPanelView, setRightPanelView] = useState<RightPanelView>(null);
   const [rightPanelWidth, setRightPanelWidth] = useState(400);
@@ -301,8 +311,32 @@ const ScopeDetails = () => {
         className: "text-align-center",
         render: () => (
           <div className="observation-cell">
-            <img src={IMAGES.commentPlusIcon} alt="Add Observation" />
-            {/* <img src={IMAGES.commentPlusGreenIcon} alt="Add Observation" /> */}
+            <Popover
+              trigger="hover"
+              placement="top"
+              overlayClassName="observation-popover"
+              content={
+                <div className="observation-popover-content">
+                  <div className="popover-header">
+                    <span className="title">Observation</span>
+                    <span className="edited">Last edited : John Anderson</span>
+                  </div>
+
+                  <div className="popover-body">
+                    <p>
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                      when an unknown printer took a galley of type and scrambled it to make a type
+                      specimen book.
+                    </p>
+                  </div>
+                </div>
+              }>
+              <div className="observation-icons">
+                <img src={IMAGES.commentPlusIcon} alt="Add Observation" />
+                {/* <img src={IMAGES.commentPlusGreenIcon} alt="Add Observation" /> */}
+              </div>
+            </Popover>
           </div>
         ),
       },
@@ -316,13 +350,18 @@ const ScopeDetails = () => {
             <div className="rejected-refresh">
               <div className="rejected-tag">
                 REJECTED
-                <Tooltip title="Certain details could not be verified during the internal review process.">
+                <Tooltip
+                  rootClassName="w-160"
+                  title="Certain details could not be verified during the internal review process.">
                   <i className="erm-icon info-icon" />
                 </Tooltip>
               </div>
               <span className="refresh-btn" title="Refresh Status">
-                <i className="erm-icon refresh-icon" />
+                <i className="erm-icon close-icon" />
               </span>
+              {/* <span className="refresh-btn" title="Refresh Status">
+                <i className="erm-icon refresh-icon" />
+              </span> */}
             </div>
             {/* <div className="user-detail-wrap">
             <img src={IMAGES.avatarImage} alt="User Avatar" />
@@ -356,6 +395,11 @@ const ScopeDetails = () => {
     [handleRowSelectionChange]
   );
 
+  const handleSubmitReviewer = (reviewer: any) => {
+    console.log("Selected Reviewer:", reviewer);
+    setIsReviewerModalOpen(false);
+  };
+
   return (
     <>
       <div className="scope-page-container">
@@ -374,6 +418,7 @@ const ScopeDetails = () => {
                 isChatOpen={isChatOpen}
                 onCommentsToggle={handleCommentsToggle}
                 onChatToggle={handleChatToggle}
+                onOpenReviewerModal={handleOpenReviewerModal}
               />
 
               <div className="scope-details-content">
@@ -392,14 +437,26 @@ const ScopeDetails = () => {
                     </div>
                   </div>
                   <div className="signal-assessment-right">
-                    <h5>Risk Assessment :</h5>
-                    <Button
-                      className="secondary-btn"
-                      type="primary"
-                      shape="round"
-                      onClick={handleOpenRiskAssessment}>
-                      ADD
-                    </Button>
+                    <div className="assessment-step-one">
+                      <h5>Risk Assessment :</h5>
+                      <Button
+                        className="secondary-btn"
+                        type="primary"
+                        shape="round"
+                        onClick={handleOpenRiskAssessment}>
+                        ADD
+                      </Button>
+                    </div>
+
+                    {/* <div className="assessment-step-two">
+                      <h5>Risk Assessment :</h5>
+                      <div className="step-two-content">
+                        <span className="signal-icon yellow"></span> Moderate
+                      </div>
+                      <Button className="no-style" type="primary">
+                        <i className="erm-icon edit-icon" />
+                      </Button>
+                    </div> */}
                   </div>
                 </div>
                 <div className="scope-stats">
@@ -436,12 +493,11 @@ const ScopeDetails = () => {
             {/* RIGHT PANEL (COMMENTS OR CHAT) */}
             {isRightPanelOpen && (
               <div
-                className={`right-panel ${isRightPanelOpen ? "open" : ""} ${isResizing ? "resizing" : ""}`}
+                className={`right-panel ${isRightPanelOpen ? "open" : ""} ${
+                  isResizing ? "resizing" : ""
+                }`}
                 style={{ width: `${rightPanelWidth}px` }}>
-                <div
-                  className="right-panel-resizer"
-                  onMouseDown={handleMouseDown}
-                />
+                <div className="right-panel-resizer" onMouseDown={handleMouseDown} />
                 <div className="right-panel-header">
                   <h3 className="right-panel-title">
                     {isCommentsOpen ? "Comments" : isChatOpen ? "Chat" : ""}
@@ -455,7 +511,9 @@ const ScopeDetails = () => {
                   </Button>
                 </div>
                 <div className="right-panel-content">
-                  {isCommentsOpen && <Comments comments={comments} onCommentsChange={setComments} />}
+                  {isCommentsOpen && (
+                    <Comments comments={comments} onCommentsChange={setComments} />
+                  )}
                   {isChatOpen && (
                     <ChatPanel
                       title="Deal Room AI"
@@ -473,6 +531,12 @@ const ScopeDetails = () => {
         open={isRiskAssessmentOpen}
         onClose={handleCloseRiskAssessment}
         onAdd={handleAddRisk}
+      />
+
+      <SelectReviewerModal
+        open={isReviewerModalOpen}
+        onClose={handleCloseReviewerModal}
+        handleSubmit={handleSubmitReviewer}
       />
     </>
   );
