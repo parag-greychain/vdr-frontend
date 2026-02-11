@@ -1,15 +1,32 @@
 import { Avatar, Dropdown, type MenuProps } from "antd";
-import { persistStore } from "redux-persist";
-import { store } from "../../../store";
 import { useNavigate } from "react-router-dom";
-import { PATHS } from "../../../shared";
+import { cleanupAndNavigate, LocalStorageName } from "../../../shared";
+import { handleMicrosoftLogout } from "../../../services/microsoftAuth.service";
 
 const UserProfile = () => {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    persistStore(store).purge();
-    navigate(PATHS.login);
+  const handleLogout = async () => {
+    try {
+      const accessToken = localStorage.getItem(LocalStorageName.Token);
+      const refreshToken = localStorage.getItem(LocalStorageName.RefreshToken);
+
+      if (accessToken && refreshToken) {
+        const response = await handleMicrosoftLogout(refreshToken, accessToken);
+        // Redirect to Microsoft logout URL (same pattern as login)
+        if (response && response?.microsoft_logout_url) {
+          // Redirect to Microsoft logout URL
+          // Cleanup will happen on the callback page after Microsoft redirects back
+          window.location.href = response.microsoft_logout_url;
+          return;
+        }
+      }
+      // If no Microsoft logout URL or tokens, proceed with cleanup
+      cleanupAndNavigate(navigate);
+    } catch (error) {
+      console.error("Logout error:", error);
+      cleanupAndNavigate(navigate);
+    }
   };
 
   const items: MenuProps["items"] = [

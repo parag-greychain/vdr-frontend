@@ -1,5 +1,5 @@
 import Login from "./login/Login";
-import LoginCallback from "./loginCallback/LoginCallback";
 import { LogoutCallback } from "./logoutCallback";
+import LoginCallback from "./loginCallback";
 
 export { Login, LoginCallback, LogoutCallback };
