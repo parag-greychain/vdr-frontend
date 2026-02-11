@@ -7,11 +7,11 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Login, Home, Project, ScopeDetails, ProjectDetails, CreateProject } from "./pages";
+import { LoginCallback, LogoutCallback } from "./pages/auth";
 import { PATHS } from "./shared";
 import { AppLayout } from "./layout";
 import AuthLayout from "./layout/auth/AuthLayout";
 import "./App.scss";
-
 
 const App = () => {
   const router = createBrowserRouter(
@@ -19,6 +19,8 @@ const App = () => {
       <Route>
         <Route element={<AuthLayout />}>
           <Route index path={PATHS.login} element={<Login />} />
+          <Route path={PATHS.authCallback} element={<LoginCallback />} />
+          <Route path={PATHS.logoutCallback} element={<LogoutCallback />} />
         </Route>
         <Route element={<AppLayout />}>
           <Route index path={PATHS.home} element={<Home />} />
@@ -26,9 +28,9 @@ const App = () => {
           <Route path={PATHS.scopeDetails} element={<ScopeDetails />} />
           <Route path={PATHS.projectDetails} element={<ProjectDetails />} />
           <Route path={PATHS.createProject} element={<CreateProject />} />
-        </Route >
-      </Route >
-    )
+        </Route>
+      </Route>,
+    ),
   );
 
   return (

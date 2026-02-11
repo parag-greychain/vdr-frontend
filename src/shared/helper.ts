@@ -1,3 +1,8 @@
+import { NavigateFunction } from "react-router-dom";
+import { persistStore } from "redux-persist";
+import { store } from "../store";
+import { LocalStorageName, PATHS, X_userId } from "./constants";
+
 export const uniqueId = () => {
   const timestamp = new Date().getTime();
   const random = Math.floor(Math.random() * 1000);
@@ -6,7 +11,6 @@ export const uniqueId = () => {
   // under 999
   return numericId;
 };
-
 
 export const formatMathToLatexNew = (input: string): string => {
   if (!input) return "";
@@ -39,4 +43,12 @@ export const formatMathToLatexNew = (input: string): string => {
 
 export const generateTempSessionId = () => {
   return crypto.randomUUID(); // UUID v4
+};
+
+export const cleanupAndNavigate = (navigate: NavigateFunction) => {
+  persistStore(store).purge();
+  localStorage.removeItem(X_userId);
+  localStorage.removeItem(LocalStorageName.Token);
+  localStorage.removeItem(LocalStorageName.RefreshToken);
+  navigate(PATHS.login);
 };

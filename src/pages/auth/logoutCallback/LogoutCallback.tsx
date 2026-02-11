@@ -1,24 +1,15 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { cleanupAndNavigate, IMAGES } from "../../../shared";
 import { Button } from "antd";
-import "./Login.scss";
-import { IMAGES } from "../../../shared";
-import { getAuthLoginUrl } from "../../../services/microsoftAuth.service";
+import "../../auth/login/Login.scss";
 
-const Login = () => {
-  const handleMicrosoftLogin = async () => {
-    try {
-      const response = await getAuthLoginUrl();
-      if (response && response.authorization_url) {
-        // Store state for verification on callback
-        if (response.state) {
-          localStorage.setItem("ms_auth_state", response.state);
-        }
-        // Redirect to Microsoft authorization URL
-        window.location.href = response.authorization_url;
-      }
-    } catch (error) {
-      console.error("Microsoft login failed", error);
-    }
-  };
+const LogoutCallback = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    cleanupAndNavigate(navigate);
+  }, [navigate]);
 
   return (
     <div className="login-container">
@@ -38,8 +29,8 @@ const Login = () => {
       <div className="login-right">
         <div className="login-box">
           <h3>Login</h3>
-          <Button type="default" className="login-btn" onClick={handleMicrosoftLogin}>
-            <img src={IMAGES.microsoft} alt="microsoft" /> Continue with Microsoft
+          <Button type="default" className="login-btn" loading={true}>
+            <img src={IMAGES.microsoft} alt="microsoft" /> Logging out...
           </Button>
           <div className="links">
             <a href="#">Contact Support</a>
@@ -51,4 +42,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LogoutCallback;

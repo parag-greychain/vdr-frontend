@@ -1,6 +1,8 @@
 export enum PATHS {
   home = "/",
   login = "/login",
+  authCallback = "/callback",
+  logoutCallback = "/logout-callback",
   projects = "/projects",
   projectDetails = "/project-details",
   scopeDetails = "/scope-details",
@@ -14,6 +16,8 @@ export enum LocalStorageName {
   MultiUploadAssetIds = "multiUploadAssetIds_vdr",
   SPAccessToken = "spAccessToken",
 }
+
+export const X_userId = "erm-x-userid";
 
 export enum MessageType {
   User = "user",

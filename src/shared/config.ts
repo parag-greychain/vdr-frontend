@@ -3,24 +3,28 @@ const hostname = window?.location?.hostname;
 interface IConfig {
   BASE_URL: string;
   USER_BASE_URL: string;
+  SERVICE_BASE_URL: string;
   HOST: string;
 }
 // For Localhost
 const LOCALHOST_CONFIG: IConfig = {
   BASE_URL: "https://dev.test.com/",
   USER_BASE_URL: "https://dev.test.com/",
+  SERVICE_BASE_URL: "https://dev-user-service.ermtools.app",
   HOST: hostname,
 };
 
 const DEV_CONFIG: IConfig = {
   BASE_URL: "https://dev.test.com/",
   USER_BASE_URL: "https://dev.test.com/",
+  SERVICE_BASE_URL: "https://dev-user-service.ermtools.app",
   HOST: hostname,
 };
 
 const PRE_PROD_CONFIG: IConfig = {
   BASE_URL: "https://prod.test.com/",
   USER_BASE_URL: "https://prod.test.com/",
+  SERVICE_BASE_URL: "https://dev-user-service.ermtools.app",
   HOST: hostname,
 };
 

@@ -13,18 +13,20 @@ import {
 import storage from "redux-persist/lib/storage"; // localStorage
 import appSlice from "./app/appSlice";
 import knowledgeAIChatSlice from "./knowledgeAIChat/knowledgeAIChatSlice";
+import authSlice from "./auth/authSlice";
 
 //  Persist config
 const persistConfig = {
   key: "erm-frontend",
   storage, // localStorage
-  whitelist: ["app", "knowledgeAIChat"],
+  whitelist: ["app", "knowledgeAIChat", "auth"],
 };
 
 //  Combine reducers
 const appReducer = combineReducers({
   app: appSlice,
   knowledgeAIChat: knowledgeAIChatSlice,
+  auth: authSlice,
 });
 
 //  Types
@@ -36,7 +38,7 @@ type InitializationAction = { type: "initializationStore" };
 // Root reducer that handles initialization action
 const rootReducer = (
   state: RootStateTemp | undefined,
-  action: UnknownAction | InitializationAction
+  action: UnknownAction | InitializationAction,
 ): RootStateTemp => {
   if (action.type === "initializationStore") {
     return appReducer(undefined, { type: "initializationStore" });

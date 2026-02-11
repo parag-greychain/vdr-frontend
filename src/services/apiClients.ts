@@ -1,9 +1,4 @@
-import axios, {
-  AxiosRequestConfig,
-  AxiosError,
-  AxiosInstance,
-  AxiosResponse,
-} from "axios";
+import axios, { AxiosRequestConfig, AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import persistStore from "redux-persist/es/persistStore";
 import { configs, LocalStorageName, STRING } from "../shared";
 import { store } from "../store";
@@ -37,9 +32,7 @@ const processQueue = (error: unknown, token: string | null = null) => {
 };
 
 const refreshAccessToken = async (): Promise<string> => {
-  const storedRefreshToken = localStorage.getItem(
-    LocalStorageName.RefreshToken
-  );
+  const storedRefreshToken = localStorage.getItem(LocalStorageName.RefreshToken);
   if (!storedRefreshToken) {
     throw new Error("No refresh token available");
   }
@@ -55,7 +48,7 @@ const refreshAccessToken = async (): Promise<string> => {
         Subdomain: getSubdomain(),
         Authorization: `Bearer ${storedRefreshToken}`,
       },
-    }
+    },
   );
 
   const { jwtToken, token, refreshToken } = res.data;
@@ -64,11 +57,17 @@ const refreshAccessToken = async (): Promise<string> => {
 
   // Save new tokens
   localStorage.setItem(LocalStorageName.Token, accessToken);
-  if (refreshToken)
-    localStorage.setItem(LocalStorageName.RefreshToken, refreshToken);
+  if (refreshToken) localStorage.setItem(LocalStorageName.RefreshToken, refreshToken);
 
   return accessToken;
 };
+
+export const userPermissionApi = axios.create({
+  baseURL: configs.SERVICE_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 // Base Axios Clients
 // Axios Instance
@@ -91,7 +90,7 @@ const applyRequestInterceptor = (client: AxiosInstance) => {
       }
       return config;
     },
-    (error: unknown) => Promise.reject(error)
+    (error: unknown) => Promise.reject(error),
   );
 };
 
@@ -118,9 +117,7 @@ const setupResponseInterceptor = (client: AxiosInstance) => {
         message?.includes(STRING?.errorMessage?.tokenExpireError)
       ) {
         originalRequest._retry = true;
-        const refreshToken = localStorage.getItem(
-          LocalStorageName.RefreshToken
-        );
+        const refreshToken = localStorage.getItem(LocalStorageName.RefreshToken);
 
         if (!refreshToken) {
           persistStore(store).purge();
@@ -167,7 +164,7 @@ const setupResponseInterceptor = (client: AxiosInstance) => {
       }
 
       return Promise.reject(err?.response?.data || err);
-    }
+    },
   );
 };
 
@@ -176,37 +173,31 @@ applyRequestInterceptor(axiosClient);
 setupResponseInterceptor(axiosClient);
 
 // Methods GET, POST,PUT, DELETE for Axios-Client
-export const get = async (path: string, config?: AxiosRequestConfig) => {
-  return await axiosClient
-    .get(`${path}`, config)
-    .then((response) => response.data);
-};
+export const get = async (client: AxiosInstance, path: string, config?: AxiosRequestConfig) =>
+  await client.get(path, config).then((res) => res.data);
 
 export const post = async (
+  client: AxiosInstance,
   path: string,
   payload?: any,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ) => {
-  return await axiosClient
-    .post(`${path}`, payload, config)
-    .then((response) => response);
+  return await client.post(`${path}`, payload, config).then((response) => response);
 };
 
 export const put = async (
+  client: AxiosInstance,
   path: string,
   payload?: any,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ) => {
-  return await axiosClient
-    .put(`${path}`, payload, config)
-    .then((response) => response);
+  return await client.put(`${path}`, payload, config).then((response) => response);
 };
 
 export const deleteRequest = async (
+  client: AxiosInstance,
   path: string,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ) => {
-  return await axiosClient
-    .delete(`${path}`, config)
-    .then((response) => response);
+  return await client.delete(`${path}`, config).then((response) => response);
 };
